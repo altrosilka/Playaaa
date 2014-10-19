@@ -1,0 +1,19 @@
+<section id="view-artists-page" class="view view-fullsize">
+  <header>
+    <div class="fullsizeImage" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
+    <div class="top">
+      <h1 ng-bind="ctr.artistInfo.name"></h1>
+    </div>
+  </header>
+
+  <a href="/flow/?artist={{ctr.artistInfo.name}}">Flow</a>
+
+  <div ng-show="ctr.albums.length">
+    <div class="inner">
+      <h2>Альбомы</h2>
+    </div>
+    <div class="albums list list-gray">
+      <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
+    </div>
+  </div>
+</section>

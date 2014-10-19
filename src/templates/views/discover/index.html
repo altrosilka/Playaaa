@@ -1,0 +1,14 @@
+<section class="view view-fullsize view-padding">
+  <h2>Популярные исполнители</h2> 
+  <section class="list list-gray artistGrid">
+    <a class="item" ng-repeat="item in ctr.artists">
+      <div class="image" style="background-image: url(../images/tmp/artist.jpg)"></div>
+      <footer>
+        <h3 ng-bind="item.name"></h3>
+        <span class="gray">Сейчас её слушают
+          <span ng-bind="item.listeners"></span>
+        </span>
+      </footer>
+    </a>
+  </section>
+</section>

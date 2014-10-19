@@ -1,0 +1,59 @@
+#view-artists-page {
+  header {
+    height: 300px;
+    border-bottom: 2px solid #eee;
+    position: relative;
+    .fullsizeImage {
+      height: 100%;
+      z-index: 1;
+      width: 100%;
+      background-size: cover;
+      -webkit-filter: blur(10px);
+      background-position: top;
+      background-repeat: no-repeat;
+      position: absolute;
+      opacity: 0.6;
+      -webkit-transform: translate3d(0, 0, 0);
+    }
+    .top {
+      position: absolute;
+      z-index: 2;
+      h1 {}
+    }
+  }
+  .albums .item {
+    float: left;
+    display: block;
+    margin: 16px 0 0 16px;
+    width: 220px;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    .img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #464646;
+      font-size: 12px;
+      padding: 5px 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .bigAlbumInfo h1 {
+      font-size: 26px;
+      margin: 10px;
+    }
+  }
+}

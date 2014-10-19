@@ -1,0 +1,119 @@
+.controlPanel {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  border-bottom: 1px solid #ddd;
+  background: rgb(236, 232, 236);
+  background: -moz-linear-gradient(top, rgba(236, 232, 236, 1) 0%, rgba(219, 217, 219, 1) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(236, 232, 236, 1)), color-stop(100%, rgba(219, 217, 219, 1)));
+  background: -webkit-linear-gradient(top, rgba(236, 232, 236, 1) 0%, rgba(219, 217, 219, 1) 100%);
+  background: -o-linear-gradient(top, rgba(236, 232, 236, 1) 0%, rgba(219, 217, 219, 1) 100%);
+  background: -ms-linear-gradient(top, rgba(236, 232, 236, 1) 0%, rgba(219, 217, 219, 1) 100%);
+  background: linear-gradient(to bottom, rgba(236, 232, 236, 1) 0%, rgba(219, 217, 219, 1) 100%);
+  .progressPanel {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    left: 0;
+    height: 5px;
+    background: #f4f4f4;
+    box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.2);
+    transition: @fastTime;
+    .progress {
+      width: 0%;
+      background: @baseColor;
+      height: 100%;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: @fastTime;
+    }
+    .times {
+      .current, .total {
+        position: absolute;
+        top: -1px;
+        font-size: 11px;
+        opacity: 0;
+        visibility: hidden;
+        transition: @fastTime;
+      }
+      .current {
+        left: -30px;
+      }
+      .total {
+        right: -30px;
+      }
+    }
+  }
+  &:hover {
+    .progressPanel {
+      height: 15px;
+      .times {
+        .current, .total {
+          visibility: visible;
+          opacity: 1;
+        }
+        .current {
+          left: 5px;
+        }
+        .total {
+          right: 5px;
+        }
+      }
+    }
+  }
+  .buttons {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    .btn {
+      cursor: pointer;
+      line-height: 24px;
+      outline: none;
+      border: none;
+      height: 24px;
+      padding: 0 12px;
+      i {
+        font-size: 12px;
+        line-height: 24px;
+        color: #444;
+      }
+      &.next, &.prev {
+        i {
+          font-size: 22px;
+        }
+      }
+      &.next {
+        padding-right: 10px;
+      }
+      &.prev {
+        padding-left: 10px;
+      }
+      &.play {
+        font-size: 14px;
+        line-height: 20px;
+        padding-right: 10px;
+      }
+      &.pause {
+        font-size: 14px;
+        line-height: 20px;
+        padding-left: 11px;
+      }
+      &.play, &.pause {
+        width:32px;
+      }
+    }
+  }
+  .trackInfo {
+    position: absolute;
+    left: 50%;
+    bottom: 17px;
+    font-size: 14px;
+    width: 400px;
+    margin-left: -200px;
+    text-align: center;
+    .artist {} .title {}
+  }
+}

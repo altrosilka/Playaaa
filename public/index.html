@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html data-ng-app="App">
+
+<head>
+  <base href="/" target="_blank" />
+  <meta charset="UTF-8">
+  <title>Yandex catalog test task</title>
+  <link rel="stylesheet" href="pack/vendors.css?v=1.0.0">
+  <link rel="stylesheet" href="pack/styles.css?v=1.0.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body data-status="{{ status }}">
+  <div id="circleG" class="mainLoader">
+    <div id="circleG_1" class="circleG">
+    </div>
+    <div id="circleG_2" class="circleG">
+    </div>
+    <div id="circleG_3" class="circleG">
+    </div>
+  </div>
+  <div class="layout">
+    <header>
+      <menu>
+        <a href="/">Главная</a>
+        <a href="/discover/">Поиск</a>
+        <a href="/artists/">Исполнители</a>
+        <a href="/playlists/">Плейлисты</a>
+      </menu>
+      <form>
+        <input type="text">
+      </form>
+    </header>
+    <div data-ui-view class="view"></div>
+  </div>
+
+  <div class="controlPanel" ng-controller="C_controlPanel as ctr">
+    <div class="progressPanel" ng-mouseup="ctr.mouseUp($event,'p');">
+      <div minutes-scaler class="minutesScaler" duration="ctr.totalTime"></div>
+      <div class="progress" style="width:{{ctr.progress}}%"></div>
+      <div class="times">
+        <div class="current" ng-bind="ctr.currentTime | toGIS"></div>
+        <div class="total" ng-bind="ctr.totalTime | toGIS"></div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="play btn" ng-click="ctr.play()" ng-hide="ctr.playing">
+        <i class="fa fa-play"></i>
+      </button>
+      <button class="pause btn" ng-click="ctr.pause()" ng-show="ctr.playing">
+        <i class="fa fa-pause"></i>
+      </button>  
+      <button class="prev btn" ng-click="ctr.prev()">
+        <i class="fa fa-angle-left"></i>
+      </button>
+      <button class="next btn" ng-click="ctr.next()">
+        <i class="fa fa-angle-right"></i>
+      </button>
+    </div>
+    <div class="trackInfo ng-hide" ng-show="ctr.artist">
+      <span class="artist" ng-bind="ctr.artist"></span>-
+      <span class="title" ng-bind="ctr.title"></span>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="pack/vendor.js?v=1.0.0"></script>
+  <script type="text/javascript" src="pack/templates.js?v=1.0.0"></script>
+  <script type="text/javascript" src="pack/scripts.js?v=1.0.0"></script>
+</body>
+
+</html>
