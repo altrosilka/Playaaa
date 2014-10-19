@@ -3,10 +3,20 @@
     <div class="fullsizeImage" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
     <div class="top">
       <h1 ng-bind="ctr.artistInfo.name"></h1>
+      <div class="tags">
+        <a class="tag btn btn-default" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags">
+          <i class="fa fa-tag"></i>
+          <span>{{tag.name}}</span>
+        </a>
+      </div>
+      <a class="play" href="/flow/?artist={{ctr.artistInfo.name}}">
+        <i class="fa fa-play"></i>
+      </a>
+      <div class="image" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
     </div>
   </header>
 
-  <a href="/flow/?artist={{ctr.artistInfo.name}}">Flow</a>
+
 
   <div ng-show="ctr.albums.length">
     <div class="inner">

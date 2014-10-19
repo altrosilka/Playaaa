@@ -3,7 +3,7 @@ angular.module('App')
 
     var service = {};
 
-    service.getArtistRadio = function(options) {
+    service.getStaticPlaylist = function(options) {
       return call('playlist/static', angular.extend({
         type: 'artist-radio',
         bucket: 'id:musicbrainz',

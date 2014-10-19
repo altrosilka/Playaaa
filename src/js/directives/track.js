@@ -3,7 +3,7 @@ angular.module('App')
     return {
       scope:{
         info: '='
-      },
+      }, 
       templateUrl: 'templates/directives/track.html',
       link: function($scope, $element){
         $element.on('click',function(){

@@ -6,6 +6,5 @@ App.run(['$rootScope','PS_lastfm','S_sound','PS_vk',
   
     PS_vk.init();
     S_sound.init();
-    PS_lastfm.init();
   }
 ]);

@@ -16,7 +16,7 @@ App.config([
 
     $stateProvider
       .state('discover', {
-        url: "/discover/",
+        url: "/discover/?q",
         controller: 'C_discover as ctr',
         templateUrl: "templates/views/discover/index.html"
       })
