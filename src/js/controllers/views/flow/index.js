@@ -21,7 +21,7 @@ angular.module('App')
       var artist = $stateParams.artist;
       PS_echonest.getStaticPlaylist({
         artist: artist,
-        results: 12
+        results: 25
       }).then(function(resp){
         createListeners(resp.data.response.songs)
       });

@@ -11,6 +11,13 @@ angular.module('App')
       }, options));
     }
 
+    service.getGenresList = function(options) {
+      return call('genre/list', angular.extend({
+        results: 50
+      }, options));
+    }
+
+
     function call(method, options) {
       return $http({
         url: __echonest.url + method,

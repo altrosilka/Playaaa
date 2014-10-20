@@ -5,7 +5,7 @@ input[type="text"] {
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2), 0 0px 50px 10px rgba(30, 143, 219, 0);
   border: none;
   outline: none;
-  line-height: 14px;
+  line-height: 19px;
   font-size: 14px;
   padding: 4px 10px;
   transition: 0.4s;
@@ -542,4 +542,77 @@ body[data-status="loading"] .mainLoader {
 .layout > header form input[type="text"] {
   float: right;
   margin: 23px 16px 0;
+}
+.intro {
+  position: fixed;
+  z-index: 100000;
+  background: #222;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+  visibility: visible;
+}
+.intro.hider {
+  -webkit-transform: scale(3);
+  opacity: 0;
+  visibility: hidden;
+}
+.intro .image {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: 0.4s;
+  visibility: hidden;
+  opacity: 0;
+  background-position: center;
+  background-repeat: repeat;
+}
+.intro .image.active {
+  visibility: visible;
+  opacity: 1;
+}
+.intro .top {
+  z-index: 2;
+  position: absolute;
+  color: #ccc;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.intro .top .wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 50%;
+  margin-top: -70px;
+}
+.intro .top .wrap h1 {
+  font-size: 40px;
+  margin-bottom: -15px;
+}
+.intro .top .wrap h2 {
+  font-size: 16px;
+}
+.intro .top .wrap h3 {
+  font-size: 14px;
+  margin-top: 40px;
+  transition: 0.6s;
+  opacity: 0;
+  visibility: hidden;
+}
+.intro .top .wrap h3.active {
+  margin-top: 10px;
+  opacity: 1;
+  visibility: visible;
+}
+.intro .top .wrap h3 span {
+  color: #fff;
 }

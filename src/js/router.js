@@ -28,14 +28,23 @@ App.config([
       .state('artistpage', {
         url: "/artists/:artist",
         controller: 'C_artists.page as ctr',
-        templateUrl: "templates/views/artists/page.html", 
-        reloadOnSearch: false
+        templateUrl: "templates/views/artists/page.html"
       })
       .state('flow', {
         url: "/flow/?artist&tag",
         controller: 'C_flow as ctr',
         templateUrl: "templates/views/flow/index.html", 
         reloadOnSearch: false
+      })
+      .state('playlists', {
+        url: "/playlists/",
+        controller: 'C_playlists as ctr',
+        templateUrl: "templates/views/playlists/index.html", 
+        reloadOnSearch: false
+      })
+      .state('share', {
+        url: "/share/:type/:id",
+        controller: 'C_share'
       })
   }
 ]);

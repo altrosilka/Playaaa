@@ -1,7 +1,9 @@
 angular.module('App')
-  .service('PS_vk', ['$modal', '__vkAppId', function($modal, __vkAppId) {
+  .service('PS_vk', ['$modal', '$rootScope', '__vkAppId', function($modal, $rootScope, __vkAppId) {
 
     var service = {};
+
+    var userInfo = {};
 
     function call(method, options, callback) {
       options = $.extend({
@@ -40,7 +42,7 @@ angular.module('App')
       call(method, options, callback);
     }
 
-    function afterAuth(resp, $scope) {
+    function afterAuth(resp) {
       if (resp.session) {
         VK.Api.call('users.get', {
           fields: 'photo_50'
@@ -50,17 +52,21 @@ angular.module('App')
           var photo = r.response[0].photo_50;
 
 
-          var userInfo = {
+          userInfo = {
             id: id,
             name: name,
             photo: photo
           }
 
-          $scope.$broadcast('userLogin', userInfo);
+          $rootScope.$broadcast('userLogin', userInfo);
         });
       } else {
-        service.autorise();
+        $rootScope.$broadcast('badAuthorization');
       }
+    }
+
+    service.getUserInfo = function(){
+
     }
 
     service.init = function() {
@@ -69,16 +75,16 @@ angular.module('App')
       });
     }
 
-    service.autorise = function() {
+    service.authorize = function() {
       VK.Auth.login(function() {
         VK.Auth.getLoginStatus(afterAuth);
       }, VK.access.AUDIO + 262144);
     }
 
 
-    service.intro = function($scope) {
+    service.intro = function() {
       VK.Auth.getLoginStatus(function(resp) {
-        afterAuth(resp, $scope);
+        afterAuth(resp);
       });
     }
 

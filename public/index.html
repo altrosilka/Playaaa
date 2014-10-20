@@ -4,14 +4,27 @@
 <head>
   <base href="/" target="_blank" />
   <meta charset="UTF-8">
-  <title>Yandex catalog test task</title>
-  <link rel="stylesheet" href="pack/vendors.css?v=1.0.0">
-  <link rel="stylesheet" href="pack/styles.css?v=1.0.0">
+  <title>Playaaa</title>
+  <link rel="stylesheet" href="pack/vendors.css?v=1.0.2">
+  <link rel="stylesheet" href="pack/styles.css?v=1.0.2">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body data-status="{{ $root.status }}">
+  <div class="intro" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
+    <div class="top">
+      <div class="wrap">
+        <h1>Playaaa</h1>
+        <h2>онлайн-плеер</h2>
+        <h3 ng-class="{'active':ctr.userName}">вход под пользователем
+          <span ng-bind="ctr.userName"></span>
+        </h3>
+        <button class="btn btn-primary" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
+      </div>
+    </div>
+    <div class="image" set-bg-on-load="images/background/intro.jpg"></div>
+  </div>
   <div id="circleG" class="mainLoader">
     <div id="circleG_1" class="circleG">
     </div>
@@ -29,7 +42,7 @@
         <a href="/playlists/">Плейлисты</a>
       </menu>
       <form ng-submit="ctr.search(ctr.q)">
-        <input type="text" ng-model="ctr.q">
+        <input type="text" placeholder="Поиск музыки" ng-model="ctr.q">
         <input type="submit" style="position:absolute;left:-9999px">
       </form>
     </header>
@@ -45,14 +58,14 @@
         <div class="total" ng-bind="ctr.totalTime | toGIS"></div>
       </div>
     </div>
- 
+
     <div class="buttons">
       <button class="play btn" ng-click="ctr.play()" ng-hide="ctr.playing">
         <i class="fa fa-play"></i>
       </button>
       <button class="pause btn" ng-click="ctr.pause()" ng-show="ctr.playing">
         <i class="fa fa-pause"></i>
-      </button>  
+      </button>
       <button class="prev btn" ng-click="ctr.prev()">
         <i class="fa fa-angle-left"></i>
       </button>
@@ -61,13 +74,14 @@
       </button>
     </div>
     <div class="trackInfo ng-hide" ng-show="ctr.artist">
-      <span class="artist" ng-bind="ctr.artist"></span>&nbsp;-&nbsp;<span class="title" ng-bind="ctr.title"></span>
+      <span class="artist" ng-bind="ctr.artist"></span>&nbsp;-&nbsp;
+      <span class="title" ng-bind="ctr.title"></span>
     </div>
   </div>
 
-  <script type="text/javascript" src="pack/vendor.js?v=1.0.0"></script>
-  <script type="text/javascript" src="pack/templates.js?v=1.0.0"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=1.0.0"></script>
+  <script type="text/javascript" src="pack/vendor.js?v=1.0.2"></script>
+  <script type="text/javascript" src="pack/templates.js?v=1.0.2"></script>
+  <script type="text/javascript" src="pack/scripts.js?v=1.0.2"></script>
 </body>
 
 </html>
