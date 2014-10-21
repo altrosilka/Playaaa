@@ -44,7 +44,8 @@ App.config([
       })
       .state('share', {
         url: "/share/:type/:id",
-        controller: 'C_share'
+        controller: 'C_share',
+        templateUrl: "templates/views/share/index.html"
       })
   }
 ]);

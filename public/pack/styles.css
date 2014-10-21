@@ -450,6 +450,14 @@ body[data-status="loading"] .mainLoader {
   font-size: 26px;
   margin: 10px;
 }
+#view_share {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #333;
+}
 .minutesScaler {
   position: absolute;
   height: 100%;

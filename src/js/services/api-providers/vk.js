@@ -1,20 +1,19 @@
 angular.module('App')
-  .service('PS_vk', ['$modal', '$rootScope', '__vkAppId', function($modal, $rootScope, __vkAppId) {
+  .service('PS_vk', ['$q', '$modal', '$rootScope', '__vkAppId', function($q, $modal, $rootScope, __vkAppId) {
 
     var service = {};
 
     var userInfo = {};
 
-    function call(method, options, callback) {
+    function call(method, options, defer) {
+      defer = defer || $q.defer();
       options = $.extend({
         v: 5.23
       }, options);
       VK.Api.call(method, options, function(resp) {
         if (resp.response) {
-          if (typeof callback === 'function') {
-            callback(resp);
-          }
-        } 
+          defer.resolve(resp);
+        }
 
         if (resp.error && resp.error.error_code === 14) {
           var sid = resp.error.captcha_sid;
@@ -28,18 +27,21 @@ angular.module('App')
               }
             }
           }).result.then(function(code) {
-            call(method, angular.extend(options,{
+            call(method, angular.extend(options, {
               captcha_key: code,
               captcha_sid: sid
-            }), callback);
+            }), defer);
           });
         }
 
       });
+      return defer.promise;
     }
 
-    service.call = function(method, options, callback) {
-      call(method, options, callback);
+
+
+    service.call = function(method, options) {
+      return call(method, options);
     }
 
     function afterAuth(resp) {
@@ -65,7 +67,7 @@ angular.module('App')
       }
     }
 
-    service.getUserInfo = function(){
+    service.getUserInfo = function() {
 
     }
 
@@ -137,19 +139,17 @@ angular.module('App')
 
 
         service.call('execute', {
-            code: code
-          },
-          function(resp) {
-            executeIndex++;
-            callback(resp, start);
-            console.log(resp);
-            if (executeIndex < executeCount) {
-              setTimeout(execute, 1000);
-            } else {
-              lastCallback();
-            }
+          code: code
+        }).then(function(resp) {
+          executeIndex++;
+          callback(resp, start);
+          console.log(resp);
+          if (executeIndex < executeCount) {
+            setTimeout(execute, 1000);
+          } else {
+            lastCallback();
           }
-        );
+        });
       }
       execute();
 

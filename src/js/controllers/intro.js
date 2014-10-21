@@ -1,7 +1,8 @@
-angular.module('App').controller('C_intro', ['$scope', '$timeout', 'PS_vk', function($scope, $timeout, PS_vk) {
+angular.module('App').controller('C_intro', ['$state', '$scope', '$timeout', 'PS_vk', function($state, $scope, $timeout, PS_vk) {
   var ctr = this;
 
   $scope.$on('userLogin', function(event, info) {
+
     $scope.$apply(function() {
       ctr.userName = info.name;
       $timeout(function() {
@@ -11,6 +12,7 @@ angular.module('App').controller('C_intro', ['$scope', '$timeout', 'PS_vk', func
         }, 550);
       }, 2000);
     });
+
   });
 
   $scope.$on('badAuthorization', function(event, info) {

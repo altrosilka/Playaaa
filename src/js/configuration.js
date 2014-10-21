@@ -11,3 +11,10 @@ App
       "secret": "abda2711d758f43cbbede5942541f97f"
     }
   })
+  .constant('__api',{
+    url: 'http://api.playaaa.dev:8080',
+    paths: {
+      translationTrackMp3: '/track/translate/',
+      getTrackTranslationData: '/track/getData/'
+    }
+  })
