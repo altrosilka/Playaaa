@@ -15,6 +15,7 @@ App
     url: 'http://api.playaaa.dev:8080',
     paths: {
       translationTrackMp3: '/track/translate/',
-      getTrackTranslationData: '/track/getData/'
+      getTrackTranslationData: '/track/getData/',
+      getTopArtists: '/artists/top'
     }
   })

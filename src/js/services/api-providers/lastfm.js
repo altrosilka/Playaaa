@@ -59,6 +59,17 @@ angular.module('App')
       }
     }
 
+    service.album = {
+      getInfo: function(options){
+        return $q.when(call('album.getInfo', angular.extend({}, options)).then(function(resp){
+          var imageSrc = resp.data.album.image[3]['#text'];
+          resp.data.album.albumImage = imageSrc;
+          
+          return resp.data.album;
+        }));
+      }
+    }
+
     service.tag = {
       getTopTracks: function(tag) {
         return call('tag.getTopTracks', {

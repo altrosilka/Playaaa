@@ -18,6 +18,15 @@
 
 
 
+  <div ng-show="ctr.searchTracks.length">
+    <div class="inner">
+      <h2>Треки</h2>
+    </div>
+    <div class="albums list list-gray">
+      <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
+    </div>
+  </div>
+
   <div ng-show="ctr.albums.length">
     <div class="inner">
       <h2>Альбомы</h2>

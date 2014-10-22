@@ -5,15 +5,12 @@ angular.module('App')
       var service = {};
 
       service.loading = function() {
-        $rootScope.$apply(function() {
-          $rootScope.status = 'loading';
-        });
+        $rootScope.status = 'loading';
+
       }
 
       service.ready = function() {
-        $rootScope.$apply(function() {
-          $rootScope.status = 'ready';
-        });
+        $rootScope.status = 'ready';
       }
 
       return service;

@@ -1,12 +1,12 @@
 <div class="track" ng-class="{'error': error, 'playing': $root.currentTrack.id==info.id}">
-  <button class="play btn btn-default">
+  <span class="play">
    	<i class="fa fa-play"></i>
-  </button>
+  </span>
   <span class="time">{{info.duration | toGIS}}</span>
   <span class="bitrate" ng-show="bitrate">{{bitrate | formatBitrate}}</span>
   <span class="text">
     <span class="artist">{{info.artist}}</span>
-    –
+    &nbsp;–&nbsp;
     <span class="title">{{info.title}}</span>
   </span>
 </div>

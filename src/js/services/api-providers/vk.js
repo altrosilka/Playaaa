@@ -155,8 +155,8 @@ angular.module('App')
 
     }
 
-    service.search = function(options, callback) {
-      options = $.extend({
+    service.search = function(options) {
+      return call('audio.search', angular.extend({
         auto_complete: 1,
         lyrics: 0,
         performer_only: 0,
@@ -165,15 +165,7 @@ angular.module('App')
         offset: 0,
         count: 50,
         v: 5.23
-      }, options);
-      VK.Api.call('audio.search', options, function(resp) {
-        if (resp.response) {
-          if (typeof callback === 'function') {
-            callback(resp);
-          }
-        }
-
-      });
+      }, options));
     }
 
     function parserVkSearchRequest(artist, title) {

@@ -167,40 +167,7 @@ angular.module('App')
       return q.split('.').pop()
     }
 
-    function filterName(text) {
-      var filt = ["♫", "►", "=", "♥", " ]", "★", "™", "║", "●", "✖"];
-
-      text = text.replace(new RegExp("[0-9]+[.]", 'g'), "");
-      text = text.replace(new RegExp("^[0-9]+[ ]", 'g'), "");
-      text = text.replace(new RegExp("[(][0-9]+[)]", 'g'), "");
-      text = text.replace(new RegExp("[(][.]+[)]", 'g'), "");
-
-      text = text.replace(new RegExp("www.[0-9^ ]*", 'g'), "");
-      text = text.replace(new RegExp("club[^ ]*", 'g'), "");
-      text = text.replace(new RegExp("ё", 'g'), "е");
-      text = text.replace(/([^ ]*\.ru)/g, "");
-      text = text.replace(/\[[^]*\]/g, "");
-
-      for (var k = 0; k < filt.length; k++)
-        text = text.replace(new RegExp(filt[k], 'g'), "");
-      return text;
-    }
-
-    service.filterAudios = function(items, onlyFilter) {
-
-      var filteredItems = [];
-      for (var l = items.length, i = 0; i < l; i++) {
-        var item = items[i];
-        var title = filterName(item.title);
-        if (typeof item.duration !== 'undefined' && (item.title.length < 50 || onlyFilter)) {
-          item.title = title;
-          item.artist = filterName(item.artist);
-          filteredItems.push(item);
-        }
-      };
-
-      return filteredItems;
-    }
+    
 
 
 

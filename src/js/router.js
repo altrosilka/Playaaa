@@ -47,5 +47,10 @@ App.config([
         controller: 'C_share',
         templateUrl: "templates/views/share/index.html"
       })
+      .state('album', {
+        url: "/album/:artist/:albumName",
+        controller: 'C_album as ctr',
+        templateUrl: "templates/views/album/index.html"
+      })
   }
 ]);

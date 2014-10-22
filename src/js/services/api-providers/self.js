@@ -7,7 +7,7 @@ angular.module('App')
 
     service.getHotArtists = function(options) {
       return $http({
-        url: base + '/tmp/hotArtists.json',
+        url: base + __api.paths.getTopArtists,
         method: 'GET'
       });
     }

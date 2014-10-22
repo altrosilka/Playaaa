@@ -10,7 +10,7 @@
   transition: 0.5s;
   visibility: visible;
   &.hider {
-    -webkit-transform: scale(3);
+    /*-webkit-transform: scale(3);*/
     opacity: 0;
     visibility: hidden;
   }
@@ -66,6 +66,23 @@
         }
         span {
           color: #fff;
+        }
+      }
+      .btn {
+        background: rgba(255,255,255,0.2);
+        color: #eee;
+        border: 3px solid #eee;
+        transition: @fastTime;
+        padding:8px 30px;
+        outline: none;
+        box-shadow: none;
+        &:hover{
+          background:rgba(255,255,255,0.35);
+          border-color: #fff;
+        }
+
+        &:active{
+          background:rgba(255,255,255,0.5);
         }
       }
     }

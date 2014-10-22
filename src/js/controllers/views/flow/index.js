@@ -64,7 +64,7 @@ angular.module('App')
             }
             tracks.push(q);
           });
-          tracks = S_utils.filterAudios(tracks, true);
+          tracks = S_reduce.filterTracks(tracks,{withDurations: true});
 
           ctr.songs = ctr.songs.concat(tracks);
 

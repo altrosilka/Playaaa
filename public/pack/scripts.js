@@ -21,7 +21,8 @@ App
     url: 'http://api.playaaa.dev:8080',
     paths: {
       translationTrackMp3: '/track/translate/',
-      getTrackTranslationData: '/track/getData/'
+      getTrackTranslationData: '/track/getData/',
+      getTopArtists: '/artists/top'
     }
   })
 
@@ -109,6 +110,11 @@ App.config([
         url: "/share/:type/:id",
         controller: 'C_share',
         templateUrl: "templates/views/share/index.html"
+      })
+      .state('album', {
+        url: "/album/:artist/:albumName",
+        controller: 'C_album as ctr',
+        templateUrl: "templates/views/album/index.html"
       })
   }
 ]);
@@ -447,15 +453,12 @@ angular.module('App')
       var service = {};
 
       service.loading = function() {
-        $rootScope.$apply(function() {
-          $rootScope.status = 'loading';
-        });
+        $rootScope.status = 'loading';
+
       }
 
       service.ready = function() {
-        $rootScope.$apply(function() {
-          $rootScope.status = 'ready';
-        });
+        $rootScope.status = 'ready';
       }
 
       return service;
@@ -469,14 +472,54 @@ angular.module('App')
       var service = {};
 
       service.normalizeTopTracks = function(array) {
-        return _.reduce(array,function(newArray, song){
+        return _.reduce(array, function(newArray, song) {
           newArray.push({
             artist: song.artist.name,
             title: song.name,
             duration: song.duration
           });
           return newArray;
-        },[]); 
+        }, []);
+      }
+
+      service.filterTracks = function(items, allowOptions) {
+        allowOptions = angular.extend({
+          bigTitles: false,
+          withDurations: true
+        }, allowOptions || {});
+
+        var filteredItems = [];
+        for (var l = items.length, i = 0; i < l; i++) {
+          var item = items[i];
+          var title = service.clearTrashSymbols(item.title);
+
+          if (!allowOptions.withDurations || (typeof item.duration !== 'undefined' && allowOptions.withDurations)) {
+            if (allowOptions.bigTitles || (!allowOptions.bigTitles && item.title.length < 50)) {
+              item.title = title;
+              item.artist = service.clearTrashSymbols(item.artist);
+              filteredItems.push(item);
+            }
+          }
+        };
+
+        return filteredItems;
+      }
+
+      service.clearTrashSymbols = function(text) {
+        var filt = ["♫", "►", "=", "♥", " ]", "★", "™", "║", "●", "✖"];
+        text = text.replace(new RegExp("[0-9]+[.]", 'g'), "");
+        text = text.replace(new RegExp("^[0-9]+[ ]", 'g'), "");
+        text = text.replace(new RegExp("[(][0-9]+[)]", 'g'), "");
+        text = text.replace(new RegExp("[(][.]+[)]", 'g'), "");
+        text = text.replace(new RegExp("www.[0-9^ ]*", 'g'), "");
+        text = text.replace(new RegExp("club[^ ]*", 'g'), "");
+        text = text.replace(new RegExp("ё", 'g'), "е");
+        text = text.replace(/([^ ]*\.ru)/g, "");
+        text = text.replace(/\[[^]*\]/g, "");
+
+        for (var k = 0; k < filt.length; k++)
+          text = text.replace(new RegExp(filt[k], 'g'), "");
+        return text;
       }
 
       return service;
@@ -906,40 +949,7 @@ angular.module('App')
       return q.split('.').pop()
     }
 
-    function filterName(text) {
-      var filt = ["♫", "►", "=", "♥", " ]", "★", "™", "║", "●", "✖"];
-
-      text = text.replace(new RegExp("[0-9]+[.]", 'g'), "");
-      text = text.replace(new RegExp("^[0-9]+[ ]", 'g'), "");
-      text = text.replace(new RegExp("[(][0-9]+[)]", 'g'), "");
-      text = text.replace(new RegExp("[(][.]+[)]", 'g'), "");
-
-      text = text.replace(new RegExp("www.[0-9^ ]*", 'g'), "");
-      text = text.replace(new RegExp("club[^ ]*", 'g'), "");
-      text = text.replace(new RegExp("ё", 'g'), "е");
-      text = text.replace(/([^ ]*\.ru)/g, "");
-      text = text.replace(/\[[^]*\]/g, "");
-
-      for (var k = 0; k < filt.length; k++)
-        text = text.replace(new RegExp(filt[k], 'g'), "");
-      return text;
-    }
-
-    service.filterAudios = function(items, onlyFilter) {
-
-      var filteredItems = [];
-      for (var l = items.length, i = 0; i < l; i++) {
-        var item = items[i];
-        var title = filterName(item.title);
-        if (typeof item.duration !== 'undefined' && (item.title.length < 50 || onlyFilter)) {
-          item.title = title;
-          item.artist = filterName(item.artist);
-          filteredItems.push(item);
-        }
-      };
-
-      return filteredItems;
-    }
+    
 
 
 
@@ -6470,6 +6480,17 @@ angular.module('App')
       }
     }
 
+    service.album = {
+      getInfo: function(options){
+        return $q.when(call('album.getInfo', angular.extend({}, options)).then(function(resp){
+          var imageSrc = resp.data.album.image[3]['#text'];
+          resp.data.album.albumImage = imageSrc;
+          
+          return resp.data.album;
+        }));
+      }
+    }
+
     service.tag = {
       getTopTracks: function(tag) {
         return call('tag.getTopTracks', {
@@ -6503,7 +6524,7 @@ angular.module('App')
 
     service.getHotArtists = function(options) {
       return $http({
-        url: base + '/tmp/hotArtists.json',
+        url: base + __api.paths.getTopArtists,
         method: 'GET'
       });
     }
@@ -6679,8 +6700,8 @@ angular.module('App')
 
     }
 
-    service.search = function(options, callback) {
-      options = $.extend({
+    service.search = function(options) {
+      return call('audio.search', angular.extend({
         auto_complete: 1,
         lyrics: 0,
         performer_only: 0,
@@ -6689,15 +6710,7 @@ angular.module('App')
         offset: 0,
         count: 50,
         v: 5.23
-      }, options);
-      VK.Api.call('audio.search', options, function(resp) {
-        if (resp.response) {
-          if (typeof callback === 'function') {
-            callback(resp);
-          }
-        }
-
-      });
+      }, options));
     }
 
     function parserVkSearchRequest(artist, title) {
@@ -6708,20 +6721,80 @@ angular.module('App')
     return service;
   }]);
 
-angular.module('App')
-  .controller('C_discover',['$stateParams','PS_echonest', 'PS_self', function($stateParams, PS_echonest, PS_self){
-    var ctr = {};
+angular.module('App').controller('C_album', ['$stateParams', 'PS_lastfm', 'PS_vk','S_reduce',function($stateParams, PS_lastfm, PS_vk, S_reduce) {
 
-    ctr.searchMode = ($stateParams.q)?true:false;
+  var ctr = this;
 
-    ctr.query = $stateParams.q;
+  var artist = $stateParams.artist;
+  var albumName = $stateParams.albumName;
 
-    PS_self.getHotArtists().then(function(data){
-      ctr.artists = data.data.artists;
-    })
 
-    return ctr;
-  }])
+
+  ctr.audios = [];
+
+  ctr.tracksPlurals = {
+    0: 'нет треков',
+    one: '{} трек',
+    few: '{} трека',
+    many: '{} треков',
+    other: '{} треков'
+  };
+
+
+  PS_lastfm.album.getInfo({
+    artist: artist,
+    album: albumName
+  }).then(function(data) {
+    ctr.info = data;
+
+    var filtTracks = getTracks(data);
+    
+    PS_vk.findTrackArray(filtTracks, function(array, start) {
+      console.log('part!');
+      var tracks = [];
+      $.each(array.response, function(i, val) {
+        var q = val.items[0];
+        if (!q) {
+          var pseudo = filtTracks[start + i];
+          q = {
+            error: true,
+            artist: pseudo.artist,
+            title: pseudo.title,
+            duration: pseudo.duration
+          }
+        }
+        tracks.push(q);
+      });
+      tracks = S_reduce.filterTracks(tracks);
+      ctr.audios = ctr.audios.concat(tracks);
+
+
+    }, function() {
+      console.log('all!');
+    });
+  });
+
+
+  function getTracks(data) {
+    var filteredTracks = [];
+    for (var i = 0, l = data.tracks.track.length; i < l; i++) {
+      var track = data.tracks.track[i];
+      filteredTracks.push({
+        artist: track.artist.name,
+        title: track.name,
+        duration: track.duration
+      });
+    }
+
+    if (typeof data.tracks.track.length === 'undefined'){
+      filteredTracks.push(data.tracks.track); 
+    }
+
+    return filteredTracks;
+  }
+
+}]);
+
 angular.module('App')
   .controller('C_artists',['PS_echonest', 'PS_self', function(PS_echonest, PS_self){
     var ctr = {};
@@ -6737,33 +6810,63 @@ angular.module('App')
     return ctr;
   }])
 angular.module('App')
-  .controller('C_artists.page', ['$q', '$stateParams', 'PS_lastfm', 'PS_self', function($q, $stateParams, PS_lastfm, PS_self) {
+  .controller('C_artists.page', [
+    '$q',
+    '$stateParams',
+    'PS_lastfm',
+    'PS_self',
+    'PS_vk',
+    'S_reduce',
+    function($q, $stateParams, PS_lastfm, PS_self, PS_vk, S_reduce) {
+      var ctr = {};
+
+      var artist = $stateParams.artist;
+
+      $q.all({
+        info: PS_lastfm.artist.getInfo(artist),
+        albums: PS_lastfm.artist.getTopAlbums({
+          artist: artist
+        }),
+        tags: PS_lastfm.artist.getTopTags(artist),
+        tracks: PS_vk.search({
+          q: artist
+        })
+      }).then(function(resp) {
+        console.log(resp);
+
+
+
+
+        var src = resp.info.data.artist;
+        ctr.artistInfo = {
+          name: src.name,
+          image: src.image[src.image.length - 1]['#text'],
+          tags: resp.tags.data.toptags.tag.splice(0, 7)
+        }
+
+        ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items).splice(0,10);
+
+        ctr.albums = resp.albums;
+      });
+
+      return ctr;
+    }
+  ])
+
+angular.module('App')
+  .controller('C_discover',['$stateParams','PS_echonest', 'PS_self', function($stateParams, PS_echonest, PS_self){
     var ctr = {};
 
-    var artist = $stateParams.artist;
+    ctr.searchMode = ($stateParams.q)?true:false;
 
+    ctr.query = $stateParams.q;
 
-    $q.all({
-      info: PS_lastfm.artist.getInfo(artist),
-      albums: PS_lastfm.artist.getTopAlbums({artist:artist}),
-      tags: PS_lastfm.artist.getTopTags(artist)
-    }).then(function(resp) {
-      console.log(resp);
-
-
-      var src = resp.info.data.artist;
-      ctr.artistInfo = {
-        name: src.name,
-        image: src.image[src.image.length - 1]['#text'],
-        tags: resp.tags.data.toptags.tag.splice(0,7)
-      }
-
-      ctr.albums = resp.albums;
-    });
+    PS_self.getHotArtists().then(function(data){
+      ctr.artists = data.data.artists;
+    })
 
     return ctr;
   }])
- 
 angular.module('App')
   .controller('C_flow', [
     '$stateParams',
@@ -6830,7 +6933,7 @@ angular.module('App')
             }
             tracks.push(q);
           });
-          tracks = S_utils.filterAudios(tracks, true);
+          tracks = S_reduce.filterTracks(tracks,{withDurations: true});
 
           ctr.songs = ctr.songs.concat(tracks);
 

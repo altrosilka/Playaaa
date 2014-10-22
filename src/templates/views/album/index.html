@@ -1,0 +1,21 @@
+<div class="rightPanel">
+  <div class="bigAlbumInfo panel clearfix">
+    <div class="image" style="background-image:url({{ctr.info.albumImage}})"></div>
+    <h2>{{ctr.info.artist}}</h2>
+    <h1>{{ctr.info.name}}</h1>
+    <div class="date">{{ctr.info.releasedate}}</div>
+  </div>
+</div>
+
+
+<div class="leftPanel">
+  <h2>РўСЂРµРєРё СЃ Р°Р»СЊР±РѕРјР°
+    <small class="pull-right">
+      <ng-pluralize count="ctr.info.tracks.track.length" when="tracksPlurals">
+      </ng-pluralize>
+    </small>
+  </h2>
+  <div class="tracks">
+    <track ng-repeat="item in ctr.audios" info="item"></track>
+  </div>
+</div>

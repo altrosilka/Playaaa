@@ -5,14 +5,14 @@
   <base href="/" target="_blank" />
   <meta charset="UTF-8">
   <title>Playaaa</title>
-  <link rel="stylesheet" href="pack/vendors.css?v=1.0.2">
-  <link rel="stylesheet" href="pack/styles.css?v=1.0.2">
+  <link rel="stylesheet" href="pack/vendors.css?v=1.0.3">
+  <link rel="stylesheet" href="pack/styles.css?v=1.0.3">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body data-status="{{ $root.status }}">
-  <div class="intro" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
+  <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
       <div class="wrap">
         <h1>Playaaa</h1>
@@ -20,7 +20,7 @@
         <h3 ng-class="{'active':ctr.userName}">вход под пользователем
           <span ng-bind="ctr.userName"></span>
         </h3>
-        <button class="btn btn-primary" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
+        <button class="btn" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
       </div>
     </div>
     <div class="image" set-bg-on-load="images/background/intro.jpg"></div>
@@ -79,9 +79,9 @@
     </div>
   </div>
 
-  <script type="text/javascript" src="pack/vendor.js?v=1.0.2"></script>
-  <script type="text/javascript" src="pack/templates.js?v=1.0.2"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=1.0.2"></script>
+  <script type="text/javascript" src="pack/vendor.js?v=1.0.3"></script>
+  <script type="text/javascript" src="pack/templates.js?v=1.0.3"></script>
+  <script type="text/javascript" src="pack/scripts.js?v=1.0.3"></script>
 </body>
 
 </html>

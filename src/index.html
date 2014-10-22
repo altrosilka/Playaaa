@@ -12,7 +12,7 @@
 </head>
 
 <body data-status="{{ $root.status }}">
-  <div class="intro" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
+  <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
       <div class="wrap">
         <h1>Playaaa</h1>
@@ -20,7 +20,7 @@
         <h3 ng-class="{'active':ctr.userName}">вход под пользователем
           <span ng-bind="ctr.userName"></span>
         </h3>
-        <button class="btn btn-primary" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
+        <button class="btn" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
       </div>
     </div>
     <div class="image" set-bg-on-load="images/background/intro.jpg"></div>
