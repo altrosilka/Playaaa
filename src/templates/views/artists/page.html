@@ -1,6 +1,6 @@
-<section id="view-artists-page" class="view view-fullsize">
+<section id="view-artists-page" class="view view-fullsize" ng-if="ctr.artistInfo">
   <header>
-    <div class="fullsizeImage" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
+    <div class="fullsizeImage" thief-background="ctr.artistInfo.image"></div>
     <div class="top">
       <h1 ng-bind="ctr.artistInfo.name"></h1>
       <div class="tags">

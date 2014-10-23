@@ -23,6 +23,7 @@ gulp.task('scripts', function() {
       './bower_components/angular/angular.js',
       './bower_components/angular-ui-router/release/angular-ui-router.js',
       './bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+      //'./bower_components/color-thief/src/color-thief.js'
     ])
     .pipe(concat('vendor.js'))
     // .pipe(uglify())
@@ -37,10 +38,12 @@ gulp.task('scripts-deploy', function() {
     .pipe(gulp.dest('./public/pack'))
   gulp.src([
       './bower_components/jquery/dist/jquery.js',
+      './bower_components/lodash/dist/lodash.js',
       './bower_components/bootstrap/dist/js/bootstrap.js',
       './bower_components/angular/angular.js',
       './bower_components/angular-ui-router/release/angular-ui-router.js',
       './bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+      //'./bower_components/color-thief/src/color-thief.js'
     ])
     .pipe(concat('vendor.js'))
     .pipe(uglify())

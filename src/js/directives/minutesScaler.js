@@ -18,7 +18,7 @@ angular.module('App')
           var pixelsOnMinute = w / minutes;
           var iterations = Math.ceil(minutes);
 
-          for (var i = 0; i < iterations; i++) {
+          for (var i = 1; i < iterations; i++) {
             $element.append('<div class="scale" style="left:' + (i * pixelsOnMinute) + 'px"></div>');
           }
         });

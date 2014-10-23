@@ -33,38 +33,38 @@ input[type="text"]:focus {
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.9), 0px 0px 1px rgba(0, 0, 0, 0.3);
 }
 .controlPanel {
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50px;
-  border-bottom: 1px solid #ddd;
-  background: #ece8ec;
-  background: -moz-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ece8ec), color-stop(100%, #dbd9db));
-  background: -webkit-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: -o-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: -ms-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: linear-gradient(to bottom, #ece8ec 0%, #dbd9db 100%);
+  position: relative;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.8);
 }
 .controlPanel .progressPanel {
   position: absolute;
-  top: 45px;
-  right: 0;
-  left: 0;
-  height: 5px;
-  background: #f4f4f4;
-  box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.2);
+  bottom: 6px;
+  width: 228px;
+  left: 10px;
+  height: 8px;
   transition: 0.2s;
+  cursor: pointer;
 }
-.controlPanel .progressPanel .progress {
+.controlPanel .progressPanel .fake {
+  height: 2px;
+  margin-top: 3px;
+  background: #ddd;
+  position: relative;
+}
+.controlPanel .progressPanel .fake .progress {
   width: 0%;
-  background: #1e8fdb;
+  background: #000;
   height: 100%;
   border-radius: 0px;
-  cursor: pointer;
   transition: 0.2s;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.controlPanel .progressPanel .fake .download {
+  height: 100%;
+  background: #BEBEBE;
 }
 .controlPanel .progressPanel .times .current,
 .controlPanel .progressPanel .times .total {
@@ -81,70 +81,95 @@ input[type="text"]:focus {
 .controlPanel .progressPanel .times .total {
   right: -30px;
 }
-.controlPanel:hover .progressPanel {
-  height: 15px;
-}
-.controlPanel:hover .progressPanel .times .current,
-.controlPanel:hover .progressPanel .times .total {
-  visibility: visible;
-  opacity: 1;
-}
-.controlPanel:hover .progressPanel .times .current {
-  left: 5px;
-}
-.controlPanel:hover .progressPanel .times .total {
-  right: 5px;
-}
 .controlPanel .buttons {
   position: absolute;
-  left: 16px;
-  bottom: 16px;
+  left: 0px;
+  top: 51px;
+  right: 0px;
+  text-align: center;
 }
 .controlPanel .buttons .btn {
-  cursor: pointer;
+  opacity: 0.4;
+  box-shadow: 0 0 0 2px #333;
+  border-radius: 50%;
+  background: transparent;
   line-height: 24px;
   outline: none;
-  border: none;
-  height: 24px;
-  padding: 0 12px;
+  padding: 0 8px;
+  transition: 0.2s;
+}
+.controlPanel .buttons .btn:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.controlPanel .buttons .btn:active {
+  opacity: 1;
 }
 .controlPanel .buttons .btn i {
-  font-size: 12px;
-  line-height: 24px;
   color: #444;
+}
+.controlPanel .buttons .btn.next,
+.controlPanel .buttons .btn.prev {
+  width: 24px;
+  height: 24px;
 }
 .controlPanel .buttons .btn.next i,
 .controlPanel .buttons .btn.prev i {
-  font-size: 22px;
+  font-size: 13px;
+  line-height: 23px;
 }
 .controlPanel .buttons .btn.next {
-  padding-right: 10px;
+  padding-left: 8px;
 }
 .controlPanel .buttons .btn.prev {
-  padding-left: 10px;
+  padding-left: 4px;
 }
 .controlPanel .buttons .btn.play {
-  font-size: 14px;
-  line-height: 20px;
-  padding-right: 10px;
+  padding-right: 4px;
+}
+.controlPanel .buttons .btn.play i {
+  line-height: 38px;
 }
 .controlPanel .buttons .btn.pause {
-  font-size: 14px;
-  line-height: 20px;
-  padding-left: 11px;
+  padding-left: 9px;
+}
+.controlPanel .buttons .btn.pause i {
+  line-height: 38px;
 }
 .controlPanel .buttons .btn.play,
 .controlPanel .buttons .btn.pause {
-  width: 32px;
+  width: 36px;
+  height: 36px;
+  margin: 0px 5px;
+}
+.controlPanel .buttons .btn.play i,
+.controlPanel .buttons .btn.pause i {
+  font-size: 16px;
 }
 .controlPanel .trackInfo {
-  position: absolute;
-  left: 50%;
-  bottom: 17px;
-  font-size: 14px;
-  width: 400px;
-  margin-left: -200px;
+  font-size: 12px;
   text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  left: 10px;
+}
+.controlPanel .trackInfo .artist {
+  font-weight: bold;
+}
+.leftPanel {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 50%;
+  margin-left: -620px;
+  width: 360px;
+  border-radius: 0px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
 }
 * {
   font-family: 'Open Sans';
@@ -152,6 +177,7 @@ input[type="text"]:focus {
 html,
 body {
   height: 100%;
+  min-height: 100%;
 }
 body {
   font: 13px Arial, Helvetica, sans-serif;
@@ -183,14 +209,22 @@ body[data-status="loading"] .mainLoader {
 .gray {
   color: #999999;
 }
+.content {
+  width: 1240px;
+  margin: auto;
+  min-height: 100%;
+}
 .layout {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.7);
-  border-radius: 5px;
-  width: 960px;
-  margin: 120px auto;
-  min-height: 300px;
+  border-radius: 0px;
   box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
+  width: 860px;
+  margin: 0px 0 0px 380px;
+  min-height: 100%;
+}
+.panel {
+  margin-bottom: 0;
 }
 .list .item {
   border-radius: 5px;
@@ -460,24 +494,18 @@ body[data-status="loading"] .mainLoader {
 }
 .minutesScaler {
   position: absolute;
-  height: 100%;
-  left: 100%;
+  top: 1px;
+  bottom: 1px;
   z-index: 2;
   left: 0;
   right: 0;
 }
 .minutesScaler .scale {
-  margin-left: -30px;
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 30px;
-  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
-  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
-  background: -o-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
-  background: -ms-linear-gradient(left, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
-  background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+  width: 1px;
+  background: #bbb;
 }
 .track {
   height: 38px;
@@ -510,7 +538,7 @@ body[data-status="loading"] .mainLoader {
   cursor: pointer;
 }
 .layout > header {
-  height: 70px;
+  height: 50px;
   border-bottom: 1px solid #BEBEBE;
   background: #ece8ec;
   background: -moz-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
@@ -530,10 +558,10 @@ body[data-status="loading"] .mainLoader {
   float: left;
   height: 100%;
   padding: 0 20px;
-  line-height: 70px;
+  line-height: 47px;
   transition: 0.2s;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 13px;
   color: #555;
   text-decoration: none;
 }
@@ -555,7 +583,7 @@ body[data-status="loading"] .mainLoader {
 }
 .layout > header form input[type="text"] {
   float: right;
-  margin: 23px 16px 0;
+  margin: 11px 15px 0;
 }
 .intro {
   position: fixed;
