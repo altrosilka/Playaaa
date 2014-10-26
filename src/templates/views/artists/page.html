@@ -1,14 +1,24 @@
 <section id="view-artists-page" class="view view-fullsize" ng-if="ctr.artistInfo">
-  <header>
-    <div class="fullsizeImage" thief-background="ctr.artistInfo.image"></div>
+  <header class="whiteHeader">
+    <!--<div class="fullsizeImage" thief-background="ctr.artistInfo.image"></div>-->
     <div class="top">
-      <h1 ng-bind="ctr.artistInfo.name"></h1>
-      <div class="tags">
-        <a class="tag btn btn-default" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags">
-          <i class="fa fa-tag"></i>
-          <span>{{tag.name}}</span>
-        </a>
-      </div>
+      <h1>
+        <span ng-bind="ctr.artistInfo.name"></span>
+        <span class="tags">
+          <a class="tag" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:3">
+            <i class="fa fa-tag"></i>
+            <span>{{tag.name}}</span>
+          </a>
+        </span>
+      </h1>
+      <menu>
+        <a href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
+        <a href="/artists/{{ctr.artistInfo.name}}/albums/" ng-class="{'active':ctr.section === 'albums'}">Альбомы</a>
+        <!--<a href="/artists/{{ctr.artistInfo.name}}/videos/" ng-class="{'active':ctr.section === 'videos'}">Видео</a>-->
+        <a href="/flow/?artist={{ctr.artistInfo.name}}">Волна</a>
+        <a href="/artists/{{ctr.artistInfo.name}}/similar/" ng-class="{'active':ctr.section === 'similar'}">Похожее</a>
+      </menu>
+
       <a class="play" href="/flow/?artist={{ctr.artistInfo.name}}">
         <i class="fa fa-play"></i>
       </a>
@@ -17,22 +27,63 @@
   </header>
 
 
+  <section ng-if="!ctr.section">
+    <div ng-show="ctr.searchTracks.length">
+      <div class="inner">
+        <h2>Треки</h2>
+      </div>
+      <div class="albums list list-gray">
+        <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
+      </div>
+    </div>
 
-  <div ng-show="ctr.searchTracks.length">
+    <div ng-show="ctr.albums.length">
+      <div class="inner">
+        <h2>Альбомы</h2>
+      </div>
+      <div class="albums list list-gray">
+        <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
+      </div>
+    </div>
+  </section>
+
+  <section ng-if="ctr.section === 'tracks'">
     <div class="inner">
       <h2>Треки</h2>
     </div>
     <div class="albums list list-gray">
       <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
     </div>
-  </div>
+  </section>
 
-  <div ng-show="ctr.albums.length">
+  <section ng-if="ctr.section === 'albums'">
     <div class="inner">
       <h2>Альбомы</h2>
     </div>
     <div class="albums list list-gray">
       <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
     </div>
-  </div>
+  </section>
+
+  <section ng-if="ctr.section === 'similar'">
+    <div class="inner">
+      <h2>Тэги исполнителя</h2>
+      <section>
+        <a class="tag btn btn-primary" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:15">
+          <i class="fa fa-tag"></i>
+          <span>{{tag.name}}</span>
+        </a>
+      </section>
+      <h2>Похожие исполнители</h2>
+      <section class="list list-gray artistGrid">
+        <a class="item" href="/artists/{{item.name}}/" ng-repeat="item in ctr.similarArtists | withoutStatsCleaning">
+          <div class="image" style="background-image: url({{item.imageSrc}})"></div>
+          <footer>
+            <h3 ng-bind="item.name"></h3>
+          </footer>
+        </a>
+      </section>
+    </div>
+  </section>
+
 </section>

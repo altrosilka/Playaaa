@@ -209,6 +209,18 @@ body[data-status="loading"] .mainLoader {
 .gray {
   color: #999999;
 }
+.link {
+  text-decoration: none;
+  border-bottom: 1px solid;
+  transition: 0.2s;
+}
+.link:hover {
+  text-decoration: none;
+  border-color: transparent;
+}
+.link.no-border {
+  border-color: transparent;
+}
 .content {
   width: 1240px;
   margin: auto;
@@ -251,7 +263,7 @@ body[data-status="loading"] .mainLoader {
 .artistGrid .item {
   float: left;
   margin: 16px 0 0 16px;
-  width: 220px;
+  width: 265px;
   height: 287px;
   position: relative;
   overflow: hidden;
@@ -264,7 +276,7 @@ body[data-status="loading"] .mainLoader {
   height: 100%;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 230px;
+  background-size: cover;
 }
 .artistGrid .item footer {
   position: absolute;
@@ -289,91 +301,15 @@ body[data-status="loading"] .mainLoader {
 .view.view-padding {
   padding: 16px;
 }
-.circleG {
-  background-color: rgba(255, 255, 255, 0);
-  float: left;
-  height: 6px;
-  margin-left: 3px;
-  width: 6px;
-  -moz-animation-name: bounce_circleG;
-  -moz-animation-duration: 0.8999999999999999s;
-  -moz-animation-iteration-count: infinite;
-  -moz-animation-direction: linear;
-  -moz-border-radius: 4px;
-  -webkit-animation-name: bounce_circleG;
-  -webkit-animation-duration: 0.8999999999999999s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-direction: linear;
-  -webkit-border-radius: 4px;
-  -ms-animation-name: bounce_circleG;
-  -ms-animation-duration: 0.8999999999999999s;
-  -ms-animation-iteration-count: infinite;
-  -ms-animation-direction: linear;
-  -ms-border-radius: 4px;
-  -o-animation-name: bounce_circleG;
-  -o-animation-duration: 0.8999999999999999s;
-  -o-animation-iteration-count: infinite;
-  -o-animation-direction: linear;
-  -o-border-radius: 4px;
-  animation-name: bounce_circleG;
-  animation-duration: 0.8999999999999999s;
-  animation-iteration-count: infinite;
-  animation-direction: linear;
-  border-radius: 4px;
-}
-#circleG_1 {
-  -moz-animation-delay: 0.18s;
-  -webkit-animation-delay: 0.18s;
-  -ms-animation-delay: 0.18s;
-  -o-animation-delay: 0.18s;
-  animation-delay: 0.18s;
-}
-#circleG_2 {
-  -moz-animation-delay: 0.42000000000000004s;
-  -webkit-animation-delay: 0.42000000000000004s;
-  -ms-animation-delay: 0.42000000000000004s;
-  -o-animation-delay: 0.42000000000000004s;
-  animation-delay: 0.42000000000000004s;
-}
-#circleG_3 {
-  -moz-animation-delay: 0.5399999999999999s;
-  -webkit-animation-delay: 0.5399999999999999s;
-  -ms-animation-delay: 0.5399999999999999s;
-  -o-animation-delay: 0.5399999999999999s;
-  animation-delay: 0.5399999999999999s;
-}
-@-moz-keyframes bounce_circleG {
-  50% {
-    background-color: #b8b8b8;
-  }
-}
-@-webkit-keyframes bounce_circleG {
-  50% {
-    background-color: #b8b8b8;
-  }
-}
-@-ms-keyframes bounce_circleG {
-  50% {
-    background-color: #b8b8b8;
-  }
-}
-@-o-keyframes bounce_circleG {
-  50% {
-    background-color: #b8b8b8;
-  }
-}
-@keyframes bounce_circleG {
-  50% {
-    background-color: #b8b8b8;
-  }
-}
-#view-artists-page header {
-  height: 300px;
-  border-bottom: 2px solid #eee;
+header.whiteHeader {
+  height: 120px;
   position: relative;
   margin-top: -1px;
+  background: #fff;
+  border-bottom: 1px solid #B0B0B0;
 }
-#view-artists-page header .fullsizeImage {
+header.whiteHeader .fullsizeImage {
+  display: none;
   height: 100%;
   z-index: 1;
   width: 100%;
@@ -385,76 +321,121 @@ body[data-status="loading"] .mainLoader {
   opacity: 0.6;
   -webkit-transform: translate3d(0, 0, 0);
 }
-#view-artists-page header .top {
+header.whiteHeader .top {
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.5);
 }
-#view-artists-page header .top h1 {
-  color: #fff;
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  font-size: 42px;
+header.whiteHeader .top h1 {
+  font-size: 22px;
+  top: 32px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+header.whiteHeader .top h2 {
+  font-size: 18px;
+  top: 73px;
+}
+header.whiteHeader .top h1,
+header.whiteHeader .top h2 {
+  color: #333;
   position: absolute;
-  left: 16px;
-  top: 16px;
+  margin: 0;
+  left: 118px;
+  right: 16px;
 }
-#view-artists-page header .top .tags {
+header.whiteHeader .top menu {
   position: absolute;
-  bottom: 138px;
-  left: 16px;
-  width: 400px;
+  left: 118px;
+  padding: 0;
+  margin: 0;
+  top: 70px;
 }
-#view-artists-page header .top .tags .tag {
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-#view-artists-page header .top .play {
-  padding: 25px 30px 23px;
-  border-radius: 10px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-  background: #fff;
-  color: #666;
-  overflow: auto;
-  display: block;
-  position: absolute;
-  left: 500px;
-  top: 50%;
-  margin: -53px 0 0;
+header.whiteHeader .top menu a {
+  color: #1e8fdb;
+  font-size: 12px;
+  display: inline-block;
+  margin-right: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid;
   transition: 0.2s;
 }
-#view-artists-page header .top .play .fa {
-  font-size: 60px;
-  line-height: 60px;
-  height: 60px;
-  margin-left: 6px;
+header.whiteHeader .top menu a:hover {
+  border-color: transparent;
 }
-#view-artists-page header .top .play:hover {
-  padding: 35px 40px 33px;
-  margin: -63px 0 0 -10px;
+header.whiteHeader .top menu a.active,
+header.whiteHeader .top menu a.active:hover {
+  color: #333;
+  border-bottom: none;
+  cursor: default;
+}
+header.whiteHeader .top .play {
+  width: 88px;
+  height: 88px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+  background: #fff;
+  display: block;
+  position: absolute;
+  right: 16px;
+  transition: 0.2s;
+  top: 16px;
+  color: #555;
+}
+header.whiteHeader .top .play .fa {
+  font-size: 38px;
+  line-height: 28px;
+  height: 28px;
+  margin: 31px 0 0 33px;
+}
+header.whiteHeader .top .play:hover {
+  background: #eee;
   color: #111;
 }
-#view-artists-page header .top .image {
+header.whiteHeader .top .image {
   position: absolute;
-  width: 250px;
-  height: 250px;
-  right: 25px;
-  top: 25px;
+  width: 88px;
+  height: 88px;
+  left: 16px;
+  top: 16px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  border-radius: 5px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+#view-album .gray {
+  font-size: 12px;
+  float: right;
+  margin: 6px 0 0;
+  display: block;
+}
+#view-artists-page .whiteHeader .tags {
+  float: right;
+  display: block;
+  margin-top: -8px;
+}
+#view-artists-page .whiteHeader .tags .tag {
+  font-size: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid;
+  transition: 0.2s;
+  display: inline-block;
+  margin-left: 10px;
+}
+#view-artists-page .whiteHeader .tags .tag:hover {
+  border-color: transparent;
+}
+#view-artists-page .whiteHeader h1 {
+  right: 121px;
 }
 #view-artists-page .albums .item {
   float: left;
   display: block;
   margin: 16px 0 0 16px;
-  width: 220px;
-  height: 220px;
+  width: 265px;
+  height: 265px;
   position: relative;
   overflow: hidden;
 }
@@ -491,6 +472,25 @@ body[data-status="loading"] .mainLoader {
   bottom: 0;
   top: 0;
   background: #333;
+}
+#view-flow .paddingLoader {
+  text-align: center;
+  width: 100%;
+  height: 130px;
+  position: relative;
+}
+#view-flow .paddingLoader .lineLoader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -5px 0 0 -40px;
+}
+#view-flow .paddingLoader .lineLoader .lineLoaderPoint {
+  width: 10px;
+  height: 10px;
+  border-radius: 110px 10px;
+  margin: 0 3px;
+  opacity: 0.3;
 }
 .minutesScaler {
   position: absolute;
@@ -537,8 +537,86 @@ body[data-status="loading"] .mainLoader {
   background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
 }
+.lineLoaderPoint {
+  background-color: rgba(255, 255, 255, 0);
+  float: left;
+  height: 6px;
+  margin-left: 3px;
+  width: 6px;
+  -moz-animation-name: bounce_circleG;
+  -moz-animation-duration: 0.8999999999999999s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: linear;
+  -moz-border-radius: 4px;
+  -webkit-animation-name: bounce_circleG;
+  -webkit-animation-duration: 0.8999999999999999s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: linear;
+  -webkit-border-radius: 4px;
+  -ms-animation-name: bounce_circleG;
+  -ms-animation-duration: 0.8999999999999999s;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-direction: linear;
+  -ms-border-radius: 4px;
+  -o-animation-name: bounce_circleG;
+  -o-animation-duration: 0.8999999999999999s;
+  -o-animation-iteration-count: infinite;
+  -o-animation-direction: linear;
+  -o-border-radius: 4px;
+  animation-name: bounce_circleG;
+  animation-duration: 0.8999999999999999s;
+  animation-iteration-count: infinite;
+  animation-direction: linear;
+  border-radius: 4px;
+}
+.lineLoaderPoint_1 {
+  -moz-animation-delay: 0.18s;
+  -webkit-animation-delay: 0.18s;
+  -ms-animation-delay: 0.18s;
+  -o-animation-delay: 0.18s;
+  animation-delay: 0.18s;
+}
+.lineLoaderPoint_2 {
+  -moz-animation-delay: 0.42000000000000004s;
+  -webkit-animation-delay: 0.42000000000000004s;
+  -ms-animation-delay: 0.42000000000000004s;
+  -o-animation-delay: 0.42000000000000004s;
+  animation-delay: 0.42000000000000004s;
+}
+.lineLoaderPoint_3 {
+  -moz-animation-delay: 0.5399999999999999s;
+  -webkit-animation-delay: 0.5399999999999999s;
+  -ms-animation-delay: 0.5399999999999999s;
+  -o-animation-delay: 0.5399999999999999s;
+  animation-delay: 0.5399999999999999s;
+}
+@-moz-keyframes bounce_circleG {
+  50% {
+    background-color: #000000;
+  }
+}
+@-webkit-keyframes bounce_circleG {
+  50% {
+    background-color: #000000;
+  }
+}
+@-ms-keyframes bounce_circleG {
+  50% {
+    background-color: #000000;
+  }
+}
+@-o-keyframes bounce_circleG {
+  50% {
+    background-color: #000000;
+  }
+}
+@keyframes bounce_circleG {
+  50% {
+    background-color: #000000;
+  }
+}
 .layout > header {
-  height: 50px;
+  height: 60px;
   border-bottom: 1px solid #BEBEBE;
   background: #ece8ec;
   background: -moz-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
@@ -557,8 +635,8 @@ body[data-status="loading"] .mainLoader {
 .layout > header menu a {
   float: left;
   height: 100%;
-  padding: 0 20px;
-  line-height: 47px;
+  padding: 0 16px;
+  line-height: 60px;
   transition: 0.2s;
   font-weight: bold;
   font-size: 13px;
@@ -583,7 +661,7 @@ body[data-status="loading"] .mainLoader {
 }
 .layout > header form input[type="text"] {
   float: right;
-  margin: 11px 15px 0;
+  margin: 16px 15px 0;
 }
 .intro {
   position: fixed;

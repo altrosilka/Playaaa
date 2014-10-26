@@ -1,0 +1,103 @@
+header.whiteHeader {
+  height: 120px;
+  position: relative;
+  margin-top: -1px;
+  background: #fff;
+  border-bottom: 1px solid #B0B0B0;
+  .fullsizeImage {
+    display: none;
+    height: 100%;
+    z-index: 1;
+    width: 100%;
+    background-size: cover;
+    -webkit-filter: blur(10px);
+    background-position: top;
+    background-repeat: no-repeat;
+    position: absolute;
+    opacity: 0.6;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+  .top {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    h1 {
+      font-size: 22px;
+      top: 32px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 6px;
+    }
+    h2 {
+      font-size: 18px;
+      top: 73px;
+    }
+    h1, h2 {
+      color: #333;
+      position: absolute;
+      margin: 0;
+      left: 118px;
+      right: 16px;
+    }
+    menu {
+      position: absolute;
+      left: 118px;
+      padding: 0;
+      margin: 0;
+      top: 70px;
+      a {
+        color: @baseColor;
+        font-size: 12px;
+        display: inline-block;
+        margin-right: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid;
+        transition: @fastTime;
+        &:hover {
+          border-color: transparent;
+        }
+        &.active, &.active:hover {
+          color: #333;
+          border-bottom: none;
+          cursor: default;
+        }
+      }
+    }
+    
+    .play {
+      width: 88px;
+      height: 88px;
+      border-radius: 5px;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+      background: #fff;
+      display: block;
+      position: absolute;
+      right: 16px;
+      transition: 0.2s;
+      top: 16px;
+      color: #555;
+      .fa {
+        font-size: 38px;
+        line-height: 28px;
+        height: 28px;
+        margin: 31px 0 0 33px;
+      }
+      &:hover {
+        background: #eee;
+        color: #111;
+      }
+    }
+    .image {
+      position: absolute;
+      width: 88px;
+      height: 88px;
+      left: 16px;
+      top: 16px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top;
+    }
+  }
+}

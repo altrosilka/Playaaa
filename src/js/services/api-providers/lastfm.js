@@ -13,6 +13,28 @@ angular.module('App')
           autocorrect: true
         });
       },
+      getSimilar: function(artist) {
+
+        var deferred = $q.defer();
+
+        call('artist.getSimilar', {
+          artist: artist,
+          autocorrect: false,
+          limit: 9
+        }).then(function(resp) {
+
+          var artists = resp.data.similarartists.artist, il;
+          
+          angular.forEach(artists, function(artist){
+            il = artist.image.length;
+            artist.imageSrc = artist.image[4]['#text'];
+          });
+
+          deferred.resolve(artists);
+        });
+
+        return deferred.promise;
+      },
       getTopTags: function(artist) {
         return call('artist.getTopTags', {
           artist: artist,
@@ -21,7 +43,7 @@ angular.module('App')
       },
       getTopAlbums: function(options, callback) {
         var deferred = $q.defer();
-      
+
         call('artist.getTopAlbums', angular.extend(options, {
           limit: 16,
           page: 0
@@ -60,11 +82,11 @@ angular.module('App')
     }
 
     service.album = {
-      getInfo: function(options){
-        return $q.when(call('album.getInfo', angular.extend({}, options)).then(function(resp){
+      getInfo: function(options) {
+        return $q.when(call('album.getInfo', angular.extend({}, options)).then(function(resp) {
           var imageSrc = resp.data.album.image[3]['#text'];
           resp.data.album.albumImage = imageSrc;
-          
+
           return resp.data.album;
         }));
       }

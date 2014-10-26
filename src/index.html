@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="pack/styles.css?v=@@version">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-</head>
+</head> 
 
 <body data-status="{{ $root.status }}">
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
@@ -25,14 +25,7 @@
     </div>
     <div class="image" set-bg-on-load="images/background/intro.jpg"></div>
   </div>
-  <div id="circleG" class="mainLoader">
-    <div id="circleG_1" class="circleG">
-    </div>
-    <div id="circleG_2" class="circleG">
-    </div>
-    <div id="circleG_3" class="circleG">
-    </div>
-  </div>
+  <div class="mainLoader" data-line-loader></div>
   <div class="content">
     <div class="leftPanel panel">
       <header class="controlPanel" ng-controller="C_controlPanel as ctr">

@@ -26,10 +26,13 @@ App.config([
         templateUrl: "templates/views/artists/index.html"
       })
       .state('artistpage', {
-        url: "/artists/:artist",
+        url: "/artists/:artist/",
         controller: 'C_artists.page as ctr',
         templateUrl: "templates/views/artists/page.html"
       })
+        .state('artistpage.section', {
+          url: ":section/"
+        })
       .state('flow', {
         url: "/flow/?artist&tag",
         controller: 'C_flow as ctr',

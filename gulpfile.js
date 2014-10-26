@@ -10,21 +10,25 @@ var gulp = require("gulp"),
   git = require('gulp-git'),
   less = require('gulp-less'),
   templateCache = require('gulp-angular-templatecache');
+ 
+var vendorLibs = [
+  './bower_components/jquery/dist/jquery.js',
+  './bower_components/lodash/dist/lodash.js',
+  './bower_components/bootstrap/dist/js/bootstrap.js',
+  './bower_components/angular/angular.js',
+  './bower_components/angular-ui-router/release/angular-ui-router.js',
+  './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  './bower_components/momentjs/moment.js'
+  //'./bower_components/color-thief/src/color-thief.js'
+];
+
 
 gulp.task('scripts', function() {
   gulp.src(['./src/js/**/*.js'])
     .pipe(concat('scripts.js'))
     //.pipe(uglify())
     .pipe(gulp.dest('./public/pack'))
-  gulp.src([
-      './bower_components/jquery/dist/jquery.js',
-      './bower_components/lodash/dist/lodash.js',
-      './bower_components/bootstrap/dist/js/bootstrap.js',
-      './bower_components/angular/angular.js',
-      './bower_components/angular-ui-router/release/angular-ui-router.js',
-      './bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
-      //'./bower_components/color-thief/src/color-thief.js'
-    ])
+  gulp.src(vendorLibs)
     .pipe(concat('vendor.js'))
     // .pipe(uglify())
     .pipe(gulp.dest('./public/pack'))
@@ -36,15 +40,7 @@ gulp.task('scripts-deploy', function() {
     .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./public/pack'))
-  gulp.src([
-      './bower_components/jquery/dist/jquery.js',
-      './bower_components/lodash/dist/lodash.js',
-      './bower_components/bootstrap/dist/js/bootstrap.js',
-      './bower_components/angular/angular.js',
-      './bower_components/angular-ui-router/release/angular-ui-router.js',
-      './bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
-      //'./bower_components/color-thief/src/color-thief.js'
-    ])
+  gulp.src(vendorLibs)
     .pipe(concat('vendor.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./public/pack'))

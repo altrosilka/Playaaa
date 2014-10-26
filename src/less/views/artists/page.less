@@ -1,92 +1,31 @@
 #view-artists-page {
-  header {
-    height: 300px;
-    border-bottom: 2px solid #eee;
-    position: relative;
-    margin-top: -1px;
-    .fullsizeImage {
-      height: 100%;
-      z-index: 1;
-      width: 100%;
-      background-size: cover;
-      -webkit-filter: blur(10px);
-      background-position: top;
-      background-repeat: no-repeat;
-      position: absolute;
-      opacity: 0.6;
-      -webkit-transform: translate3d(0, 0, 0);
-    }
-    .top {
-      position: absolute;
-      z-index: 2;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.5);
-      h1 {
-        color: #fff;
-        text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-        font-size: 42px;
-        position: absolute;
-        left: 16px;
-        top: 16px;
-      }
-      .tags {
-        position: absolute;
-        bottom: 138px;
-        left: 16px;
-        width: 400px;
-        .tag {
-          margin-right: 5px;
-          margin-bottom: 5px;
-        }
-      }
-      .play {
-        padding: 25px 30px 23px;
-        border-radius: 10px;
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-        background: #fff;
-        color: #666;
-        overflow: auto;
-        display: block;
-        position: absolute;
-        left: 500px;
-        top: 50%;
-        margin: -53px 0 0;
-        transition: 0.2s;
-        .fa {
-          font-size: 60px;
-          line-height: 60px;
-          height: 60px;
-          margin-left: 6px;
-        }
+  .whiteHeader {
+    .tags {
+      float: right;
+      display: block;
+      margin-top: -8px;
+      .tag {
+        font-size: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid;
+        transition: @fastTime;
+        display: inline-block;
+        margin-left: 10px;
         &:hover {
-          padding: 35px 40px 33px;
-          margin: -63px 0 0 -10px;
-          color: #111;
+          border-color: transparent;
         }
       }
-      .image {
-        position: absolute;
-        width: 250px;
-        height: 250px;
-        right: 25px;
-        top: 25px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: top;
-        border-radius: 5px;
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-      }
+    }
+    h1 {
+      right: 121px;
     }
   }
   .albums .item {
     float: left;
     display: block;
     margin: 16px 0 0 16px;
-    width: 220px;
-    height: 220px;
+    width: 265px;
+    height: 265px;
     position: relative;
     overflow: hidden;
     .img {

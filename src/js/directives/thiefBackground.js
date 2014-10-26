@@ -1,5 +1,5 @@
 angular.module('App').directive('thiefBackground', [function() {
-  return {
+  return { 
     scope: {
       imageUrl: '=thiefBackground'
     },
