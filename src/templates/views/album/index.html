@@ -1,20 +1,22 @@
 <section id="view-album">
 
-  <header class="whiteHeader">
+  <header class="whiteHeader column">
     <div class="top">
       <h1>
         <a class="link no-border" href="/artists/{{ctr.info.artist}}/" ng-bind="ctr.info.artist"></a>
       </h1>
       <h2>
         <span ng-bind="ctr.info.name"></span>
-        <span class="gray" ng-if="ctr.info.releasedate">Дата релиза: <b>{{ctr.info.releasedate | lastfmDateToLocal}}</b></span>
+        <span class="gray" ng-if="ctr.info.releasedate">Дата релиза: <b>{{ctr.info.releasedate | lastfmDateToLocal}}</b>
+        </span>
       </h2>
 
       <div class="image" ng-style="{'background-image':'url('+ctr.info.albumImage+')'}"></div>
     </div>
   </header>
 
-  <div class="inner">
+
+  <div class="column inner">
     <h2>Композиции с альбома
       <small class="pull-right">
         <div ng-pluralize count="ctr.audios.length" when="ctr.tracksPlurals"></div>

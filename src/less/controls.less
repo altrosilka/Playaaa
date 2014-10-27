@@ -1,7 +1,7 @@
 input[type="text"] {
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: #fff;
-  color: #222;
+  color: #eee;
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, .2), 0 0px 50px 10px fade(@baseColor, 0);
   border: none;
   outline: none;
@@ -14,10 +14,7 @@ input[type="text"]:focus {
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, .2), 0 0px 3px 1px @baseColor;
 }
 .btn {
-  border-radius: 5px;
-  background-color: #fff;
-  color: #222;
-  box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
   border: none;
   outline: none;
   line-height: 14px;
@@ -30,5 +27,14 @@ input[type="text"]:focus {
   &.btn-default {
     background-color: #F2F2F2;
     box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.9), 0px 0px 1px rgba(0, 0, 0, 0.3);
+  }
+
+  &.btn-primary{
+    border:2px solid;
+    background:transparent;
+  }
+
+  &.white{
+  color:#ccc;
   }
 }

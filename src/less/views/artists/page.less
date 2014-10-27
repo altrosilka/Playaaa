@@ -1,9 +1,31 @@
 #view-artists-page {
   .whiteHeader {
+    height: 380px;
+    padding: 0;
+    .fullsizeImage {
+      height: 100%;
+      z-index: 1;
+      width: 100%;
+      background-size: cover;
+      background-position: center 20%;
+      background-repeat: no-repeat;
+      position: absolute;
+      -webkit-transform: translate3d(0, 0, 0);
+      &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        content: '';
+        background: url(../images/overlay.png) center repeat;
+      }
+    }
     .tags {
-      float: right;
+      position: absolute;
       display: block;
-      margin-top: -8px;
+      bottom: 24px;
+      right: 20px;
       .tag {
         font-size: 10px;
         text-decoration: none;
@@ -17,7 +39,29 @@
       }
     }
     h1 {
-      right: 121px;
+      right: 132px;
+      top: 290px;
+      left: 20px;
+      font-size: 27px;
+      padding-bottom: 6px;
+      border: none;
+    }
+    menu {
+      left: 20px;
+      top: 336px;
+      right: 132px;
+      a {
+        font-size: 14px;
+
+        &.active{
+        color: #fff;
+        }
+      }
+    }
+    .image {
+      width: 100px;
+      height: 100px;
+      box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.7);
     }
     .play {
       width: 88px;
@@ -25,11 +69,11 @@
       border-radius: 5px;
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
       background: #fff;
-      display: block;
+      display: none;
       position: absolute;
-      right: 16px;
+      right: 20px;
       transition: @fastTime;
-      top: 16px;
+      top: 20px;
       color: #555;
       .fa {
         font-size: 38px;
@@ -71,7 +115,7 @@
   }
   .publics {
     overflow: auto;
-    padding: 3px 16px;
+    padding: 3px 20px;
     .public {
       float: left;
       margin-right: 20px;
@@ -80,13 +124,13 @@
         height: 50px;
         background-repeat: no-repeat;
         background-position: center;
-        background-size:cover;
+        background-size: cover;
         float: left;
       }
       .info {
         float: left;
         margin-left: 10px;
-        padding-top:7px;
+        padding-top: 7px;
         .name {
           font-size: 14px;
           max-width: 236px;
@@ -98,7 +142,7 @@
         .members {
           display: block;
           color: #666;
-          font-size:10px;
+          font-size: 10px;
         }
       }
     }
@@ -106,7 +150,7 @@
   .albums .item {
     float: left;
     display: block;
-    margin: 16px 0 0 16px;
+    margin: 20px 0 0 20px;
     width: 265px;
     height: 265px;
     position: relative;
@@ -136,6 +180,14 @@
     .bigAlbumInfo h1 {
       font-size: 26px;
       margin: 10px;
+    }
+  }
+  .realTags {
+    padding-top: 13px;
+    margin-bottom: -9px;
+    .tag {
+      display: inline-block;
+      margin: 0 7px 7px 0;
     }
   }
 }

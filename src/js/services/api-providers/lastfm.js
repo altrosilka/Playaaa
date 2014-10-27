@@ -106,6 +106,11 @@ angular.module('App')
         return call('chart.getTopArtists', {
           limit: limit || 50
         });
+      },
+      getHypedArtists: function(limit) {
+        return call('chart.getHypedArtists', {
+          limit: limit || 50
+        });
       }
     }
 

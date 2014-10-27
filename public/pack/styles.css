@@ -1,8 +1,8 @@
 input[type="text"] {
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: #fff;
-  color: #222;
-  box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2), 0 0px 50px 10px rgba(30, 143, 219, 0);
+  color: #eee;
+  box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2), 0 0px 50px 10px rgba(240, 168, 36, 0);
   border: none;
   outline: none;
   line-height: 19px;
@@ -11,13 +11,10 @@ input[type="text"] {
   transition: 0.4s;
 }
 input[type="text"]:focus {
-  box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2), 0 0px 3px 1px #1e8fdb;
+  box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2), 0 0px 3px 1px #f0a824;
 }
 .btn {
-  border-radius: 5px;
-  background-color: #fff;
-  color: #222;
-  box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
   border: none;
   outline: none;
   line-height: 14px;
@@ -31,6 +28,13 @@ input[type="text"]:focus {
 .btn.btn-default {
   background-color: #F2F2F2;
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.9), 0px 0px 1px rgba(0, 0, 0, 0.3);
+}
+.btn.btn-primary {
+  border: 2px solid;
+  background: transparent;
+}
+.btn.white {
+  color: #ccc;
 }
 .controlPanel {
   position: relative;
@@ -233,6 +237,12 @@ body[data-status="loading"] .mainLoader {
   opacity: 1;
   visibility: visible;
 }
+a {
+  color: #f0a824;
+}
+a:hover {
+  color: #f90;
+}
 .gray {
   color: #999999;
 }
@@ -263,21 +273,22 @@ body[data-status="loading"] .mainLoader {
   background: transparent;
 }
 .column {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.7);
   box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
+  border-radius: 1px;
   margin: 15px 0;
-  padding: 10px 0 16px;
+  padding: 10px 0 20px;
+  color: #bbb;
 }
 .column .inner {
-  padding: 10px 16px!important;
+  padding: 10px 20px!important;
 }
 .column h2 {
   font-size: 24px;
   margin: 0px;
 }
 .list .item {
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: #fff;
   color: #222;
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2);
@@ -296,12 +307,12 @@ body[data-status="loading"] .mainLoader {
   background-color: #f1f1f1;
 }
 .artistGrid {
-  margin: 0 -16px;
+  margin: 0 -20px;
 }
 .artistGrid .item {
   float: left;
-  margin: 16px 0 0 16px;
-  width: 265px;
+  margin: 20px 0 0 20px;
+  width: 259px;
   height: 287px;
   position: relative;
   overflow: hidden;
@@ -321,41 +332,29 @@ body[data-status="loading"] .mainLoader {
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 10px;
 }
 .artistGrid .item footer h3 {
   margin: 0;
   font-size: 20px;
-  font-weight: bold;
+  color: #eee;
+  font-weight: normal;
 }
 .artistGrid .item footer .gray {
   font-size: 12px;
-  color: #666;
+  color: #999;
 }
 .view.view-fullsize {
   width: 100%;
 }
 .view .inner,
 .view.view-padding {
-  padding: 16px;
+  padding: 20px;
 }
 header.whiteHeader {
-  height: 120px;
+  height: 128px;
   position: relative;
-}
-header.whiteHeader .fullsizeImage {
-  display: none;
-  height: 100%;
-  z-index: 1;
-  width: 100%;
-  background-size: cover;
-  -webkit-filter: blur(10px);
-  background-position: top;
-  background-repeat: no-repeat;
-  position: absolute;
-  opacity: 0.6;
-  -webkit-transform: translate3d(0, 0, 0);
 }
 header.whiteHeader .top {
   position: absolute;
@@ -377,11 +376,11 @@ header.whiteHeader .top h2 {
 }
 header.whiteHeader .top h1,
 header.whiteHeader .top h2 {
-  color: #333;
+  color: #eee;
   position: absolute;
   margin: 0;
   left: 118px;
-  right: 16px;
+  right: 20px;
 }
 header.whiteHeader .top menu {
   position: absolute;
@@ -391,7 +390,7 @@ header.whiteHeader .top menu {
   top: 70px;
 }
 header.whiteHeader .top menu a {
-  color: #1e8fdb;
+  color: #f0a824;
   font-size: 12px;
   display: inline-block;
   margin-right: 10px;
@@ -412,8 +411,8 @@ header.whiteHeader .top .image {
   position: absolute;
   width: 88px;
   height: 88px;
-  left: 16px;
-  top: 16px;
+  left: 20px;
+  top: 20px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -424,10 +423,34 @@ header.whiteHeader .top .image {
   margin: 6px 0 0;
   display: block;
 }
+#view-artists-page .whiteHeader {
+  height: 380px;
+  padding: 0;
+}
+#view-artists-page .whiteHeader .fullsizeImage {
+  height: 100%;
+  z-index: 1;
+  width: 100%;
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+#view-artists-page .whiteHeader .fullsizeImage:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  content: '';
+  background: url(../images/overlay.png) center repeat;
+}
 #view-artists-page .whiteHeader .tags {
-  float: right;
+  position: absolute;
   display: block;
-  margin-top: -8px;
+  bottom: 24px;
+  right: 20px;
 }
 #view-artists-page .whiteHeader .tags .tag {
   font-size: 10px;
@@ -441,7 +464,28 @@ header.whiteHeader .top .image {
   border-color: transparent;
 }
 #view-artists-page .whiteHeader h1 {
-  right: 121px;
+  right: 132px;
+  top: 290px;
+  left: 20px;
+  font-size: 27px;
+  padding-bottom: 6px;
+  border: none;
+}
+#view-artists-page .whiteHeader menu {
+  left: 20px;
+  top: 336px;
+  right: 132px;
+}
+#view-artists-page .whiteHeader menu a {
+  font-size: 14px;
+}
+#view-artists-page .whiteHeader menu a.active {
+  color: #fff;
+}
+#view-artists-page .whiteHeader .image {
+  width: 100px;
+  height: 100px;
+  box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.7);
 }
 #view-artists-page .whiteHeader .play {
   width: 88px;
@@ -449,11 +493,11 @@ header.whiteHeader .top .image {
   border-radius: 5px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
   background: #fff;
-  display: block;
+  display: none;
   position: absolute;
-  right: 16px;
+  right: 20px;
   transition: 0.2s;
-  top: 16px;
+  top: 20px;
   color: #555;
 }
 #view-artists-page .whiteHeader .play .fa {
@@ -494,7 +538,7 @@ header.whiteHeader .top .image {
 }
 #view-artists-page .publics {
   overflow: auto;
-  padding: 3px 16px;
+  padding: 3px 20px;
 }
 #view-artists-page .publics .public {
   float: left;
@@ -529,7 +573,7 @@ header.whiteHeader .top .image {
 #view-artists-page .albums .item {
   float: left;
   display: block;
-  margin: 16px 0 0 16px;
+  margin: 20px 0 0 20px;
   width: 265px;
   height: 265px;
   position: relative;
@@ -561,6 +605,14 @@ header.whiteHeader .top .image {
   font-size: 26px;
   margin: 10px;
 }
+#view-artists-page .realTags {
+  padding-top: 13px;
+  margin-bottom: -9px;
+}
+#view-artists-page .realTags .tag {
+  display: inline-block;
+  margin: 0 7px 7px 0;
+}
 #view_public .verified {
   color: #777;
   display: block;
@@ -572,7 +624,7 @@ header.whiteHeader .top .image {
   font-size: 15px;
 }
 #view_public .description {
-  padding: 0 16px;
+  padding: 0 20px;
   max-height: 111px;
   overflow: hidden;
 }
@@ -648,7 +700,7 @@ header.whiteHeader .top .image {
 }
 .track {
   height: 30px;
-  padding: 0 16px;
+  padding: 0 20px;
   font-size: 12px;
 }
 .track .play {
@@ -757,14 +809,9 @@ header.whiteHeader .top .image {
 }
 .layout > header {
   height: 60px;
-  background: #ece8ec;
-  background: -moz-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ece8ec), color-stop(100%, #dbd9db));
-  background: -webkit-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: -o-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: -ms-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
-  background: linear-gradient(to bottom, #ece8ec 0%, #dbd9db 100%);
-  border-radius: 0 0 5px 5px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
+  border-radius: 1px;
 }
 .layout > header menu {
   margin: 0;
@@ -775,25 +822,25 @@ header.whiteHeader .top .image {
 .layout > header menu a {
   float: left;
   height: 100%;
-  padding: 0 16px;
-  line-height: 57px;
+  padding: 0 20px;
+  line-height: 60px;
   transition: 0.2s;
   font-weight: bold;
   font-size: 13px;
-  color: #555;
+  color: #bbb;
   text-decoration: none;
 }
 .layout > header menu a:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.1);
-  color: #222;
+  color: #eee;
   box-shadow: inset 0px -1px 3px rgba(0, 0, 0, 0.1);
 }
 .layout > header menu a:active,
 .layout > header menu a.active,
 .layout > header menu a.active:hover {
   background-color: rgba(0, 0, 0, 0.2);
-  color: #000;
+  color: #fff;
   box-shadow: inset 0px -1px 3px rgba(0, 0, 0, 0.2);
 }
 .layout > header form {
@@ -801,7 +848,8 @@ header.whiteHeader .top .image {
 }
 .layout > header form input[type="text"] {
   float: right;
-  margin: 16px 15px 0;
+  margin: 16px 20px 0;
+  background-color: #333;
 }
 .intro {
   position: fixed;

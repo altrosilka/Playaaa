@@ -1,15 +1,9 @@
 <section id="view-artists-page" class="view view-fullsize" ng-if="ctr.artistInfo">
   <header class="whiteHeader column">
-    <!--<div class="fullsizeImage" thief-background="ctr.artistInfo.image"></div>-->
+    <div class="fullsizeImage" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
     <div class="top">
       <h1>
         <span ng-bind="ctr.artistInfo.name"></span>
-        <span class="tags">
-          <a class="tag" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:3">
-            <i class="fa fa-tag"></i>
-            <span>{{tag.name}}</span>
-          </a>
-        </span>
       </h1>
       <menu>
         <a href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
@@ -18,6 +12,13 @@
         <a href="/flow/?artist={{ctr.artistInfo.name}}">Волна</a>
         <a href="/artists/{{ctr.artistInfo.name}}/similar/" ng-class="{'active':ctr.section === 'similar'}">Похожее</a>
       </menu>
+
+      <span class="tags">
+        <a class="tag" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:3">
+          <i class="fa fa-tag"></i>
+          <span>{{tag.name}}</span>
+        </a>
+      </span>
 
       <a class="play" href="/flow/?artist={{ctr.artistInfo.name}}">
         <i class="fa fa-play"></i>
@@ -40,14 +41,16 @@
 
     <div class="column" ng-show="ctr.publics.length">
       <div class="inner">
-        <h2>Паблики <i class="fa fa-info-circle" tooltip-html-unsafe="умное описание" tooltip-trigger="mouseenter"></i></h2>
+        <h2>Паблики <i class="fa fa-info-circle" tooltip-html-unsafe="умное описание" tooltip-trigger="mouseenter"></i>
+        </h2>
       </div>
       <div class="publics">
         <a class="public" href="/public/{{public.id}}/" ng-repeat="public in ctr.publics">
           <div class="image" ng-style="{'background-image':'url('+public.photo_100+')'}"></div>
           <div class="info">
-          <span class="name" ng-bind="public.name"></span>
-          <span class="members"><strong ng-bind="public.members_count"></strong> подписчиков</span>
+            <span class="name" ng-bind="public.name"></span>
+            <span class="members">
+              <strong ng-bind="public.members_count"></strong>&nbsp;подписчиков</span>
           </div>
         </a>
       </div>
@@ -89,8 +92,8 @@
     <div class="column">
       <div class="inner">
         <h2>Тэги исполнителя</h2>
-        <section class="clearfix">
-          <a class="tag btn btn-primary" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:15">
+        <section class="clearfix realTags">
+          <a class="tag btn btn-primary white" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:15">
             <i class="fa fa-tag"></i>
             <span>{{tag.name}}</span>
           </a>
