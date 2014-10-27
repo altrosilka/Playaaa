@@ -331,6 +331,7 @@ body[data-status="loading"] .mainLoader {
 }
 .artistGrid .item footer .gray {
   font-size: 12px;
+  color: #666;
 }
 .view.view-fullsize {
   width: 100%;

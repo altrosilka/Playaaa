@@ -44,10 +44,10 @@ angular.module('App')
       getTopAlbums: function(options, callback) {
         var deferred = $q.defer();
 
-        call('artist.getTopAlbums', angular.extend(options, {
+        call('artist.getTopAlbums', angular.extend({
           limit: 16,
           page: 0
-        })).then(function(resp) {
+        }, options)).then(function(resp) {
           var albums = [];
           var data = resp.data;
           if (data.topalbums["@attr"]) {
@@ -97,6 +97,14 @@ angular.module('App')
         return call('tag.getTopTracks', {
           tag: tag,
           limit: 12
+        });
+      }
+    }
+
+    service.chart = {
+      getTopArtists: function(limit) {
+        return call('chart.getTopArtists', {
+          limit: limit || 50
         });
       }
     }

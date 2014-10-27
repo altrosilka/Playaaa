@@ -4,6 +4,16 @@ angular.module('App')
     function($rootScope) {
       var service = {};
 
+      service.normalizeTopArtists = function(array){
+        return _.map(array,function(artist){
+          return {
+            name: artist.name,
+            listeners: artist.listeners,
+            image: artist.image[artist.image.length-1]['#text']
+          }
+        });
+      }
+
       service.normalizeTopTracks = function(array) {
         return _.reduce(array, function(newArray, song) {
           newArray.push({

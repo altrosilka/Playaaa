@@ -2,11 +2,12 @@
   <h2>Популярные исполнители</h2>  
   <section class="list list-gray artistGrid clearfix">
     <a class="item" href="/artists/{{item.name}}/" ng-repeat="item in ctr.artists">
-      <div class="image" style="background-image: url(../images/tmp/artist.jpg)"></div>
+      <div class="image" ng-style="{'background-image': 'url('+item.image+')'}"></div>
       <footer>
         <h3 ng-bind="item.name"></h3>
-        <span class="gray">Сейчас 3892 слушателя
-          <span ng-bind="item.listeners"></span>
+        <span class="gray">Сейчас 
+          <strong ng-bind="item.listeners"></strong>
+          слушателя
         </span>
       </footer>
     </a>

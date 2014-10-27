@@ -64,7 +64,8 @@ angular.module('App')
                 performer_only: 1 
               }),
               albums: PS_lastfm.artist.getTopAlbums({
-                artist: artist
+                artist: artist,
+                limit: 3
               })
             }).then(function(resp) {
               ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items).splice(0, 10);
