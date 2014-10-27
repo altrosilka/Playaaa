@@ -1,6 +1,6 @@
 {
   "name": "playaaa",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "authors": [
     "Egor M <me@megor.ru>"
   ],
@@ -25,6 +25,7 @@
     "color-thief": "*",
     "angular-dragdrop": "~1.0.8",
     "momentjs": "~2.8.3",
-    "jquery-ui": "~1.11.2"
+    "jquery-ui": "~1.11.2",
+    "angular-sanitize": "~1.3.0"
   }
 }

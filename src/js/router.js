@@ -55,5 +55,11 @@ App.config([
         controller: 'C_album as ctr',
         templateUrl: "templates/views/album/index.html"
       })
+      .state('public', {
+        url: "/public/:id/?album_id",
+        controller: 'C_public as ctr',
+        templateUrl: "templates/views/public/page.html",
+        reloadOnSearch: false
+      })
   }
 ]);

@@ -17,12 +17,21 @@ angular.module('App')
       }, options));
     }
 
+    service.extractArtists = function(text) {
+      return call('artist/extract', {
+        text: text,
+        results: 3
+      });
+    }
+
 
     function call(method, options) {
       return $http({
         url: __echonest.url + method,
         method: 'GET',
-        params: angular.extend({api_key: __echonest.key},options)
+        params: angular.extend({
+          api_key: __echonest.key
+        }, options)
       });
     }
 

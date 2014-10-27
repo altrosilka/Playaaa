@@ -35,25 +35,25 @@
         font-size: 38px;
         line-height: 28px;
         height: 28px;
-        display:block;
-        border:none;
-        text-align:center;
+        display: block;
+        border: none;
+        text-align: center;
         margin: 20px 0 0;
-        transition:@fastTime;
+        transition: @fastTime;
         -webkit-transform: scale(0.8);
-        margin-left:5px;
+        margin-left: 5px;
       }
       &:hover {
         background: #eee;
         color: #111;
-        text-decoration:none;
-        .fa{
-          margin-top:31px;
+        text-decoration: none;
+        .fa {
+          margin-top: 31px;
           -webkit-transform: scale(1);
         }
-        span{
+        span {
           bottom: 0px;
-          opacity:0;
+          opacity: 0;
           visibility: hidden;
         }
       }
@@ -65,7 +65,41 @@
         color: #666;
         text-align: center;
         bottom: 15px;
-        transition:@fastTime;
+        transition: @fastTime;
+      }
+    }
+  }
+  .publics {
+    overflow: auto;
+    padding: 3px 16px;
+    .public {
+      float: left;
+      margin-right: 20px;
+      .image {
+        width: 50px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size:cover;
+        float: left;
+      }
+      .info {
+        float: left;
+        margin-left: 10px;
+        padding-top:7px;
+        .name {
+          font-size: 14px;
+          max-width: 236px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          display: block;
+        }
+        .members {
+          display: block;
+          color: #666;
+          font-size:10px;
+        }
       }
     }
   }

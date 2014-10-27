@@ -1,0 +1,45 @@
+#view_public {
+  .verified {
+    color: #777;
+    display: block;
+    font-size: 10px;
+    float: right;
+    margin-top: 9px;
+    .fa {
+      font-size: 15px;
+    }
+  }
+  .description {
+    padding: 0 16px;
+    max-height: 111px;
+    overflow: hidden;
+  }
+  .short {
+    margin-right: 250px;
+    position: relative;
+    .text {
+      max-width: 511px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .albums {
+      position: absolute;
+      left: 100%;
+      width: 250px;
+      margin-top: 20px;
+      .album {
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.8);
+        margin-bottom: 4px;
+        display: block;
+        padding: 5px 10px;
+        border-radius: 0 5px 5px 0;
+        &.active{
+        	background: rgba(255, 255, 255, 1);
+        	color:#333;
+        }
+      }
+    }
+  }
+}

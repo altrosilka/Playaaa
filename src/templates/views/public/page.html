@@ -1,0 +1,33 @@
+<section id="view_public" class="view view-fullsize">
+  <div class="column">
+    <header class="whiteHeader">
+      <div class="top">
+        <h1>Паблик
+          <strong ng-bind="ctr.public.name"></strong>
+          <span class="verified" ng-if="ctr.public.verified"><i class="fa fa-check"></i> официальное сообщество</span>
+        </h1>
+        <h2 ng-if="ctr.parsedArtists">
+          <span ng-if="ctr.parsedArtists.length > 1">исполнителей</span>
+          <span ng-if="ctr.parsedArtists.length === 1">исполнителя</span>
+          <a href="/artists/{{artist.name}}/" ng-repeat="artist in ctr.parsedArtists">{{artist.name}}</a>
+        </h2>
+        <div class="image" ng-style="{'background-image':'url('+ctr.public.photo_100+')'}"></div>
+      </div>
+    </header>
+    <section class="description" ng-bind-html="ctr.public.description | parseVkUrls" ng-trim="true"></section>
+  </div>
+
+  <div class="column" ng-class="{'short':ctr.albums}">
+  	<div class="albums" ng-if="ctr.albums">
+  		<a href="/public/{{ctr.public.id}}/" class="album" ng-class="{'active':!ctr.activeAlbum}" ng-click="ctr.loadAlbum()">Все треки</a>
+  		<a href="/public/{{ctr.public.id}}/?album_id={{album.id}}" class="album" ng-repeat="album in ctr.albums"  ng-class="{'active':ctr.activeAlbum === album.id}" ng-click="ctr.loadAlbum(album.id)">{{album.title}}</a> 
+  	</div>
+    <div class="inner">
+      <h2>Треки</h2>
+    </div>
+    <div class="list list-gray">
+      <div ng-repeat="song in ctr.songs" track info="song"></div>
+    </div>
+  </div>
+
+</section>

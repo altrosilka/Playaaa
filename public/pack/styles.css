@@ -254,15 +254,27 @@ body[data-status="loading"] .mainLoader {
   min-height: 100%;
 }
 .layout {
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 0px;
-  box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
   width: 860px;
   margin: 0px 0 0px 380px;
   min-height: 100%;
 }
 .panel {
   margin-bottom: 0;
+  background: transparent;
+}
+.column {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin: 15px 0;
+  padding: 10px 0 16px;
+}
+.column .inner {
+  padding: 10px 16px!important;
+}
+.column h2 {
+  font-size: 24px;
+  margin: 0px;
 }
 .list .item {
   border-radius: 5px;
@@ -330,9 +342,6 @@ body[data-status="loading"] .mainLoader {
 header.whiteHeader {
   height: 120px;
   position: relative;
-  margin-top: -1px;
-  background: #fff;
-  border-bottom: 1px solid #B0B0B0;
 }
 header.whiteHeader .fullsizeImage {
   display: none;
@@ -358,7 +367,7 @@ header.whiteHeader .top {
 header.whiteHeader .top h1 {
   font-size: 22px;
   top: 32px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #bebebe;
   padding-bottom: 6px;
 }
 header.whiteHeader .top h2 {
@@ -482,6 +491,40 @@ header.whiteHeader .top .image {
   bottom: 15px;
   transition: 0.2s;
 }
+#view-artists-page .publics {
+  overflow: auto;
+  padding: 3px 16px;
+}
+#view-artists-page .publics .public {
+  float: left;
+  margin-right: 20px;
+}
+#view-artists-page .publics .public .image {
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  float: left;
+}
+#view-artists-page .publics .public .info {
+  float: left;
+  margin-left: 10px;
+  padding-top: 7px;
+}
+#view-artists-page .publics .public .info .name {
+  font-size: 14px;
+  max-width: 236px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+#view-artists-page .publics .public .info .members {
+  display: block;
+  color: #666;
+  font-size: 10px;
+}
 #view-artists-page .albums .item {
   float: left;
   display: block;
@@ -516,6 +559,49 @@ header.whiteHeader .top .image {
 #view-artists-page .albums .item .bigAlbumInfo h1 {
   font-size: 26px;
   margin: 10px;
+}
+#view_public .verified {
+  color: #777;
+  display: block;
+  font-size: 10px;
+  float: right;
+  margin-top: 9px;
+}
+#view_public .verified .fa {
+  font-size: 15px;
+}
+#view_public .description {
+  padding: 0 16px;
+  max-height: 111px;
+  overflow: hidden;
+}
+#view_public .short {
+  margin-right: 250px;
+  position: relative;
+}
+#view_public .short .text {
+  max-width: 511px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#view_public .short .albums {
+  position: absolute;
+  left: 100%;
+  width: 250px;
+  margin-top: 20px;
+}
+#view_public .short .albums .album {
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.8);
+  margin-bottom: 4px;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 0 5px 5px 0;
+}
+#view_public .short .albums .album.active {
+  background: #ffffff;
+  color: #333;
 }
 #view_share {
   position: fixed;
@@ -560,12 +646,13 @@ header.whiteHeader .top .image {
   background: #bbb;
 }
 .track {
-  height: 38px;
+  height: 30px;
   padding: 0 16px;
+  font-size: 12px;
 }
 .track .play {
   float: left;
-  margin-top: 10px;
+  margin-top: 7px;
   color: #555;
 }
 .track .play:hover {
@@ -573,14 +660,14 @@ header.whiteHeader .top .image {
 }
 .track .time {
   float: right;
-  margin: 10px 0px;
+  margin: 7px 0 0 10px;
 }
 .track .bitrate {
   float: right;
 }
 .track .text {
   float: left;
-  margin: 10px;
+  margin: 7px 0 0 10px;
 }
 .track .text .artist {
   font-weight: bold;
@@ -669,7 +756,6 @@ header.whiteHeader .top .image {
 }
 .layout > header {
   height: 60px;
-  border-bottom: 1px solid #BEBEBE;
   background: #ece8ec;
   background: -moz-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ece8ec), color-stop(100%, #dbd9db));
@@ -677,6 +763,7 @@ header.whiteHeader .top .image {
   background: -o-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
   background: -ms-linear-gradient(top, #ece8ec 0%, #dbd9db 100%);
   background: linear-gradient(to bottom, #ece8ec 0%, #dbd9db 100%);
+  border-radius: 0 0 5px 5px;
 }
 .layout > header menu {
   margin: 0;

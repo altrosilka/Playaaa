@@ -1,5 +1,5 @@
 <section id="view-artists-page" class="view view-fullsize" ng-if="ctr.artistInfo">
-  <header class="whiteHeader">
+  <header class="whiteHeader column">
     <!--<div class="fullsizeImage" thief-background="ctr.artistInfo.image"></div>-->
     <div class="top">
       <h1>
@@ -9,7 +9,7 @@
             <i class="fa fa-tag"></i>
             <span>{{tag.name}}</span>
           </a>
-        </span> 
+        </span>
       </h1>
       <menu>
         <a href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
@@ -29,7 +29,7 @@
 
 
   <section ng-if="!ctr.section">
-    <div ng-show="ctr.searchTracks.length">
+    <div class="column" ng-show="ctr.searchTracks.length">
       <div class="inner">
         <h2>Треки</h2>
       </div>
@@ -38,52 +38,77 @@
       </div>
     </div>
 
-    <div ng-show="ctr.albums.length">
+    <div class="column" ng-show="ctr.publics.length">
+      <div class="inner">
+        <h2>Паблики <i class="fa fa-info-circle" tooltip-html-unsafe="умное описание" tooltip-trigger="mouseenter"></i></h2>
+      </div>
+      <div class="publics">
+        <a class="public" href="/public/{{public.id}}/" ng-repeat="public in ctr.publics">
+          <div class="image" ng-style="{'background-image':'url('+public.photo_100+')'}"></div>
+          <div class="info">
+          <span class="name" ng-bind="public.name"></span>
+          <span class="members"><strong ng-bind="public.members_count"></strong> подписчиков</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="column" ng-show="ctr.albums.length">
       <div class="inner">
         <h2>Альбомы</h2>
       </div>
-      <div class="albums list list-gray">
+      <div class="albums list list-gray clearfix">
         <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
       </div>
     </div>
   </section>
 
   <section ng-if="ctr.section === 'tracks'">
-    <div class="inner">
-      <h2>Треки</h2>
-    </div>
-    <div class="albums list list-gray">
-      <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
+    <div class="column">
+      <div class="inner">
+        <h2>Треки</h2>
+      </div>
+      <div class="albums list list-gray">
+        <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
+      </div>
     </div>
   </section>
 
   <section ng-if="ctr.section === 'albums'">
-    <div class="inner">
-      <h2>Альбомы</h2>
-    </div>
-    <div class="albums list list-gray">
-      <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
+    <div class="column">
+      <div class="inner">
+        <h2>Альбомы</h2>
+      </div>
+      <div class="albums list list-gray clearfix">
+        <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
+      </div>
     </div>
   </section>
 
   <section ng-if="ctr.section === 'similar'">
-    <div class="inner">
-      <h2>Тэги исполнителя</h2>
-      <section>
-        <a class="tag btn btn-primary" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:15">
-          <i class="fa fa-tag"></i>
-          <span>{{tag.name}}</span>
-        </a>
-      </section>
-      <h2>Похожие исполнители</h2>
-      <section class="list list-gray artistGrid">
-        <a class="item" href="/artists/{{item.name}}/" ng-repeat="item in ctr.similarArtists | withoutStatsCleaning">
-          <div class="image" style="background-image: url({{item.imageSrc}})"></div>
-          <footer>
-            <h3 ng-bind="item.name"></h3>
-          </footer>
-        </a>
-      </section>
+    <div class="column">
+      <div class="inner">
+        <h2>Тэги исполнителя</h2>
+        <section class="clearfix">
+          <a class="tag btn btn-primary" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:15">
+            <i class="fa fa-tag"></i>
+            <span>{{tag.name}}</span>
+          </a>
+        </section>
+      </div>
+    </div>
+    <div class="column">
+      <div class="inner">
+        <h2>Похожие исполнители</h2>
+        <section class="list list-gray artistGrid clearfix">
+          <a class="item" href="/artists/{{item.name}}/" ng-repeat="item in ctr.similarArtists | withoutStatsCleaning">
+            <div class="image" style="background-image: url({{item.imageSrc}})"></div>
+            <footer>
+              <h3 ng-bind="item.name"></h3>
+            </footer>
+          </a>
+        </section>
+      </div>
     </div>
   </section>
 

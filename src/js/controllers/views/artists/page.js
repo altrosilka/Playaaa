@@ -19,8 +19,6 @@ angular.module('App')
 
       ctr.section = $state.params.section;
 
-      console.log($state.params);
-
       $scope.$on('$stateChangeSuccess', function(event, toState, toParams) {
         ctr.section = toParams.section;
         ctr.loadInfo(ctr.section);
@@ -82,7 +80,12 @@ angular.module('App')
 
       $q.all({
         info: PS_lastfm.artist.getInfo(artist),
-        tags: PS_lastfm.artist.getTopTags(artist)
+        tags: PS_lastfm.artist.getTopTags(artist),
+        publics: PS_vk.call('groups.search',{
+          q: artist,
+          fields: "members_count,verified,site",
+          count: 3
+        })
       }).then(function(resp) {
 
         var src = resp.info.data.artist;
@@ -91,6 +94,8 @@ angular.module('App')
           image: src.image[src.image.length - 1]['#text'],
           tags: resp.tags.data.toptags.tag
         }
+        ctr.publics = (resp.publics.response) ? resp.publics.response.items : [];
+        console.log(ctr.publics);
       });
 
       return ctr;

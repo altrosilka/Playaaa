@@ -7,7 +7,7 @@ angular.module('App')
       controller: 'CD_track as tctr',
       templateUrl: 'templates/directives/track.html',
       link: function($scope, $element){
-        $element.on('dblclick',function(){
+        $element.on('click',function(){
           S_sound.createAndPlay($scope.info);
         });
       }

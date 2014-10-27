@@ -1,6 +1,9 @@
-<section id="view-flow" class="view view-fullsize view-padding">
-  <h2>Радио по {{ctr.typeLocale}} «<a class="link no-border" href="/artists/{{ctr.query}}/" ng-if="!ctr.isTag" ng-bind="ctr.query"></a><span ng-if="ctr.isTag" ng-bind="ctr.query"></span>»</h2>
-
+<section id="view-flow" class="view view-fullsize column">
+  <div class="inner">
+    <h2>Радио по {{ctr.typeLocale}} «
+      <a class="link no-border" href="/artists/{{ctr.query}}/" ng-if="!ctr.isTag" ng-bind="ctr.query"></a>
+      <span ng-if="ctr.isTag" ng-bind="ctr.query"></span>»</h2>
+  </div>
   <div class="paddingLoader" data-line-loader="black" ng-hide="ctr.songs.length"></div>
 
   <div ng-repeat="song in ctr.songs" track info="song"></div>
