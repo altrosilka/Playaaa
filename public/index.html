@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="pack/styles.css?v=1.0.4">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-</head> 
+</head>
 
 <body data-status="{{ $root.status }}">
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
@@ -27,6 +27,7 @@
   </div>
   <div class="mainLoader" data-line-loader></div>
   <div class="content">
+
     <div class="leftPanel panel">
       <header class="controlPanel" ng-controller="C_controlPanel as ctr">
         <div class="progressPanel" ng-mouseup="ctr.mouseUp($event,'p');">
@@ -62,6 +63,15 @@
           <span class="title" ng-bind="ctr.title"></span>
         </div>
       </header>
+      <div class="playlistFull" ng-controller="C_playlist as ctr">
+        <div class="removeField" data-ng-class="{'active':ctr.inDrag}" data-drop="true" data-jqyoui-options jqyoui-droppable="{onOver: 'ctr.onOver', onDrop: 'ctr.onDrop'}"></div>
+
+        <div class="tabs">табы</div>
+
+        <section class="playlistsContainer" data-drop="true" data-jqyoui-options jqyoui-droppable ng-model="ctr.currentTrackList">
+         <!-- <section ng-repeat="playlist in ctr.playlists"></section>-->
+        </section>
+      </div>
     </div>
     <div class="layout panel">
       <header ng-controller="C_header as ctr">

@@ -13,7 +13,8 @@ angular.module('App')
 
       console.log($stateParams);
 
-      ctr.type = ($stateParams.tag) ? 'тегу' : 'исполнителю';
+      ctr.isTag = ($stateParams.tag) ? true : false;
+      ctr.typeLocale = (ctr.isTag) ? 'тегу' : 'исполнителю';
       ctr.query = ($stateParams.tag) ? $stateParams.tag : $stateParams.artist;
 
       ctr.songs = [];

@@ -9,7 +9,7 @@
             <i class="fa fa-tag"></i>
             <span>{{tag.name}}</span>
           </a>
-        </span>
+        </span> 
       </h1>
       <menu>
         <a href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
@@ -21,6 +21,7 @@
 
       <a class="play" href="/flow/?artist={{ctr.artistInfo.name}}">
         <i class="fa fa-play"></i>
+        <span>Волна</span>
       </a>
       <div class="image" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
     </div>

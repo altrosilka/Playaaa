@@ -1,6 +1,6 @@
-<div class="track" ng-class="{'error': error, 'playing': $root.currentTrack.id==info.id}">
+<div class="track" data-drag="true" data-jqyoui-options="{revert: true}" jqyoui-draggable="{onStart: 'tctr.onStart', onStop: 'tctr.onStop'}" ng-model="info">
   <span class="play">
-   	<i class="fa fa-play"></i>
+   	<i class="fa fa-play"></i> 
   </span>
   <span class="time">{{info.duration | toGIS}}</span>
   <span class="bitrate" ng-show="bitrate">{{bitrate | formatBitrate}}</span>

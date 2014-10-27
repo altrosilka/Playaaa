@@ -13,9 +13,16 @@ var gulp = require("gulp"),
  
 var vendorLibs = [
   './bower_components/jquery/dist/jquery.js',
+/*  './bower_components/jquery-ui/ui/core.js',
+  './bower_components/jquery-ui/ui/widget.js',
+  './bower_components/jquery-ui/ui/mouse.js',
+  './bower_components/jquery-ui/ui/draggable.js',
+  './bower_components/jquery-ui/ui/droppable.js',*/
+  './bower_components/jquery-ui/jquery-ui.js',
   './bower_components/lodash/dist/lodash.js',
   './bower_components/bootstrap/dist/js/bootstrap.js',
   './bower_components/angular/angular.js',
+  './bower_components/angular-dragdrop/src/angular-dragdrop.js',
   './bower_components/angular-ui-router/release/angular-ui-router.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/momentjs/moment.js'
