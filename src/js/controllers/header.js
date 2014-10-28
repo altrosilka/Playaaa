@@ -1,4 +1,4 @@
-angular.module('App').controller('C_header', ['$state','PS_lastfm', function($state, PS_lastfm) {
+angular.module('App').controller('C_header', ['$state','$scope','PS_lastfm', function($state, $scope, PS_lastfm) {
   var ctr = this;
 
   ctr.search = function(q){
@@ -10,6 +10,10 @@ angular.module('App').controller('C_header', ['$state','PS_lastfm', function($st
       }
     });   
   }
+
+  $scope.$on('userLogin', function() {
+    ctr.visible = true;
+  });
 
   return ctr;
 }]);

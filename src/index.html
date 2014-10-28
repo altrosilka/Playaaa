@@ -11,7 +11,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 </head>
 
-<body data-status="{{ $root.status }}" data-ng-class="{'flowBody':isFlow}">
+<body data-status="{{ $root.status }}" data-state="{{$root.state}}" data-ng-class="{'radioBody':isRadio}">
   <div class="flowOverlay"></div>
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
@@ -92,7 +92,7 @@
       </div>
     </div>
     <div class="layout panel">
-      <header ng-controller="C_header as ctr">
+      <header ng-controller="C_header as ctr" ng-show="ctr.visible">
         <menu>
           <!--<a href="/">Главная</a>
           <a href="/discover/">Поиск</a>-->

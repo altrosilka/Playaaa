@@ -1,8 +1,37 @@
 #view_share {
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  top:0;
-  background:#333;
-} 
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #333;
+  .container {
+    text-align: center;
+    h2 {
+      position: static;
+      margin: 20px 0 15px;
+      font-size: 28px;
+    }
+    .singIn {
+      font-size: 14px;
+      padding: 10px 30px;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+    }
+  }
+}
+body[data-state="share"] {
+  .buttons {
+    .prev, .next {
+      display: none;
+    }
+  }
+  &.radioBody {
+    .leftPanel {
+      top: 160px;
+    }
+  }
+}

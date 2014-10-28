@@ -437,6 +437,205 @@ header.whiteHeader .top .image {
   background-repeat: no-repeat;
   background-position: top;
 }
+.fullsizePlayingView {
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  color: #ddd;
+  background: #333333 url(../images/repeated/flow.jpg) center repeat;
+}
+.fullsizePlayingView .fullsizeImage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  transition: opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+.fullsizePlayingView .fullsizeImage.active {
+  opacity: 1;
+  visibility: visible;
+}
+.fullsizePlayingView .fullsizeImage:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  content: '';
+  background: url(../images/overlay_b.png) center repeat;
+}
+.fullsizePlayingView .container {
+  width: 1240px;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+}
+.fullsizePlayingView .container h2 {
+  position: absolute;
+  left: 50%;
+  margin-left: -600px;
+  font-size: 13px;
+  top: 4px;
+  z-index: 80;
+  font-weight: 300;
+}
+.fullsizePlayingView .container .paddingLoader {
+  text-align: center;
+  width: 100%;
+  height: 130px;
+  position: relative;
+}
+.fullsizePlayingView .container .paddingLoader .lineLoader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -5px 0 0 -40px;
+}
+.fullsizePlayingView .container .paddingLoader .lineLoader .lineLoaderPoint {
+  width: 10px;
+  height: 10px;
+  border-radius: 110px 10px;
+  margin: 0 3px;
+  opacity: 0.3;
+}
+.radioBody .layout > header {
+  z-index: 70;
+  position: fixed;
+  width: 860px;
+  background: transparent;
+  box-shadow: none;
+}
+.radioBody .leftPanel {
+  z-index: 70;
+  left: 50%;
+  width: 1000px;
+  margin-left: -500px;
+  top: 60px;
+  box-shadow: none;
+  color: #ddd;
+  position: absolute;
+  bottom: 60px;
+}
+.radioBody .leftPanel > .playlistFull {
+  display: none;
+}
+.radioBody .leftPanel .controlPanel {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: auto;
+  background: transparent;
+}
+.radioBody .leftPanel .controlPanel .trackInfo {
+  text-shadow: 0px 0px 3px #222;
+  font-weight: 300;
+  top: 50%;
+  margin-top: -156px;
+}
+.radioBody .leftPanel .controlPanel .trackInfo .separator {
+  display: none;
+}
+.radioBody .leftPanel .controlPanel .trackInfo .artist {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+.radioBody .leftPanel .controlPanel .trackInfo .title {
+  font-size: 37px;
+}
+.radioBody .leftPanel .controlPanel .buttons {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin-top: -20px;
+}
+.radioBody .leftPanel .controlPanel .buttons .btn {
+  opacity: 1;
+  box-shadow: none;
+  width: auto;
+  height: auto;
+}
+.radioBody .leftPanel .controlPanel .buttons .btn i {
+  color: #ddd;
+  font-size: 22px;
+}
+.radioBody .leftPanel .controlPanel .buttons .btn:hover i {
+  color: #fff;
+}
+.radioBody .leftPanel .controlPanel .buttons .btn.play,
+.radioBody .leftPanel .controlPanel .buttons .btn.pause {
+  margin: 0 10px;
+  width: 50px;
+}
+.radioBody .leftPanel .controlPanel .buttons .btn.play i,
+.radioBody .leftPanel .controlPanel .buttons .btn.pause i {
+  font-size: 38px;
+}
+.radioBody .leftPanel .controlPanel .fake {
+  height: 3px;
+  margin-top: 3px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.radioBody .leftPanel .controlPanel .fake .progress {
+  background: rgba(255, 255, 255, 0.9);
+}
+.radioBody .leftPanel .controlPanel .fake .download {
+  background: rgba(255, 255, 255, 0.2);
+}
+.radioBody .leftPanel .controlPanel .volumePanel {
+  top: auto;
+  bottom: 0px;
+  width: 100px;
+  right: 80px;
+  height: 9px;
+  position: absolute;
+}
+.radioBody .leftPanel .controlPanel .volumePanel .current {
+  position: absolute;
+  right: 0px;
+  color: #888;
+  font-size: 11px;
+  top: -16px;
+}
+.radioBody .leftPanel .controlPanel .progressPanel {
+  top: auto;
+  bottom: 0px;
+  left: 0px;
+  right: 200px;
+  width: auto;
+  height: 9px;
+}
+.radioBody .leftPanel .controlPanel .progressPanel .times .total,
+.radioBody .leftPanel .controlPanel .progressPanel .times .current {
+  opacity: 1;
+  visibility: visible;
+  top: -16px;
+  color: #888;
+}
+.radioBody .leftPanel .controlPanel .progressPanel .times .total {
+  right: 0px;
+}
+.radioBody .leftPanel .controlPanel .progressPanel .times .current {
+  left: 0px;
+}
+.radioBody .leftPanel .controlPanel .progressPanel .minutesScaler .scale {
+  top: 2px;
+  bottom: 2px;
+  background: #A8A8A8;
+}
 #view-album .gray {
   font-size: 12px;
   float: right;
@@ -686,203 +885,29 @@ header.whiteHeader .top .image {
   top: 0;
   background: #333;
 }
-#view-flow {
-  position: fixed;
-  z-index: 60;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  color: #ddd;
-  background: #333333 url(../images/repeated/flow.jpg) center repeat;
-}
-#view-flow .fullsizeImage {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  background-size: cover;
-  background-position: center 20%;
-  background-repeat: no-repeat;
-  transition: opacity 0.5s, visibility 0.5s;
-  opacity: 0;
-  visibility: hidden;
-}
-#view-flow .fullsizeImage.active {
-  opacity: 1;
-  visibility: visible;
-}
-#view-flow .fullsizeImage:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  content: '';
-  background: url(../images/overlay_b.png) center repeat;
-}
-#view-flow .container {
-  width: 1240px;
-  margin: auto;
-  position: relative;
-  z-index: 2;
-}
-#view-flow .container h2 {
-  position: absolute;
-  left: 50%;
-  margin-left: -600px;
-  font-size: 13px;
-  top: 4px;
-  z-index: 80;
-}
-#view-flow .container .paddingLoader {
+#view_share .container {
   text-align: center;
-  width: 100%;
-  height: 130px;
-  position: relative;
 }
-#view-flow .container .paddingLoader .lineLoader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -5px 0 0 -40px;
+#view_share .container h2 {
+  position: static;
+  margin: 20px 0 15px;
+  font-size: 28px;
 }
-#view-flow .container .paddingLoader .lineLoader .lineLoaderPoint {
-  width: 10px;
-  height: 10px;
-  border-radius: 110px 10px;
-  margin: 0 3px;
-  opacity: 0.3;
+#view_share .container .singIn {
+  font-size: 14px;
+  padding: 10px 30px;
+  opacity: 0.7;
 }
-.flowBody .layout > header {
-  z-index: 70;
-  position: fixed;
-  width: 860px;
-  background: transparent;
-  box-shadow: none;
+#view_share .container .singIn:hover {
+  opacity: 1;
+  cursor: pointer;
 }
-.flowBody .leftPanel {
-  z-index: 70;
-  left: 50%;
-  width: 1000px;
-  margin-left: -500px;
-  top: 60px;
-  box-shadow: none;
-  color: #ddd;
-  position: absolute;
-  bottom: 60px;
-}
-.flowBody .leftPanel > .playlistFull {
+body[data-state="share"] .buttons .prev,
+body[data-state="share"] .buttons .next {
   display: none;
 }
-.flowBody .leftPanel .controlPanel {
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: auto;
-  background: transparent;
-}
-.flowBody .leftPanel .controlPanel .trackInfo {
-  text-shadow: 0px 0px 3px #222;
-  font-weight: 300;
-  top: 50%;
-  margin-top: -156px;
-}
-.flowBody .leftPanel .controlPanel .trackInfo .separator {
-  display: none;
-}
-.flowBody .leftPanel .controlPanel .trackInfo .artist {
-  font-size: 24px;
-  font-weight: 300;
-  margin-bottom: 4px;
-}
-.flowBody .leftPanel .controlPanel .trackInfo .title {
-  font-size: 37px;
-}
-.flowBody .leftPanel .controlPanel .buttons {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  margin-top: -20px;
-}
-.flowBody .leftPanel .controlPanel .buttons .btn {
-  opacity: 1;
-  box-shadow: none;
-  width: auto;
-  height: auto;
-}
-.flowBody .leftPanel .controlPanel .buttons .btn i {
-  color: #ddd;
-  font-size: 22px;
-}
-.flowBody .leftPanel .controlPanel .buttons .btn:hover i {
-  color: #fff;
-}
-.flowBody .leftPanel .controlPanel .buttons .btn.play,
-.flowBody .leftPanel .controlPanel .buttons .btn.pause {
-  margin: 0 10px;
-  width: 50px;
-}
-.flowBody .leftPanel .controlPanel .buttons .btn.play i,
-.flowBody .leftPanel .controlPanel .buttons .btn.pause i {
-  font-size: 38px;
-}
-.flowBody .leftPanel .controlPanel .fake {
-  height: 3px;
-  margin-top: 3px;
-  background: rgba(255, 255, 255, 0.2);
-}
-.flowBody .leftPanel .controlPanel .fake .progress {
-  background: rgba(255, 255, 255, 0.9);
-}
-.flowBody .leftPanel .controlPanel .fake .download {
-  background: rgba(255, 255, 255, 0.2);
-}
-.flowBody .leftPanel .controlPanel .volumePanel {
-  top: auto;
-  bottom: 0px;
-  width: 100px;
-  right: 80px;
-  height: 9px;
-  position: absolute;
-}
-.flowBody .leftPanel .controlPanel .volumePanel .current {
-  position: absolute;
-  right: 0px;
-  color: #888;
-  font-size: 11px;
-  top: -16px;
-}
-.flowBody .leftPanel .controlPanel .progressPanel {
-  top: auto;
-  bottom: 0px;
-  left: 0px;
-  right: 200px;
-  width: auto;
-  height: 9px;
-}
-.flowBody .leftPanel .controlPanel .progressPanel .times .total,
-.flowBody .leftPanel .controlPanel .progressPanel .times .current {
-  opacity: 1;
-  visibility: visible;
-  top: -16px;
-  color: #888;
-}
-.flowBody .leftPanel .controlPanel .progressPanel .times .total {
-  right: 0px;
-}
-.flowBody .leftPanel .controlPanel .progressPanel .times .current {
-  left: 0px;
-}
-.flowBody .leftPanel .controlPanel .progressPanel .minutesScaler .scale {
-  top: 2px;
-  bottom: 2px;
-  background: #A8A8A8;
+body[data-state="share"].radioBody .leftPanel {
+  top: 160px;
 }
 .minutesScaler {
   position: absolute;

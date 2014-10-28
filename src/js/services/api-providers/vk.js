@@ -1,6 +1,5 @@
 angular.module('App')
   .service('PS_vk', ['$q', '$modal', '$rootScope', '__vkAppId', function($q, $modal, $rootScope, __vkAppId) {
-
     var service = {};
 
     var userInfo = {};
