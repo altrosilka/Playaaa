@@ -97,6 +97,19 @@ angular.module('App').controller('C_controlPanel', ['$scope', '$http', 'S_sound'
         }
     }
   }
+  ctr.mouseLeave = function(event, type) {
+    switch (type) {
+      case "v":
+        {
+          volumeChanging = false;
+          break
+        }
+      case "p":
+        {
+          break
+        }
+    }
+  }
 
   ctr.mouseUp = function(event, type) {
     switch (type) {
