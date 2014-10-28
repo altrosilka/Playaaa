@@ -2,6 +2,26 @@
   position: relative;
   height: 120px;
   background: rgba(255, 255, 255, 0.8);
+  .fake {
+    height: 2px;
+    margin-top: 3px;
+    background: #ddd;
+    position: relative;
+    .progress {
+      width: 0%;
+      background: #000;
+      height: 100%;
+      border-radius: 0px;
+      transition: @fastTime;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .download {
+      height: 100%;
+      background: #BEBEBE;
+    }
+  }
   .progressPanel {
     position: absolute;
     bottom: 6px;
@@ -10,26 +30,6 @@
     height: 8px;
     transition: @fastTime;
     cursor: pointer;
-    .fake {
-      height: 2px;
-      margin-top: 3px;
-      background: #ddd;
-      position: relative;
-      .progress {
-        width: 0%;
-        background: #000;
-        height: 100%;
-        border-radius: 0px;
-        transition: @fastTime;
-        position: absolute;
-        left: 0;
-        top: 0;
-      }
-      .download {
-        height: 100%;
-        background: #BEBEBE;
-      }
-    }
     .times {
       .current, .total {
         position: absolute;
@@ -120,6 +120,8 @@
     left: 10px;
     .artist {
       font-weight: bold;
+      .gray {
+      }
     }
     .title {}
   }

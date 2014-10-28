@@ -1,20 +1,205 @@
 #view-flow {
-  .paddingLoader {
-    text-align: center;
-    width: 100%;
-    height: 130px;
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  color: #ddd;
+  background: #333 url(../images/repeated/flow.jpg) center repeat;
+  .fullsizeImage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    transition: opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    &.active{
+      opacity: 1;
+      visibility: visible;
+    }
+    &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      content: '';
+      background: url(../images/overlay_b.png) center repeat;
+    }
+  }
+  .container {
+    width: 1240px;
+    margin: auto;
     position: relative;
-    .lineLoader {
+    z-index: 2;
+    h2 {
       position: absolute;
       left: 50%;
-      top: 50%;
-      margin: -5px 0 0 -40px;
-      .lineLoaderPoint {
-        width: 10px;
-        height: 10px;
-        border-radius: 110px 10px;
-        margin: 0 3px;
-        opacity: 0.3;
+      margin-left: -600px;
+      font-size: 13px;
+      top: 4px;
+      z-index: 80;
+    }
+    .paddingLoader {
+      text-align: center;
+      width: 100%;
+      height: 130px;
+      position: relative;
+      .lineLoader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -5px 0 0 -40px;
+        .lineLoaderPoint {
+          width: 10px;
+          height: 10px;
+          border-radius: 110px 10px;
+          margin: 0 3px;
+          opacity: 0.3;
+        }
+      }
+    }
+  }
+}
+.flowBody {
+  .layout > header {
+    z-index: 70;
+    position: fixed;
+    width: 860px;
+    background: transparent;
+    box-shadow: none;
+  }
+  .leftPanel {
+    z-index: 70;
+    left: 50%;
+    width: 1000px;
+    margin-left: -500px;
+    top: 60px;
+    box-shadow: none;
+    color: #ddd;
+    position: absolute;
+    bottom: 60px;
+    > .playlistFull {
+      display: none;
+    }
+    .controlPanel {
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: auto;
+      background: transparent;
+      .trackInfo {
+        text-shadow: 0px 0px 3px #222;
+        font-weight: 300;
+        top: 50%;
+        margin-top: -156px;
+        .separator {
+          display: none;
+        }
+        .artist {
+          font-size: 24px;
+          font-weight: 300;
+          margin-bottom: 4px;
+        }
+        .title {
+          font-size: 37px;
+        }
+      }
+      .buttons {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        margin-top: -20px;
+        .btn {
+          opacity: 1;
+          box-shadow: none;
+          width: auto;
+          height: auto;
+          i {
+            color: #ddd;
+            font-size: 22px;
+          }
+          &:hover {
+            i {
+              color: #fff;
+            }
+          }
+          &.play, &.pause {
+            margin: 0 10px;
+            width: 50px;
+            i {
+              font-size: 38px;
+            }
+          }
+        }
+      }
+      .fake {
+        height: 3px;
+        margin-top: 3px;
+        background: rgba(255, 255, 255, 0.2);
+        .progress {
+          background: rgba(255, 255, 255, 0.9);
+        }
+        .download {
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+      .volumePanel {
+        top: auto;
+        bottom: 0px;
+        width: 100px;
+        right: 80px;
+        height: 9px;
+        position: absolute;
+        .fake {
+          .progress {}
+        }
+        .current {
+          position: absolute;
+          right: 0px;
+          color: #888;
+          font-size: 11px;
+          top: -16px;
+        }
+      }
+      .progressPanel {
+        top: auto;
+        bottom: 0px;
+        left: 0px;
+        right: 200px;
+        width: auto;
+        height: 9px;
+        .times {
+          .total, .current {
+            opacity: 1;
+            visibility: visible;
+            top: -16px;
+            color: #888;
+          }
+          .total {
+            right: 0px;
+          }
+          .current {
+            left: 0px;
+          }
+        }
+        .minutesScaler {
+          .scale {
+            top: 2px;
+            bottom: 2px;
+            background: #A8A8A8;
+          }
+        }
       }
     }
   }

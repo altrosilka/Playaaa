@@ -5,13 +5,14 @@
   <base href="/" target="_blank" />
   <meta charset="UTF-8">
   <title>Playaaa</title>
-  <link rel="stylesheet" href="pack/vendors.css?v=1.1.0">
-  <link rel="stylesheet" href="pack/styles.css?v=1.1.0">
+  <link rel="stylesheet" href="pack/vendors.css?v=1.1.1">
+  <link rel="stylesheet" href="pack/styles.css?v=1.1.1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 </head>
 
-<body data-status="{{ $root.status }}">
+<body data-status="{{ $root.status }}" data-ng-class="{'flowBody':isFlow}">
+  <div class="flowOverlay"></div>
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
       <div class="wrap">
@@ -20,7 +21,7 @@
         <h3 ng-class="{'active':ctr.userName}">вход под пользователем
           <span ng-bind="ctr.userName"></span>
         </h3>
-        <button class="btn ng-hide" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
+        <button style="display:none;" class="btn" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
       </div>
     </div>
     <div class="image" set-bg-on-load="images/background/intro.jpg"></div>
@@ -30,6 +31,33 @@
 
     <div class="leftPanel panel">
       <header class="controlPanel" ng-controller="C_controlPanel as ctr">
+
+        <div class="trackInfo ng-hide" ng-show="ctr.artist">
+          <div class="artist">
+            <span ng-bind="ctr.artist"></span><span ng-if="ctr.feat" class="gray">&nbsp;feat.&nbsp;<span ng-bind="ctr.feat"></span></span>
+          </div>
+          <span class="separator">&nbsp;-&nbsp;</span>
+          <div class="title">
+            <span ng-bind="ctr.title"></span>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <span class="prev btn" ng-click="ctr.prev()">
+            <i class="fa fa-fast-backward"></i>
+          </span>
+          <span class="play btn" ng-click="ctr.play()" ng-hide="ctr.playing">
+            <i class="fa fa-play"></i>
+          </span>
+          <span class="pause btn" ng-click="ctr.pause()" ng-show="ctr.playing">
+            <i class="fa fa-pause"></i>
+          </span>
+
+          <span class="next btn" ng-click="ctr.next()">
+            <i class="fa fa-fast-forward"></i>
+          </span>
+        </div>
+
         <div class="progressPanel" ng-mouseup="ctr.mouseUp($event,'p');">
           <div minutes-scaler class="minutesScaler" duration="ctr.totalTime"></div>
           <div class="fake">
@@ -43,33 +71,23 @@
           </div>
         </div>
 
-        <div class="buttons">
-          <span class="prev btn" ng-click="ctr.prev()">
-            <i class="fa fa-backward"></i>
-          </span>
-          <span class="play btn" ng-click="ctr.play()" ng-hide="ctr.playing">
-            <i class="fa fa-play"></i>
-          </span>
-          <span class="pause btn" ng-click="ctr.pause()" ng-show="ctr.playing">
-            <i class="fa fa-pause"></i>
-          </span>
+        <div class="volumePanel" ng-mousemove="ctr.mouseMove($event,'v');" ng-mouseleave="ctr.mouseLeave($event,'v');" ng-mousedown="ctr.mouseDown($event,'v');" ng-mouseup="ctr.mouseUp($event,'v');">
+          <div class="fake">
+            <div class="progress" style="width:{{ctr.volume}}%"></div>
+          </div>
+          <div class="current">
+            <span ng-bind="ctr.volume | number:0"></span>%
+          </div>
+        </div>
 
-          <span class="next btn" ng-click="ctr.next()">
-            <i class="fa fa-forward"></i>
-          </span>
-        </div>
-        <div class="trackInfo ng-hide" ng-show="ctr.artist">
-          <span class="artist" ng-bind="ctr.artist"></span>&nbsp;-&nbsp;
-          <span class="title" ng-bind="ctr.title"></span>
-        </div>
       </header>
       <div class="playlistFull" ng-controller="C_playlist as ctr">
         <div class="removeField" ddata-ng-class="{'active':ctr.inDrag}" ddata-drop="true" ddata-jqyoui-options djqyoui-droppable="{onOver: 'ctr.onOver', onDrop: 'ctr.onDrop'}"></div>
-
+ 
         <div class="tabs">табы</div>
 
         <section class="playlistsContainer" data-drop="true" data-jqyoui-options jqyoui-droppable ng-model="ctr.currentTrackList">
-         <!-- <section ng-repeat="playlist in ctr.playlists"></section>-->
+          <!-- <section ng-repeat="playlist in ctr.playlists"></section>-->
         </section>
       </div>
     </div>
@@ -91,10 +109,10 @@
   </div>
 
 
-
-  <script type="text/javascript" src="pack/vendor.js?v=1.1.0"></script>
-  <script type="text/javascript" src="pack/templates.js?v=1.1.0"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=1.1.0"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="pack/vendor.js?v=1.1.1"></script>
+  <script type="text/javascript" src="pack/templates.js?v=1.1.1"></script>
+  <script type="text/javascript" src="pack/scripts.js?v=1.1.1"></script>
 </body>
 
 </html>

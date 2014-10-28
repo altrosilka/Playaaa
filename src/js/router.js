@@ -1,7 +1,7 @@
 App.config([
-  '$stateProvider', 
-  '$urlRouterProvider', 
-  '$locationProvider', 
+  '$stateProvider',
+  '$urlRouterProvider',
+  '$locationProvider',
   '$httpProvider',
   function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
@@ -30,19 +30,28 @@ App.config([
         controller: 'C_artists.page as ctr',
         templateUrl: "templates/views/artists/page.html"
       })
-        .state('artistpage.section', {
-          url: ":section/"
-        })
+      .state('artistpage.section', {
+        url: ":section/"
+      })
       .state('flow', {
         url: "/flow/?artist&tag",
         controller: 'C_flow as ctr',
-        templateUrl: "templates/views/flow/index.html", 
-        reloadOnSearch: false
+        templateUrl: "templates/views/flow/index.html",
+        reloadOnSearch: false,
+        resovle: {
+          ready: function() {
+            var deferred = $q.defer();
+            setTimeout(function(){
+              deferred.resolve(true);
+            },500);
+            return deferred.promise;
+          }
+        }
       })
       .state('playlists', {
         url: "/playlists/",
         controller: 'C_playlists as ctr',
-        templateUrl: "templates/views/playlists/index.html", 
+        templateUrl: "templates/views/playlists/index.html",
         reloadOnSearch: false
       })
       .state('share', {

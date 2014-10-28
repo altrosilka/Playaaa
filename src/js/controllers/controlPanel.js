@@ -47,14 +47,15 @@ angular.module('App').controller('C_controlPanel', ['$scope', '$http', 'S_sound'
     }
   });
   $scope.$on('trackStarted', function(e, q) {
-    $scope.$apply(function() {
-      ctr.totalTime = q.duration;
-      ctr.artist = q.artist;
-      ctr.title = q.title;
-    });
+
+    ctr.totalTime = q.duration;
+    ctr.artist = q.artist;
+    ctr.title = q.title;
+    ctr.feat = q.feat;
+
   });
 
-  ctr.title="asdsad";
+  ctr.title = "asdsad";
   ctr.pause = function() {
     S_sound.togglePause();
   }
@@ -133,13 +134,13 @@ angular.module('App').controller('C_controlPanel', ['$scope', '$http', 'S_sound'
 
   function setProgress(event) {
     var progress = getPercent(event);
-    $scope.progress = progress;
+    ctr.progress = progress;
     S_sound.setProgress(progress);
   }
 
   function setVolume(event) {
     var volume = getPercent(event);
-    $scope.volume = volume;
+    ctr.volume = volume;
     S_sound.setVolume(volume);
   }
 
@@ -151,8 +152,8 @@ angular.module('App').controller('C_controlPanel', ['$scope', '$http', 'S_sound'
 
 
   function collect() {
-    var playingTrack = $('.playing').closest('.ng-scope');
-    var parent = playingTrack.closest('.tracks');
+    var playingTrack = $('.track.active').closest('.ng-scope');
+    var parent = playingTrack.closest('.list');
     var tracks = parent.children();
     return {
       tracks: tracks,
@@ -162,22 +163,32 @@ angular.module('App').controller('C_controlPanel', ['$scope', '$http', 'S_sound'
   }
 
   ctr.next = function() {
-    var c = collect();
+    var c = collect(),
+      el;
     setTimeout(function() {
       if (c.index + 1 >= c.length) {
-        c.tracks.eq(0).find('.track').trigger('click');
+        el = c.tracks.eq(0).find('.track');
       } else {
-        c.tracks.eq(c.index + 1).find('.track').trigger('click');
+        el = c.tracks.eq(c.index + 1).find('.track');
+      }
+      el.trigger('click');
+      if (!$scope.$$phase) {
+        $scope.$apply();
       }
     }, 0);
   }
   ctr.prev = function() {
-    var c = collect();
+    var c = collect(),
+      el;
     setTimeout(function() {
       if (c.index === 0) {
-        c.tracks.eq(c.length - 1).find('.track').trigger('click');
+        el = c.tracks.eq(c.length - 1).find('.track');
       } else {
-        c.tracks.eq(c.index - 1).find('.track').trigger('click');
+        el = c.tracks.eq(c.index - 1).find('.track');
+      }
+      el.trigger('click')
+      if (!$scope.$$phase) {
+        $scope.$apply();
       }
     }, 0);
   }

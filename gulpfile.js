@@ -24,8 +24,10 @@ var vendorLibs = [
   './bower_components/angular/angular.js',
   './bower_components/angular-dragdrop/src/angular-dragdrop.js',
   './bower_components/angular-sanitize/angular-sanitize.js',
+  './bower_components/angular-animate/angular-animate.js',
   './bower_components/angular-ui-router/release/angular-ui-router.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  './bower_components/trianglify/trianglify.js',
   './bower_components/momentjs/moment.js'
   //'./bower_components/color-thief/src/color-thief.js'
 ];

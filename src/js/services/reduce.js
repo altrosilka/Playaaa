@@ -4,12 +4,12 @@ angular.module('App')
     function($rootScope) {
       var service = {};
 
-      service.normalizeTopArtists = function(array){
-        return _.map(array,function(artist){
+      service.normalizeTopArtists = function(array) {
+        return _.map(array, function(artist) {
           return {
             name: artist.name,
             listeners: artist.listeners,
-            image: artist.image[artist.image.length-1]['#text']
+            image: artist.image[artist.image.length - 1]['#text']
           }
         });
       }
@@ -38,14 +38,53 @@ angular.module('App')
 
           if (!allowOptions.withDurations || (typeof item.duration !== 'undefined' && allowOptions.withDurations)) {
             if (allowOptions.bigTitles || (!allowOptions.bigTitles && item.title.length < 50)) {
-              item.title = title;
-              item.artist = service.clearTrashSymbols(item.artist);
+
+              var titleInfo = service.extractFeats(title);
+              var artistInfo = service.extractFeats(service.clearTrashSymbols(item.artist));
+              item.title = titleInfo.text;
+              item.feat = titleInfo.feat || artistInfo.feat;
+              item.artist = artistInfo.text;
               filteredItems.push(item);
             }
           }
         };
 
         return filteredItems;
+      }
+
+      service.extractFeats = function(text) {
+        var array = [
+          /(.*)\sft\s(.*)/i, 
+          /(.*)\sft\.\s(.*)/i, 
+          /(.*)\sft\.(.*)/i, 
+          /(.*)\(ft\.(.*)/i, 
+          /(.*)\(ft\s(.*)/i, 
+          /(.*)\sfeat\.\s(.*)/i,
+          /(.*)\sfeat\.(.*)/i,
+          /(.*)\sfeat\s(.*)/i,
+          /(.*)\(feat\.\s(.*)\)/i,
+          /(.*)\(feat\.(.*)\)/i,
+          /(.*)\(feat\s(.*)\)/i,
+          ];
+        var name, features, execResult, completed;
+
+        _.forEach(array, function(reg) {
+          if (!completed) {
+            execResult = reg.exec(text);
+            if (_.isArray(execResult)){
+              completed = true;
+              name = execResult[1];
+              features = execResult[2];
+            }
+          }
+        });
+        if (!name){
+          name = text;
+        }
+        return {
+          text: name,
+          feat: features
+        }
       }
 
       service.clearTrashSymbols = function(text) {

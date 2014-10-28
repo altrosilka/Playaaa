@@ -4,7 +4,7 @@ angular.module('App')
 
     var service = {};
 
-    var currentSound;
+    var currentSound, currentSoundId;
 
     var volume;
 
@@ -109,6 +109,9 @@ angular.module('App')
     service.getSound = function() {
       return currentSound;
     }
+    service.getSoundId = function() {
+      return currentSoundId;
+    }
 
     service.setVolume = function(v) {
       v = +v;
@@ -127,7 +130,7 @@ angular.module('App')
       }
       S_utils.setCookie('volume', v);
 
-      //$rootScope.$broadcast('volumeChanged', v);
+      $rootScope.$broadcast('volumeChanged', v);
     }
 
     service.setProgress = function(p) {
@@ -168,7 +171,7 @@ angular.module('App')
 
 
       service.stopAll();
-      if (currentSound) {
+      if (currentSound && currentSound.loaded) {
         currentSound.unload();
       }
       currentSound = soundManager.createSound({
@@ -232,9 +235,12 @@ angular.module('App')
       var sound = service.create(q, onfinish);
 
       sound.play();
+
+      currentSoundId = q.id;
+
       S_enviroment.setTitle(q.artist + ' – ' + q.title);
       setTimeout(function() {
-        var sound = Sound.getSound();
+        var sound = service.getSound();
         if (sound.sID !== q.id) {
           return;
         }
