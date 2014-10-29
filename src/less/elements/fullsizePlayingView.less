@@ -15,7 +15,7 @@
     right: 0;
     top: 0;
     z-index: 2;
-    opacity:0.6;
+    opacity: 0.6;
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.45) 46%, rgba(0, 0, 0, 0) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.63)), color-stop(46%, rgba(0, 0, 0, 0.45)), color-stop(100%, rgba(0, 0, 0, 0)));
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.45) 46%, rgba(0, 0, 0, 0) 100%);
@@ -27,7 +27,7 @@
     content: '';
     position: absolute;
     height: 150px;
-    opacity:0.7;
+    opacity: 0.7;
     left: 0;
     right: 0;
     bottom: 0;
@@ -165,11 +165,14 @@
       }
       .fake {
         background-color: rgba(255, 255, 255, 0.2);
+        border-radius:2px;
         .progress {
           background-color: rgba(255, 255, 255, 0.9);
+          border-radius:2px;
         }
         .download {
           background-color: rgba(255, 255, 255, 0.2);
+          border-radius:2px;
         }
       }
       .volumePanel {
@@ -181,12 +184,13 @@
           .progress {}
         }
         .current {
-          position: absolute;
-          right: 0px;
-          color: #888;
           font-size: 11px;
+          color: #888;
           top: -16px;
-          display: none;
+          &.muted {
+            color: #f00;
+            text-decoration: line-through;
+          }
         }
       }
       .progressPanel {
@@ -201,6 +205,7 @@
             visibility: visible;
             top: -16px;
             color: #888;
+            font-size: 11px;
           }
           .total {
             right: 0px;
@@ -216,6 +221,7 @@
             background-color: rgba(155, 155, 155, 0.5);
             width: 3px;
           }
+          margin-left:-1px;
         }
       }
     }

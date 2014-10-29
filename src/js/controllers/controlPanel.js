@@ -80,8 +80,17 @@ angular.module('App').controller('C_controlPanel', [
 
     ctr.love = function(){
       PS_vk.addTrackToAudios(S_sound.getPlayingTrackInfo()).then(function(resp){
-        
+
       });
+    }
+
+    ctr.toggleVolume = function(event){
+      event.stopPropagation();
+      ctr.muted = S_sound.toggleMute();
+    }
+
+    ctr.stopPropagation = function(event){
+      event.stopPropagation();
     }
 
     ctr.mouseDown = function(event, type) {

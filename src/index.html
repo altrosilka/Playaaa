@@ -90,7 +90,7 @@
           <div class="fake">
             <div class="progress" style="width:{{ctr.volume}}%"></div>
           </div>
-          <div class="current">
+          <div class="current" ng-class="{'muted':ctr.muted}" ng-click="ctr.toggleVolume($event)" ng-mousemove="ctr.stopPropagation($event);" ng-mouseleave="ctr.stopPropagation($event);" ng-mousedown="ctr.stopPropagation($event);" ng-mouseup="ctr.stopPropagation($event);">
             <span ng-bind="ctr.volume | number:0"></span>%
           </div>
         </div>

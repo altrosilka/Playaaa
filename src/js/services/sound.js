@@ -6,7 +6,7 @@ angular.module('App')
 
     var currentSound, currentSoundId, currentSoundInfo;
 
-    var volume;
+    var volume, isMuted;
 
     var bitrateObject = {};
 
@@ -116,6 +116,15 @@ angular.module('App')
 
     service.getPlayingTrackInfo = function() {
       return currentSoundInfo;
+    }
+
+    service.toggleMute = function(){
+      if (!currentSound){
+        return;
+      }
+      currentSound.toggleMute();
+      isMuted = !isMuted;
+      return isMuted;
     }
 
     service.setVolume = function(v) {
@@ -243,6 +252,10 @@ angular.module('App')
     service.createAndPlay = function(q, onerror, onfinish) {
 
       var sound = service.create(q, onfinish);
+
+      if (isMuted){
+        sound.mute();
+      }
 
       sound.play();
 

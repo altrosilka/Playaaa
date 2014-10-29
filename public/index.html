@@ -5,8 +5,8 @@
   <base href="/" target="_blank" />
   <meta charset="UTF-8">
   <title>Playaaa</title>
-  <link rel="stylesheet" href="pack/vendors.css?v=1.1.6">
-  <link rel="stylesheet" href="pack/styles.css?v=1.1.6">
+  <link rel="stylesheet" href="pack/vendors.css?v=1.1.7">
+  <link rel="stylesheet" href="pack/styles.css?v=1.1.7">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 </head>
@@ -90,7 +90,7 @@
           <div class="fake">
             <div class="progress" style="width:{{ctr.volume}}%"></div>
           </div>
-          <div class="current">
+          <div class="current" ng-class="{'muted':ctr.muted}" ng-click="ctr.toggleVolume($event)" ng-mousemove="ctr.stopPropagation($event);" ng-mouseleave="ctr.stopPropagation($event);" ng-mousedown="ctr.stopPropagation($event);" ng-mouseup="ctr.stopPropagation($event);">
             <span ng-bind="ctr.volume | number:0"></span>%
           </div>
         </div>
@@ -126,9 +126,9 @@
 
 
   <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script type="text/javascript" src="pack/vendor.js?v=1.1.6"></script>
-  <script type="text/javascript" src="pack/templates.js?v=1.1.6"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=1.1.6"></script>
+  <script type="text/javascript" src="pack/vendor.js?v=1.1.7"></script>
+  <script type="text/javascript" src="pack/templates.js?v=1.1.7"></script>
+  <script type="text/javascript" src="pack/scripts.js?v=1.1.7"></script>
 </body>
 
 </html>
