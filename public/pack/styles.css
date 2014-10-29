@@ -49,13 +49,14 @@ input[type="text"]:focus {
   background-color: rgba(255, 255, 255, 0.2);
   position: relative;
 }
-.controlPanel .fake .progress {
+.controlPanel .fake .progressLine {
   width: 0%;
   background-color: rgba(255, 255, 255, 0.9);
   height: 100%;
   border-radius: 0px;
   position: absolute;
   left: 0;
+  bottom: 0;
   top: 0;
 }
 .controlPanel .fake .download {
@@ -654,7 +655,7 @@ header.whiteHeader .top .image {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 2px;
 }
-.radioBody .leftPanel .controlPanel .fake .progress {
+.radioBody .leftPanel .controlPanel .fake .progressLine {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 2px;
 }

@@ -18,12 +18,13 @@ angular.module('App')
       ctr.query = ($stateParams.tag) ? $stateParams.tag : $stateParams.artist;
 
       ctr.songs = [];
-
+ 
       ctr.playing = false;
       if ($stateParams.artist && !$stateParams.tag) {
         var artist = $stateParams.artist;
         PS_echonest.getStaticPlaylist({
           artist: artist,
+          bucket: 'id:twitter',
           results: 30
         }).then(function(resp) {
           createListeners(resp.data.response.songs)

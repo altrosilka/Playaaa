@@ -68,13 +68,13 @@
             <i class="fa fa-share"></i>
           </span>
 
-        </div>
+        </div> 
 
         <div class="progressPanel" ng-mouseup="ctr.mouseUp($event,'p');">
           <div minutes-scaler class="minutesScaler" duration="ctr.totalTime"></div>
           <div class="fake">
-            <div class="progress" style="width:{{ctr.progress}}%"></div>
-            <div class="download" style="width:{{ctr.download}}%"></div>
+            <div class="progressLine" ng-style="{'width':ctr.progress+'%'}"></div>
+            <div class="download" ng-style="{'width':ctr.download+'%'}"></div>
           </div>
 
           <div class="times">
@@ -88,7 +88,7 @@
 
         <div class="volumePanel" ng-mousemove="ctr.mouseMove($event,'v');" ng-mouseleave="ctr.mouseLeave($event,'v');" ng-mousedown="ctr.mouseDown($event,'v');" ng-mouseup="ctr.mouseUp($event,'v');">
           <div class="fake">
-            <div class="progress" style="width:{{ctr.volume}}%"></div>
+            <div class="progressLine" ng-style="{'width':ctr.volume+'%'}"></div>
           </div>
           <div class="current" ng-class="{'muted':ctr.muted}" ng-click="ctr.toggleVolume($event)" ng-mousemove="ctr.stopPropagation($event);" ng-mouseleave="ctr.stopPropagation($event);" ng-mousedown="ctr.stopPropagation($event);" ng-mouseup="ctr.stopPropagation($event);">
             <span ng-bind="ctr.volume | number:0"></span>%
