@@ -83,6 +83,7 @@ angular.module('App')
         autoLoad: true,
         autoPlay: false,
         whileloading: function() {
+
           if (this.bytesLoaded > 50) {
             var z = this.bytesTotal;
 
@@ -175,7 +176,7 @@ angular.module('App')
 
 
       service.stopAll();
-      if (currentSound && currentSound.loaded) {
+      if (currentSound && currentSound.readyState !== 3) {
         currentSound.unload();
       }
       currentSound = soundManager.createSound({
@@ -193,6 +194,11 @@ angular.module('App')
         whileplaying: function() {
           if (this.duration != null) {
             $rootScope.$broadcast('progressChanged', this);
+          }
+        },
+        whileloading: function() {
+          if (this.bytesLoaded != null) {
+            $rootScope.$broadcast('downloadingTrackState', this.bytesLoaded/this.bytesTotal);
           }
         },
         onplay: function() {

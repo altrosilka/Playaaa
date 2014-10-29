@@ -29,7 +29,7 @@
   <div class="mainLoader" data-line-loader></div>
   <div class="content">
 
-    <div class="leftPanel panel">
+    <div class="leftPanel panel noselect">
       <header class="controlPanel" ng-controller="C_controlPanel as ctr">
 
         <div class="trackInfo ng-hide" ng-show="ctr.artist">
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <div class="buttons">
+        <div class="buttons noselect">
 
           <span class="love btn" ng-click="ctr.love()">
             <i class="fa fa-heart"></i>
@@ -74,11 +74,14 @@
           <div minutes-scaler class="minutesScaler" duration="ctr.totalTime"></div>
           <div class="fake">
             <div class="progress" style="width:{{ctr.progress}}%"></div>
-            <div class="download" style="width:50%"></div>
+            <div class="download" style="width:{{ctr.download}}%"></div>
           </div>
 
           <div class="times">
-            <div class="current" ng-bind="ctr.currentTime | toGIS"></div>
+            <div class="current">
+                <div ng-if="ctr.currentTime === 0" data-line-loader></div>
+                <span ng-bind="ctr.currentTime | toGIS"></span>
+            </div>
             <div class="total" ng-bind="ctr.totalTime | toGIS"></div>
           </div>
         </div>
@@ -104,10 +107,11 @@
       </div>
     </div>
     <div class="layout panel">
-      <header ng-controller="C_header as ctr" ng-show="ctr.visible">
+      <header class="noselect" ng-controller="C_header as ctr" ng-show="ctr.visible">
         <menu>
-          <!--<a href="/">Главная</a>
-          <a href="/discover/">Поиск</a>-->
+          <a href="/">Главная</a>
+          <a href="/lib/">Библиотека</a>
+          <a href="/discover/">Поиск</a>
           <a href="/artists/">Исполнители</a>
           <a href="/playlists/">Плейлисты</a>
         </menu>

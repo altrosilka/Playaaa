@@ -1,10 +1,10 @@
 .controlPanel {
   position: relative;
   height: 120px;
-  background: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   .fake {
-    height: 2px;
-    margin-top: 3px;
+    height: 3px;
+    margin-top: 6px;
     background: #ddd;
     position: relative;
     .progress {
@@ -12,7 +12,6 @@
       background: #000;
       height: 100%;
       border-radius: 0px;
-      transition: @fastTime;
       position: absolute;
       left: 0;
       top: 0;
@@ -22,13 +21,23 @@
       background: #BEBEBE;
     }
   }
-  .progressPanel {
+  .volumePanel, .progressPanel {
     position: absolute;
+    cursor: pointer;
+    transition: @fastTime;
+    opacity: 0.8;
+    height: 15px;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .volumePanel {
+    padding: 0 5px;
+  }
+  .progressPanel {
     bottom: 6px;
     width: 228px;
     left: 10px;
-    height: 8px;
-    transition: @fastTime;
     cursor: pointer;
     .times {
       .current, .total {
@@ -41,6 +50,18 @@
       }
       .current {
         left: -30px;
+        .lineLoader {
+          position: absolute;
+          top: 5px;
+          left: 0px;
+          width: 37px;
+          .lineLoaderPoint {
+            width: 6px;
+            height: 6px;
+            margin: 0 1px;
+            background-color: rgba(255, 255, 255, 0.6);
+          }
+        }
       }
       .total {
         right: -30px;
@@ -120,8 +141,7 @@
     left: 10px;
     .artist {
       font-weight: bold;
-      .gray {
-      }
+      .gray {}
     }
     .title {}
   }

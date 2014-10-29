@@ -46,13 +46,11 @@ angular.module('App')
       }
 
       function createListeners(songs) {
-        console.log(songs);
         ctr.playing = false;
 
         var filtTracks = getTracks(songs);
 
         PS_vk.findTrackArray(filtTracks, function(array, start) {
-          console.log('part!');
           var tracks = [];
           $.each(array.response, function(i, val) {
             var pseudo = filtTracks[start + i];
@@ -71,7 +69,6 @@ angular.module('App')
           tracks = S_reduce.filterTracks(tracks, {
             withDurations: true
           });
-          console.log(tracks);
           ctr.songs = ctr.songs.concat(tracks);
 
           if (!ctr.playing && ctr.songs.length > 0) {

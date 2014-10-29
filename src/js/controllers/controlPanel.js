@@ -50,6 +50,12 @@ angular.module('App').controller('C_controlPanel', [
         $scope.$apply();
       }
     });
+    $scope.$on('downloadingTrackState', function(e, state) {
+      ctr.download = 100 * state;
+      if (!$scope.$$phase) {
+        $scope.$apply();
+      }
+    });
     $scope.$on('trackStarted', function(e, q) {
 
       ctr.totalTime = q.duration;
@@ -57,6 +63,9 @@ angular.module('App').controller('C_controlPanel', [
       ctr.title = q.title;
       ctr.feat = q.feat;
 
+      ctr.progress = 0;
+      ctr.currentTime = 0;
+      ctr.download = 0;
     });
 
     ctr.title = "asdsad";
@@ -147,7 +156,7 @@ angular.module('App').controller('C_controlPanel', [
     function getPercent(event) {
       var element = event.currentTarget;
       var width = element.clientWidth - 10;
-      var offset = event.offsetX - ((event.target.className === 'volumeHider' || event.target.className === 'progressHider') ? 5 : 0);
+      var offset = event.offsetX - ((event.target.className === 'progressPanel' || event.target.className === 'volumePanel') ? 5 : 0);
 
       var progress = 100 * (offset / width);
       return progress;
