@@ -2,7 +2,8 @@ angular.module('App').controller('C_controlPanel', [
   '$scope',
   'S_sound',
   'S_modals',
-  function($scope, S_sound, S_modals) {
+  'PS_vk',
+  function($scope, S_sound, S_modals, PS_vk) {
     var ctr = this;
 
     $scope.playing = false;
@@ -75,6 +76,12 @@ angular.module('App').controller('C_controlPanel', [
 
     ctr.share = function(){
       S_modals.openShareModal(S_sound.getPlayingTrackInfo());
+    }
+
+    ctr.love = function(){
+      PS_vk.addTrackToAudios(S_sound.getPlayingTrackInfo()).then(function(resp){
+        
+      });
     }
 
     ctr.mouseDown = function(event, type) {

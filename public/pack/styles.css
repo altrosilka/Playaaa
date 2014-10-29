@@ -40,7 +40,8 @@ input[type="text"]:focus {
 .controlPanel {
   position: relative;
   height: 120px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ddd;
 }
 .controlPanel .fake {
   height: 3px;
@@ -118,7 +119,6 @@ input[type="text"]:focus {
 }
 .controlPanel .buttons .btn {
   opacity: 0.4;
-  box-shadow: 0 0 0 2px #333;
   border-radius: 50%;
   background: transparent;
   line-height: 24px;
@@ -134,7 +134,7 @@ input[type="text"]:focus {
   opacity: 1;
 }
 .controlPanel .buttons .btn i {
-  color: #444;
+  color: #fff;
 }
 .controlPanel .buttons .btn.next,
 .controlPanel .buttons .btn.prev {
@@ -196,8 +196,6 @@ input[type="text"]:focus {
   margin-left: -620px;
   width: 360px;
   border-radius: 0px;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
 }
 .leftPanel .playlistFull .playlistsContainer {
   height: 100px;
@@ -474,6 +472,38 @@ header.whiteHeader .top .image {
   top: 0;
   color: #ddd;
   background: #333333 url(../images/repeated/flow.jpg) center repeat;
+}
+.fullsizePlayingView:before {
+  content: '';
+  position: absolute;
+  height: 80px;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  opacity: 0.6;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.45) 46%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.63)), color-stop(46%, rgba(0, 0, 0, 0.45)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.45) 46%, rgba(0, 0, 0, 0) 100%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.45) 46%, rgba(0, 0, 0, 0) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.45) 46%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.63) 0%, rgba(0, 0, 0, 0.45) 46%, rgba(0, 0, 0, 0) 100%);
+}
+.fullsizePlayingView:after {
+  content: '';
+  position: absolute;
+  height: 150px;
+  opacity: 0.7;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.63) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(54%, rgba(0, 0, 0, 0.45)), color-stop(100%, rgba(0, 0, 0, 0.63)));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.63) 100%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.63) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.63) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.63) 100%);
 }
 .fullsizePlayingView .fullsizeImage {
   position: absolute;
@@ -915,9 +945,7 @@ header.whiteHeader .top .image {
   cursor: pointer;
 }
 body[data-state="share"] .buttons .prev,
-body[data-state="share"] .buttons .next,
-body[data-state="share"] .buttons .share,
-body[data-state="share"] .buttons .love {
+body[data-state="share"] .buttons .next {
   display: none;
 }
 body[data-state="share"].radioBody .leftPanel {

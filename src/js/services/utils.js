@@ -167,7 +167,7 @@ angular.module('App')
       return q.split('.').pop()
     }
 
-    
+
 
 
 
@@ -220,13 +220,18 @@ angular.module('App')
     })();
 
 
-    function getCode(f, vars) {
+    service.getExecuteCode = function(f, vars) {
       var entire = f.toString();
       var body = entire.slice(entire.indexOf("{") + 1, entire.lastIndexOf("}"));
 
       var varstr = '';
       if (typeof vars === 'object') {
         for (i in vars) {
+          if (typeof vars[i] === 'object'){
+            vars[i] = JSON.stringify(vars[i]);
+          } else if (typeof vars[i] === 'string') {
+            vars[i] = '"'+vars[i]+'"';
+          }
           varstr += 'var ' + i + ' = ' + vars[i] + ';';
         }
       }

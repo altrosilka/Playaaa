@@ -1,5 +1,5 @@
 angular.module('App')
-  .service('PS_vk', ['$q', '$modal', '$rootScope', '__vkAppId', function($q, $modal, $rootScope, __vkAppId) {
+  .service('PS_vk', ['$q', '$modal', '$rootScope', '__vkAppId', 'S_utils', function($q, $modal, $rootScope, __vkAppId, S_utils) {
     var service = {};
 
     var userInfo = {};
@@ -37,7 +37,47 @@ angular.module('App')
       return defer.promise;
     }
 
+    service.addTrackToAudios = function(track) {
+      var code = S_utils.getExecuteCode(
+        function() {
+          var res = API.audio.get({
+            count: 100
+          });
+          var l = res.items.length;
+          var item, finded, i = -1;
+          while (i < l-1) {
+            i = i + 1;
+            item = res.items[i];
+            if (item.artist == _artist && item.title == _title) {
+              finded = true;
+              return {
+                success: true,
+                already: true
+              };
+            }
+          }
 
+          if (!finded) {
+            API.audio.add({
+              audio_id: _id,
+              owner_id: _owner_id
+            });
+            return {
+              success: true,
+              res: res
+            };
+          }
+        }, {
+          _id: track.id,
+          _owner_id: track.owner_id,
+          _artist: track.artist,
+          _title: track.title
+        }
+      );
+      return $q.when(service.call('execute', {
+        code: code
+      }))
+    }
 
     service.call = function(method, options) {
       return call(method, options);
@@ -142,7 +182,6 @@ angular.module('App')
         }).then(function(resp) {
           executeIndex++;
           callback(resp, start);
-          console.log(resp);
           if (executeIndex < executeCount) {
             setTimeout(execute, 1000);
           } else {

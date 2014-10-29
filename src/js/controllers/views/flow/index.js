@@ -107,7 +107,6 @@ angular.module('App')
           if (!src || !src.image || src.image[src.image.length - 1]['#text'] === '') {
             var t = new Trianglify();
             var pattern = t.generate(document.body.clientWidth, document.body.clientHeight);
-            console.log(pattern.dataUri);
             ctr.artistInfo = {
               name: artist,
               image: pattern.dataUri
