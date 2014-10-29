@@ -4,7 +4,7 @@ angular.module('App')
 
     var service = {};
 
-    var currentSound, currentSoundId;
+    var currentSound, currentSoundId, currentSoundInfo;
 
     var volume;
 
@@ -111,6 +111,10 @@ angular.module('App')
     }
     service.getSoundId = function() {
       return currentSoundId;
+    }
+
+    service.getPlayingTrackInfo = function() {
+      return currentSoundInfo;
     }
 
     service.setVolume = function(v) {
@@ -235,6 +239,8 @@ angular.module('App')
       var sound = service.create(q, onfinish);
 
       sound.play();
+
+      currentSoundInfo = q;
 
       currentSoundId = q.id;
 

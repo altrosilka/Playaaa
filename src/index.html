@@ -34,7 +34,10 @@
 
         <div class="trackInfo ng-hide" ng-show="ctr.artist">
           <div class="artist">
-            <span ng-bind="ctr.artist"></span><span ng-if="ctr.feat" class="gray">&nbsp;feat.&nbsp;<span ng-bind="ctr.feat"></span></span>
+            <span ng-bind="ctr.artist"></span>
+            <span ng-if="ctr.feat" class="gray">&nbsp;feat.&nbsp;
+              <span ng-bind="ctr.feat"></span>
+            </span>
           </div>
           <span class="separator">&nbsp;-&nbsp;</span>
           <div class="title">
@@ -43,6 +46,11 @@
         </div>
 
         <div class="buttons">
+
+          <span class="love btn" ng-click="ctr.love()">
+            <i class="fa fa-heart"></i>
+          </span>
+
           <span class="prev btn" ng-click="ctr.prev()">
             <i class="fa fa-fast-backward"></i>
           </span>
@@ -52,10 +60,14 @@
           <span class="pause btn" ng-click="ctr.pause()" ng-show="ctr.playing">
             <i class="fa fa-pause"></i>
           </span>
-
           <span class="next btn" ng-click="ctr.next()">
             <i class="fa fa-fast-forward"></i>
           </span>
+
+          <span class="share btn" ng-click="ctr.share()">
+            <i class="fa fa-share"></i>
+          </span>
+
         </div>
 
         <div class="progressPanel" ng-mouseup="ctr.mouseUp($event,'p');">
@@ -83,7 +95,7 @@
       </header>
       <div class="playlistFull" ng-controller="C_playlist as ctr">
         <div class="removeField" ddata-ng-class="{'active':ctr.inDrag}" ddata-drop="true" ddata-jqyoui-options djqyoui-droppable="{onOver: 'ctr.onOver', onDrop: 'ctr.onDrop'}"></div>
- 
+
         <div class="tabs">табы</div>
 
         <section class="playlistsContainer" data-drop="true" data-jqyoui-options jqyoui-droppable ng-model="ctr.currentTrackList">

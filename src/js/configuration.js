@@ -1,4 +1,5 @@
 App
+  .constant('__domain', 'http://playaaa.dev.megor.ru')
   .constant('__vkAppId', 4468735)
   .constant('__echonest', {
     key: 'JPIQUINIHEVVTYYRU',
