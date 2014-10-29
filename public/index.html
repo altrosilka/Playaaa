@@ -5,8 +5,8 @@
   <base href="/" target="_blank" />
   <meta charset="UTF-8">
   <title>Playaaa</title>
-  <link rel="stylesheet" href="pack/vendors.css?v=1.1.8">
-  <link rel="stylesheet" href="pack/styles.css?v=1.1.8">
+  <link rel="stylesheet" href="pack/vendors.css?v=1.1.9">
+  <link rel="stylesheet" href="pack/styles.css?v=1.1.9">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 </head>
@@ -34,17 +34,17 @@
 
         <div class="trackInfo ng-hide" ng-show="ctr.artist">
           <div class="artist">
-            <span ng-bind="ctr.artist"></span>
+            <span ng-bind="ctr.artist | unEscape"></span>
             <span ng-if="ctr.feat" class="gray">&nbsp;feat.&nbsp;
-              <span ng-bind="ctr.feat"></span>
+              <span ng-bind="ctr.feat | unEscape"></span>
             </span>
           </div>
           <span class="separator">&nbsp;-&nbsp;</span>
           <div class="title">
-            <span ng-bind="ctr.title"></span>
+            <span ng-bind="ctr.title | unEscape"></span>
           </div>
         </div>
-
+ 
         <div class="buttons noselect">
 
           <span class="love btn" ng-click="ctr.love()">
@@ -126,9 +126,9 @@
 
 
   <script src="http://d3js.org/d3.v3.min.js"></script>
-  <script type="text/javascript" src="pack/vendor.js?v=1.1.8"></script>
-  <script type="text/javascript" src="pack/templates.js?v=1.1.8"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=1.1.8"></script>
+  <script type="text/javascript" src="pack/vendor.js?v=1.1.9"></script>
+  <script type="text/javascript" src="pack/templates.js?v=1.1.9"></script>
+  <script type="text/javascript" src="pack/scripts.js?v=1.1.9"></script>
 </body>
 
 </html>

@@ -34,17 +34,17 @@
 
         <div class="trackInfo ng-hide" ng-show="ctr.artist">
           <div class="artist">
-            <span ng-bind="ctr.artist"></span>
+            <span ng-bind="ctr.artist | unEscape"></span>
             <span ng-if="ctr.feat" class="gray">&nbsp;feat.&nbsp;
-              <span ng-bind="ctr.feat"></span>
+              <span ng-bind="ctr.feat | unEscape"></span>
             </span>
           </div>
           <span class="separator">&nbsp;-&nbsp;</span>
           <div class="title">
-            <span ng-bind="ctr.title"></span>
+            <span ng-bind="ctr.title | unEscape"></span>
           </div>
         </div>
-
+ 
         <div class="buttons noselect">
 
           <span class="love btn" ng-click="ctr.love()">

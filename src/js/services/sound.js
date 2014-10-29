@@ -1,5 +1,5 @@
 angular.module('App')
-  .service('S_sound', ['$rootScope','$timeout', 'S_utils', 'S_enviroment', 'S_eventer', function($rootScope, $timeout, S_utils, S_enviroment, S_eventer) {
+  .service('S_sound', ['$rootScope', '$timeout', 'S_utils', 'S_enviroment', 'S_eventer', function($rootScope, $timeout, S_utils, S_enviroment, S_eventer) {
 
 
     var service = {};
@@ -267,7 +267,6 @@ angular.module('App')
       $timeout(function() {
         var sound = service.getSound();
         if (sound.url != q.url) {
-          console.log('ret',sound.url,q.url)
           return;
         }
 
@@ -277,8 +276,8 @@ angular.module('App')
           }
           S_eventer.sendEvent('trackError');
         }
-        
-      },8000);
+
+      }, 8000);
 
       S_eventer.sendEvent('trackStarted', q);
 
