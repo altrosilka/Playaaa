@@ -218,7 +218,12 @@ angular.module('App')
         };
       }
     })();
-
+    service.prepareTextToExecute = function(str) {
+      if (typeof str !== 'string') {
+        return str;
+      }
+      return _.escape(str);
+    }
 
     service.getExecuteCode = function(f, vars) {
       var entire = f.toString();
@@ -227,10 +232,10 @@ angular.module('App')
       var varstr = '';
       if (typeof vars === 'object') {
         for (i in vars) {
-          if (typeof vars[i] === 'object'){
+          if (typeof vars[i] === 'object') {
             vars[i] = JSON.stringify(vars[i]);
           } else if (typeof vars[i] === 'string') {
-            vars[i] = '"'+vars[i]+'"';
+            vars[i] = '"' + vars[i] + '"';
           }
           varstr += 'var ' + i + ' = ' + vars[i] + ';';
         }

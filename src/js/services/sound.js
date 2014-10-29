@@ -1,5 +1,5 @@
 angular.module('App')
-  .service('S_sound', ['$rootScope','S_utils','S_enviroment',function($rootScope, S_utils, S_enviroment) {
+  .service('S_sound', ['$rootScope','$timeout', 'S_utils', 'S_enviroment', 'S_eventer', function($rootScope, $timeout, S_utils, S_enviroment, S_eventer) {
 
 
     var service = {};
@@ -15,11 +15,11 @@ angular.module('App')
       if (v === '') {
         v = 50;
       }
-      return +v; 
+      return +v;
     }
 
     service.init = function($root) {
-      
+
 
 
       soundManager.setup({
@@ -118,8 +118,8 @@ angular.module('App')
       return currentSoundInfo;
     }
 
-    service.toggleMute = function(){
-      if (!currentSound){
+    service.toggleMute = function() {
+      if (!currentSound) {
         return;
       }
       currentSound.toggleMute();
@@ -143,8 +143,7 @@ angular.module('App')
         currentSound.setVolume(v);
       }
       S_utils.setCookie('volume', v);
-
-      $rootScope.$broadcast('volumeChanged', v);
+      S_eventer.sendEvent('volumeChanged', v);
     }
 
     service.setProgress = function(p) {
@@ -162,7 +161,7 @@ angular.module('App')
         currentSound.setPosition(currentSound.durationEstimate * p / 100);
       }
 
-      $rootScope.$broadcast('progressChanged', currentSound);
+      S_eventer.sendEvent('progressChanged', currentSound);
     }
 
     service.togglePause = function() {
@@ -196,22 +195,23 @@ angular.module('App')
           if (typeof onfinish === 'function') {
             onfinish();
           }
+          S_eventer.sendEvent('trackFinished');
         },
         onload: function() {
-          $rootScope.$broadcast('progressCalculated', this);
+          S_eventer.sendEvent('progressCalculated', this);
         },
         whileplaying: function() {
           if (this.duration != null) {
-            $rootScope.$broadcast('progressChanged', this);
+            S_eventer.sendEvent('progressChanged', this);
           }
         },
         whileloading: function() {
           if (this.bytesLoaded != null) {
-            $rootScope.$broadcast('downloadingTrackState', this.bytesLoaded/this.bytesTotal);
+            S_eventer.sendEvent('downloadingTrackState', this.bytesLoaded / this.bytesTotal);
           }
         },
         onplay: function() {
-          $rootScope.$broadcast('playStateChanged', true);
+          S_eventer.sendEvent('progressCalculated', true);
 
           /*
           var set = Settings.get();
@@ -231,10 +231,10 @@ angular.module('App')
           */
         },
         onresume: function() {
-          $rootScope.$broadcast('playStateChanged', true);
+          S_eventer.sendEvent('playStateChanged', true);
         },
         onpause: function() {
-          $rootScope.$broadcast('playStateChanged', false);
+          S_eventer.sendEvent('playStateChanged', false);
         }
       });
       return currentSound;
@@ -253,7 +253,7 @@ angular.module('App')
 
       var sound = service.create(q, onfinish);
 
-      if (isMuted){
+      if (isMuted) {
         sound.mute();
       }
 
@@ -264,9 +264,10 @@ angular.module('App')
       currentSoundId = q.id;
 
       S_enviroment.setTitle(q.artist + ' – ' + q.title);
-      setTimeout(function() {
+      $timeout(function() {
         var sound = service.getSound();
-        if (sound.sID !== q.id) {
+        if (sound.url != q.url) {
+          console.log('ret',sound.url,q.url)
           return;
         }
 
@@ -274,10 +275,13 @@ angular.module('App')
           if (typeof onerror === 'function') {
             onerror();
           }
+          S_eventer.sendEvent('trackError');
         }
-      }, 10000);
+        
+      },8000);
 
-      $rootScope.$broadcast('trackStarted', q);
+      S_eventer.sendEvent('trackStarted', q);
+
     }
 
     return service;

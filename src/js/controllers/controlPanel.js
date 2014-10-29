@@ -32,6 +32,16 @@ angular.module('App').controller('C_controlPanel', [
       }
     });
 
+    $scope.$on('trackError', function() {
+      ctr.next();
+    });
+
+    $scope.$on('trackFinished', function() {
+      ctr.next();
+    });
+
+
+
 
     $scope.$on('playStateChanged', function(e, newState) {
       ctr.playing = newState;

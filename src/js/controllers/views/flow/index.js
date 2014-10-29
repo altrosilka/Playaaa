@@ -19,12 +19,12 @@ angular.module('App')
 
       ctr.songs = [];
 
-      ctr.playing = false; 
+      ctr.playing = false;
       if ($stateParams.artist && !$stateParams.tag) {
         var artist = $stateParams.artist;
         PS_echonest.getStaticPlaylist({
           artist: artist,
-          results: 30 
+          results: 30
         }).then(function(resp) {
           createListeners(resp.data.response.songs)
         });
@@ -54,9 +54,12 @@ angular.module('App')
           var tracks = [];
           $.each(array.response, function(i, val) {
             var pseudo = filtTracks[start + i];
-            var q = S_logic.findMostLikelyTrack({artist: pseudo.artist, title: pseudo.title}, val.items);
+            var q = S_logic.findMostLikelyTrack({
+              artist: pseudo.artist,
+              title: pseudo.title
+            }, val.items);
             if (!q) {
-              
+
               q = {
                 error: true,
                 artist: pseudo.artist,
@@ -91,8 +94,8 @@ angular.module('App')
         for (var i = 0, l = tracks.length; i < l; i++) {
           var track = tracks[i];
           filteredTracks.push({
-            artist: track.artist_name || track.artist,
-            title: track.title
+            artist: S_utils.prepareTextToExecute(track.artist_name || track.artist),
+            title: S_utils.prepareTextToExecute(track.title)
           });
         }
         return filteredTracks;
