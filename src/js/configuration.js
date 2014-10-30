@@ -13,8 +13,8 @@ App
     }
   })
   .constant('__api',{
-    //url: 'http://95.85.19.4:8080/',
-    url: 'http://192.168.33.10:8080',
+    url: 'http://95.85.19.4:8080/',
+    //url: 'http://192.168.33.10:8080',
     paths: {
       translationTrackMp3: '/track/translate/',
       getTrackTranslationData: '/track/getData/',

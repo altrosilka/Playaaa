@@ -9,6 +9,12 @@ input[type="text"] {
   font-size: 14px;
   padding: 4px 10px;
   transition: 0.4s;
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
 }
 input[type="text"]:focus {
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.2), 0 0px 3px 1px #f0a824;
@@ -374,6 +380,14 @@ a:hover {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.select {
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
 }
 .list .item {
   border-radius: 1px;

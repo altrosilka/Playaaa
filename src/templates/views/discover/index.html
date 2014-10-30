@@ -1,31 +1,12 @@
-<section class="view view-fullsize view-padding">
-  <section ng-if="ctr.searchMode">
-    <h2>Результаты поиска для «{{ctr.query}}»</h2>
-    <section class="list list-gray artistGrid">
-      <a class="item" ng-repeat="item in ctr.artists">
-        <div class="image" style="background-image: url(../images/tmp/artist.jpg)"></div>
-        <footer>
-          <h3 ng-bind="item.name"></h3>
-          <span class="gray">Сейчас её слушают
-            <span ng-bind="item.listeners"></span>
-          </span>
-        </footer>
-      </a>
-    </section>
+<section class="view view-fullsize">
+  <section class="column" ng-if="ctr.searchMode" ng-show="ctr.searchTracks.length">
+
+    <div class="inner">
+      <h2>Результаты поиска для «{{ctr.query}}»</h2>
+    </div>
+    <div class="albums list list-gray">
+      <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
+    </div>
   </section>
 
-  <section ng-if="!ctr.searchMode">
-    <h2>Поиск музыки</h2>
-    <section class="list list-gray artistGrid">
-      <a class="item" ng-repeat="item in ctr.artists">
-        <div class="image" style="background-image: url(../images/tmp/artist.jpg)"></div>
-        <footer>
-          <h3 ng-bind="item.name"></h3>
-          <span class="gray">Сейчас её слушают
-            <span ng-bind="item.listeners"></span>
-          </span>
-        </footer>
-      </a>
-    </section>
-  </section>
 </section>

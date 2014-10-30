@@ -32,7 +32,7 @@
     <div class="leftPanel panel noselect">
       <header class="controlPanel" ng-controller="C_controlPanel as ctr">
 
-        <div class="trackInfo ng-hide" ng-show="ctr.artist">
+        <div class="trackInfo select ng-hide" ng-show="ctr.artist">
           <div class="artist">
             <span ng-bind="ctr.artist | unEscape"></span>
             <span ng-if="ctr.feat" class="gray">&nbsp;feat.&nbsp;
@@ -116,7 +116,7 @@
           <a href="/playlists/">Плейлисты</a>
         </menu>
         <form ng-submit="ctr.search(ctr.q)">
-          <input type="text" placeholder="Поиск музыки" ng-model="ctr.q">
+          <input class="select" type="text" placeholder="Поиск музыки" ng-model="ctr.q">
           <input type="submit" style="position:absolute;left:-9999px">
         </form>
       </header>
@@ -131,8 +131,7 @@
 
   </div>
 
-
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+ 
   <script type="text/javascript" src="pack/vendor.js?v=@@version"></script>
   <script type="text/javascript" src="pack/templates.js?v=@@version"></script>
   <script type="text/javascript" src="pack/scripts.js?v=@@version"></script>

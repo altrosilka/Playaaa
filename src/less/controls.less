@@ -9,6 +9,12 @@ input[type="text"] {
   font-size: 14px;
   padding: 4px 10px;
   transition: 0.4s;
+  -webkit-touch-callout: initial;
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
 }
 input[type="text"]:focus {
   box-shadow: 0 3px 1px -3px rgba(0, 0, 0, .2), 0 0px 3px 1px @baseColor;
@@ -28,14 +34,12 @@ input[type="text"]:focus {
     background-color: #F2F2F2;
     box-shadow: 0 3px 1px -3px rgba(0, 0, 0, 0.9), 0px 0px 1px rgba(0, 0, 0, 0.3);
   }
-
-  &.btn-primary{
-    border:2px solid;
-    background:transparent;
-    color:#ccc
+  &.btn-primary {
+    border: 2px solid;
+    background: transparent;
+    color: #ccc
   }
-
-  &.white{
-  color:#ccc;
+  &.white {
+    color: #ccc;
   }
 }
