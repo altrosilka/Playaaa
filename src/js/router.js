@@ -30,13 +30,21 @@ App.config([
         controller: 'C_artists.page as ctr',
         templateUrl: "templates/views/artists/page.html"
       })
-      .state('artistpage.section', {
-        url: ":section/"
-      })
-      .state('flow', {
-        url: "/flow/?artist&tag",
-        controller: 'C_flow as ctr',
-        templateUrl: "templates/views/flow/index.html",
+        .state('artistpage.section', {
+          url: ":section/"
+        })
+      .state('lib', {
+        url: "/lib/",
+        controller: 'C_lib as ctr',
+        templateUrl: "templates/views/lib/index.html"
+      }) 
+        .state('lib.section', {
+          url: ":section/"
+        })
+      .state('wave', {
+        url: "/wave/?artist&tag",
+        controller: 'C_wave as ctr',
+        templateUrl: "templates/views/wave/index.html",
         reloadOnSearch: false,
         resovle: {
           ready: function() {

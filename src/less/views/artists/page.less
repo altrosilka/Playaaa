@@ -4,7 +4,7 @@
     padding: 0;
     .fullsizeImage {
       height: 100%;
-      z-index: 1; 
+      z-index: 1;
       width: 100%;
       background-size: cover;
       background-position: center 20%;
@@ -21,10 +21,15 @@
         background: url(../images/overlay.png) center repeat;
       }
     }
+    .wave {
+      top: auto;
+      bottom: 16px;
+      right: 16px;
+    }
     .tags {
       position: absolute;
       display: block;
-      bottom: 16px;
+      top: 16px;
       right: 16px;
       .tag {
         font-size: 10px;
@@ -45,18 +50,17 @@
       font-size: 27px;
       padding-bottom: 6px;
       border: none;
-      top:auto;
+      top: auto;
     }
     menu {
       left: 20px;
       bottom: 16px;
       right: 132px;
-      top:auto;
+      top: auto;
       a {
         font-size: 14px;
-
-        &.active{
-        color: #fff;
+        &.active {
+          color: #fff;
         }
       }
     }

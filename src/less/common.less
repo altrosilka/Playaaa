@@ -7,8 +7,17 @@ html, body {
 }
 body {
   font: 13px Arial, Helvetica, sans-serif;
-  background: fixed #111 url(../images/background/intro.jpg) center no-repeat;
   font-weight: 300;
+  &:after {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #111 url(../images/background/intro.jpg) center no-repeat;
+    z-index: 1;
+  }
   .mainLoader {
     transition: 0.4s;
     opacity: 0;
@@ -60,15 +69,28 @@ a {
   width: 1240px;
   margin: auto;
   min-height: 100%;
+  position: relative;
+  z-index: 2;
 }
 .layout {
   width: 860px;
   margin: 0px 0 0px 380px;
   min-height: 100%;
+  > footer {
+    padding: 20px 0 30px;
+    color: #ddd;
+    font-size: 11px;
+    a {
+      i {
+        margin-left: 6px;
+      }
+    }
+  }
 }
 .panel {
   margin-bottom: 0;
   background: transparent;
+  box-shadow: none;
 }
 .column {
   background-color: rgba(0, 0, 0, 0.7);
@@ -85,7 +107,7 @@ a {
     margin: 0px;
   }
 }
-.flowOverlay {
+.waveOverlay {
   position: fixed;
   left: 0;
   right: 0;

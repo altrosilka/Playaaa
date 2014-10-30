@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="pack/styles.css?v=@@version">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-</head>
+</head> 
 
 <body data-status="{{ $root.status }}" data-state="{{$root.state}}" data-ng-class="{'radioBody':isRadio}">
-  <div class="flowOverlay"></div>
+  <div class="waveOverlay"></div>
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
       <div class="wrap">
@@ -44,7 +44,7 @@
             <span ng-bind="ctr.title | unEscape"></span>
           </div>
         </div>
- 
+
         <div class="buttons noselect">
 
           <span class="love btn" ng-click="ctr.love()">
@@ -68,7 +68,7 @@
             <i class="fa fa-share"></i>
           </span>
 
-        </div> 
+        </div>
 
         <div class="progressPanel" ng-mouseup="ctr.mouseUp($event,'p');">
           <div minutes-scaler class="minutesScaler" duration="ctr.totalTime"></div>
@@ -79,8 +79,8 @@
 
           <div class="times">
             <div class="current">
-                <div ng-if="ctr.currentTime === 0" data-line-loader></div>
-                <span ng-bind="ctr.currentTime | toGIS"></span>
+              <div ng-if="ctr.currentTime === 0" data-line-loader></div>
+              <span ng-bind="ctr.currentTime | toGIS"></span>
             </div>
             <div class="total" ng-bind="ctr.totalTime | toGIS"></div>
           </div>
@@ -121,7 +121,14 @@
         </form>
       </header>
       <div data-ui-view class="view"></div>
+      <footer class="clearfix">
+        <span class="pull-left">Онлайн-плеер Playaaa</span>
+        <div class="pull-right"><a href="http://vk.com/playaaa" target="_blank">Группа плеера в ВК<i class="fa fa-external-link"></i></a> / <a href="http://vk.com/playaaa_music" target="_blank">Паблик с лучшей музыкой<i class="fa fa-external-link"></i></a>
+        </div>
+      </footer>
     </div>
+
+
   </div>
 
 

@@ -254,8 +254,17 @@ body {
 }
 body {
   font: 13px Arial, Helvetica, sans-serif;
-  background: fixed #111111 url(../images/background/intro.jpg) center no-repeat;
   font-weight: 300;
+}
+body:after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #111111 url(../images/background/intro.jpg) center no-repeat;
+  z-index: 1;
 }
 body .mainLoader {
   transition: 0.4s;
@@ -307,15 +316,26 @@ a:hover {
   width: 1240px;
   margin: auto;
   min-height: 100%;
+  position: relative;
+  z-index: 2;
 }
 .layout {
   width: 860px;
   margin: 0px 0 0px 380px;
   min-height: 100%;
 }
+.layout > footer {
+  padding: 20px 0 30px;
+  color: #ddd;
+  font-size: 11px;
+}
+.layout > footer a i {
+  margin-left: 6px;
+}
 .panel {
   margin-bottom: 0;
   background: transparent;
+  box-shadow: none;
 }
 .column {
   background-color: rgba(0, 0, 0, 0.7);
@@ -332,7 +352,7 @@ a:hover {
   font-size: 24px;
   margin: 0px;
 }
-.flowOverlay {
+.waveOverlay {
   position: fixed;
   left: 0;
   right: 0;
@@ -435,7 +455,7 @@ header.whiteHeader .top {
 header.whiteHeader .top h1 {
   font-size: 22px;
   top: 32px;
-  border-bottom: 1px solid #bebebe;
+  border-bottom: 1px solid #444444;
   padding-bottom: 6px;
 }
 header.whiteHeader .top h2 {
@@ -450,16 +470,29 @@ header.whiteHeader .top h2 {
   left: 118px;
   right: 20px;
 }
+header.whiteHeader .top .wave {
+  position: absolute;
+  right: 20px;
+  top: 75px;
+}
+header.whiteHeader .top .wave a {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 14px;
+}
+header.whiteHeader .top .wave a i {
+  margin-left: 5px;
+}
 header.whiteHeader .top menu {
   position: absolute;
   left: 118px;
   padding: 0;
   margin: 0;
-  top: 70px;
+  top: 75px;
 }
 header.whiteHeader .top menu a {
   color: #f0a824;
-  font-size: 12px;
+  font-size: 14px;
   display: inline-block;
   margin-right: 10px;
   text-decoration: none;
@@ -737,10 +770,15 @@ header.whiteHeader .top .image {
   content: '';
   background: url(../images/overlay.png) center repeat;
 }
+#view-artists-page .whiteHeader .wave {
+  top: auto;
+  bottom: 16px;
+  right: 16px;
+}
 #view-artists-page .whiteHeader .tags {
   position: absolute;
   display: block;
-  bottom: 16px;
+  top: 16px;
   right: 16px;
 }
 #view-artists-page .whiteHeader .tags .tag {

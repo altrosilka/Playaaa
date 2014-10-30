@@ -23,5 +23,15 @@ angular.module('App')
       return __api.url + __api.paths.translationTrackMp3 + hash;
     }
 
+    service.addTrackToHistory = function(track) {
+      console.log(123);
+      return $http({
+        url: base + __api.paths.history,
+        method: 'POST',
+        params: {
+          track: track
+        }
+      });
+    }
     return service;
   }]);

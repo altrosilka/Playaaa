@@ -1,0 +1,64 @@
+<section id="view-lib" class="view view-fullsize">
+  <header class="whiteHeader column">
+    <div class="top">
+      <h1>
+        <span>Твоя библиотека</span>
+      </h1>
+      <menu>
+        <a ng-href="/lib/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
+        <a ng-href="/lib/artists/" ng-class="{'active':ctr.section === 'artists'}">Исполнители</a>
+        <a ng-href="/lib/albums/" ng-class="{'active':ctr.section === 'albums'}">Альбомы</a>
+        <a ng-href="/lib/history/" ng-class="{'active':ctr.section === 'history'}">История</a>
+      </menu>
+
+      <span class="wave">
+        <a class="link" ng-href="/lib/wall/">Лента треков<i class="fa fa-list-alt"></i></a>
+        <a class="link" ng-href="/wave/?my=true">Включить волну<i class="fa fa-volume-up"></i></a>
+      </span>
+      <div class="image" ng-style="{'background-image':'url(/images/sq_logo.png)'}"></div>
+    </div>
+  </header>
+
+
+  <section ng-if="!ctr.section">
+    <div class="column" ng-show="ctr.searchTracks.length">
+      <div class="inner">
+        <h2>Треки</h2>
+      </div>
+      <div class="albums list list-gray">
+        <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
+      </div>
+    </div>
+
+    <div class="column" ng-show="ctr.albums.length">
+      <div class="inner">
+        <h2>Альбомы</h2>
+      </div>
+      <div class="albums list list-gray clearfix">
+        <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
+      </div>
+    </div>
+  </section>
+
+  <section ng-if="ctr.section === 'tracks'">
+    <div class="column">
+      <div class="inner">
+        <h2>Треки</h2>
+      </div>
+      <div class="albums list list-gray">
+        <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
+      </div>
+    </div>
+  </section>
+
+  <section ng-if="ctr.section === 'albums'">
+    <div class="column">
+      <div class="inner">
+        <h2>Альбомы</h2>
+      </div>
+      <div class="albums list list-gray clearfix">
+        <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
+      </div>
+    </div>
+  </section>
+</section>

@@ -1,7 +1,6 @@
 header.whiteHeader {
   height: 128px;
   position: relative;
-
   .top {
     position: absolute;
     z-index: 2;
@@ -12,7 +11,7 @@ header.whiteHeader {
     h1 {
       font-size: 22px;
       top: 32px;
-      border-bottom: 1px solid #bebebe;
+      border-bottom: 1px solid #444444;
       padding-bottom: 6px;
     }
     h2 {
@@ -26,15 +25,28 @@ header.whiteHeader {
       left: 118px;
       right: 20px;
     }
+    .wave {
+      position: absolute;
+      right: 20px;
+      top: 75px;
+      a {
+        display:inline-block;
+        margin-left:10px;
+        font-size: 14px;
+        i {
+          margin-left:5px;
+        }
+      }
+    }
     menu {
       position: absolute;
       left: 118px;
       padding: 0;
       margin: 0;
-      top: 70px;
+      top: 75px;
       a {
         color: @baseColor;
-        font-size: 12px;
+        font-size: 14px;
         display: inline-block;
         margin-right: 10px;
         text-decoration: none;
@@ -50,8 +62,6 @@ header.whiteHeader {
         }
       }
     }
-    
-    
     .image {
       position: absolute;
       width: 88px;

@@ -4,6 +4,22 @@ angular.module('App')
     function($rootScope) {
       var service = {};
 
+
+      service.remapTracks = function(array, remap){
+        remap = angular.extend({artist: 'artist', title: 'title'}, remap);
+        var titleInfo, artistInfo;
+        return _.map(array, function(track) {
+          artistInfo = service.extractFeats(track[remap.artist]);
+          titleInfo = service.extractFeats(track[remap.title]);
+
+          return {
+            title: titleInfo.text,
+            artist: artistInfo.text,
+            feat:  titleInfo.feat || artistInfo.feat
+          }
+        });
+      }
+
       service.normalizeTopArtists = function(array) {
         return _.map(array, function(artist) {
           return {

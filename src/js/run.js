@@ -1,12 +1,12 @@
-App.run(['$rootScope','PS_lastfm','S_sound','PS_vk',
-  function($rootScope, PS_lastfm, S_sound, PS_vk) {
+App.run(['$rootScope','PS_lastfm','S_sound','PS_vk','PS_self',
+  function($rootScope, PS_lastfm, S_sound, PS_vk, PS_self) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState) {
       $rootScope.status = 'loading';
       
-      if (toState.name === 'flow' || toState.name === 'share'){
+      if (toState.name === 'wave' || toState.name === 'share'){
         $rootScope.isRadio = true;
       }
-      if (fromState.name === 'flow' || fromState.name === 'share'){
+      if (fromState.name === 'wave' || fromState.name === 'share'){
         $rootScope.isRadio = false;
       }
       $rootScope.state = toState.name;
@@ -16,6 +16,6 @@ App.run(['$rootScope','PS_lastfm','S_sound','PS_vk',
     PS_vk.intro();
     S_sound.init();
 
-
+    PS_self.addTrackToHistory();
   }
 ]);

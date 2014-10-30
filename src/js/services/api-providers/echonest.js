@@ -24,7 +24,6 @@ angular.module('App')
       });
     }
 
-
     function call(method, options) {
       return $http({
         url: __echonest.url + method,

@@ -3,12 +3,12 @@ angular.module('App')
     return {
       scope:{
         info: '='
-      },  
+      },
       controller: 'CD_track as tctr',
       templateUrl: 'templates/directives/track.html',
-      link: function($scope, $element){
+      link: function($scope, $element, attrs, ctr){
         $element.on('click',function(){
-          S_sound.createAndPlay($scope.info);
+          ctr.playTrack($scope.info);
         });
       }
     }

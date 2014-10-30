@@ -10,7 +10,7 @@ angular.module('App').directive('thiefBackground', [function() {
       //$element.append('<img src="http://playaaa.dev/images/background/intro.jpg" id="' + id + '">');
 
 
- 
+  
       var sourceImage = document.getElementById(id);
       sourceImage.crossOrigin = "anonymous";
       var canvas = document.createElement("canvas");

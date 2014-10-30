@@ -5,25 +5,23 @@
       <h1>
         <span ng-bind="ctr.artistInfo.name"></span>
       </h1>
-      <menu>
-        <a href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
-        <a href="/artists/{{ctr.artistInfo.name}}/albums/" ng-class="{'active':ctr.section === 'albums'}">Альбомы</a>
+      <menu> 
+        <a ng-href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
+        <a ng-href="/artists/{{ctr.artistInfo.name}}/albums/" ng-class="{'active':ctr.section === 'albums'}">Альбомы</a>
         <!--<a href="/artists/{{ctr.artistInfo.name}}/videos/" ng-class="{'active':ctr.section === 'videos'}">Видео</a>-->
-        <a href="/flow/?artist={{ctr.artistInfo.name}}">Волна</a>
-        <a href="/artists/{{ctr.artistInfo.name}}/similar/" ng-class="{'active':ctr.section === 'similar'}">Похожее</a>
+        <a ng-href="/artists/{{ctr.artistInfo.name}}/similar/" ng-class="{'active':ctr.section === 'similar'}">Похожее</a>
       </menu>
 
       <span class="tags">
-        <a class="tag" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:3">
+        <a class="tag" ng-href="/wave/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:3">
           <i class="fa fa-tag"></i>
           <span>{{tag.name}}</span>
         </a>
       </span>
 
-      <a class="play" href="/flow/?artist={{ctr.artistInfo.name}}">
-        <i class="fa fa-play"></i>
-        <span>Волна</span>
-      </a>
+      <span class="wave">
+        <a class="link" ng-href="/wave/?artist={{ctr.artistInfo.name}}">Волна <span ng-bind="ctr.artistInfo.name"></span><i class="fa fa-volume-up"></i></a>
+      </span>
       <div class="image" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
     </div>
   </header>
@@ -93,7 +91,7 @@
       <div class="inner">
         <h2>Тэги исполнителя</h2>
         <section class="clearfix realTags">
-          <a class="tag btn btn-primary white" href="/flow/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:15">
+          <a class="tag btn btn-primary white" href="/wave/?tag={{tag.name}}" ng-repeat="tag in ctr.artistInfo.tags | limitTo:15">
             <i class="fa fa-tag"></i>
             <span>{{tag.name}}</span>
           </a>

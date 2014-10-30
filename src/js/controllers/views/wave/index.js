@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('C_flow', [
+  .controller('C_wave', [
     '$stateParams',
     '$scope',
     'PS_echonest',

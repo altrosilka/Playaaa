@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('C_artists.page', [
+  .controller('C_lib', [
     '$q',
     '$scope',
     '$rootScope',
@@ -8,10 +8,9 @@ angular.module('App')
     'PS_lastfm',
     'PS_self',
     'PS_vk',
-    'PS_echonest',
     'S_reduce',
     'S_processing',
-    function($q, $scope, $rootScope, $stateParams, $state, PS_lastfm, PS_self, PS_vk, PS_echonest, S_reduce, S_processing) {
+    function($q, $scope, $rootScope, $stateParams, $state, PS_lastfm, PS_self, PS_vk, S_reduce, S_processing) {
       var ctr = {};
 
 
@@ -30,22 +29,13 @@ angular.module('App')
         switch (section) {
           case 'tracks':
             $q.all({
-              _tracks: PS_vk.search({
+              tracks: PS_vk.search({
                 q: artist,
                 count: 50,
                 performer_only: 1
-              }),
-              tracks: PS_echonest.getStaticPlaylist({
-                artist: artist,
-                type: 'artist',
-                results: 100,
-                bucket: 'song_hotttnesss',
-                sort: 'song_hotttnesss-desc'
-              }),
+              })
             }).then(function(resp) {
-              //ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items);
-              ctr.searchTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {artist: 'artist_name'});
-              
+              ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items);
               S_processing.ready();
             });
             break;
@@ -60,7 +50,7 @@ angular.module('App')
             });
             break;
           case 'similar':
-            $q.all({
+            $q.all({ 
               similar: PS_lastfm.artist.getSimilar(artist)
             }).then(function(data) {
               ctr.similarArtists = data.similar;
@@ -69,40 +59,30 @@ angular.module('App')
             break;
           default:
             $q.all({
-              _tracks: PS_vk.search({
+              tracks: PS_vk.search({
                 q: artist,
-                performer_only: 1
-              }),
-              tracks: PS_echonest.getStaticPlaylist({
-                artist: artist,
-                type: 'artist',
-                results: 10,
-                bucket: 'song_hotttnesss',
-                sort: 'song_hotttnesss-desc'
+                performer_only: 1 
               }),
               albums: PS_lastfm.artist.getTopAlbums({
                 artist: artist,
                 limit: 3
               })
             }).then(function(resp) {
-              //ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items).splice(0, 10);
-              ctr.searchTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {artist: 'artist_name'}).splice(0, 10);
+              ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items).splice(0, 10);
               ctr.albums = resp.albums;
-
-              
 
               S_processing.ready();
             });
-            break;
+            break; 
         }
       }
 
-      //      ctr.loadInfo(ctr.section);
+  //      ctr.loadInfo(ctr.section);
 
       $q.all({
         info: PS_lastfm.artist.getInfo(artist),
         tags: PS_lastfm.artist.getTopTags(artist),
-        publics: PS_vk.call('groups.search', {
+        publics: PS_vk.call('groups.search',{
           q: artist,
           fields: "members_count,verified,site",
           count: 3
