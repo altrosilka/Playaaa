@@ -21,13 +21,14 @@
       <div class="wrap">
         <h1>Playaaa</h1>
         <h2>онлайн-плеер</h2>
+        <h4>версия @@version от @@date</h4>
         <h3 ng-class="{'active':ctr.userName}">вход под пользователем
           <span ng-bind="ctr.userName"></span>
-        </h3>
+        </h3> 
         <button style="display:none;" class="btn" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
       </div>
     </div>
-    <div class="image" set-bg-on-load="images/background/intro.jpg"></div>
+    <div class="image" set-bg-on-load="'/images/background/intro.jpg'"></div>
   </div>
   <div class="mainLoader" data-line-loader></div>
   <div class="content">

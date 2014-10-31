@@ -9,15 +9,16 @@ var gulp = require("gulp"),
   bump = require('gulp-bump'),
   git = require('gulp-git'),
   less = require('gulp-less'),
+  moment = require('moment'),
   templateCache = require('gulp-angular-templatecache');
- 
+
 var vendorLibs = [
   './bower_components/jquery/dist/jquery.js',
-/*  './bower_components/jquery-ui/ui/core.js',
-  './bower_components/jquery-ui/ui/widget.js',
-  './bower_components/jquery-ui/ui/mouse.js',
-  './bower_components/jquery-ui/ui/draggable.js',
-  './bower_components/jquery-ui/ui/droppable.js',*/
+  /*  './bower_components/jquery-ui/ui/core.js',
+    './bower_components/jquery-ui/ui/widget.js',
+    './bower_components/jquery-ui/ui/mouse.js',
+    './bower_components/jquery-ui/ui/draggable.js',
+    './bower_components/jquery-ui/ui/droppable.js',*/
   './bower_components/d3/d3.js',
   './bower_components/jquery-ui/jquery-ui.js',
   './bower_components/lodash/dist/lodash.js',
@@ -99,6 +100,9 @@ gulp.task('create-index', function() {
   gulp.src('./src/index.html')
     .pipe(replace({
       patterns: [{
+        match: 'date',
+        replacement: moment().format('DD.MM.YYYY')
+      }, {
         match: 'version',
         replacement: version
       }, {

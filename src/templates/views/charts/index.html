@@ -1,14 +1,19 @@
-<section class="view view-fullsize column">
+<section class="view view-fullsize">
 
-  <section class="charts column">
+  <section class="charts column inner">
     <h2>Мировые чарты</h2>
-    <a class="btn btn-primary" href="/charts/popular/">Популярные хиты</a>
-    <a class="btn btn-primary" href="/charts/hyped/">Набирающие популярность</a>
-    <a class="btn btn-primary" href="/charts/loved/">Избранные композиции</a> 
+    <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/charts/popular/">Популярные хиты</a>
+    <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/charts/hyped/">Набирающие популярность</a>
+    <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/charts/loved/">Избранные композиции</a> 
+  </section>
+ 
+  <section class="column inner" ng-repeat="section in ctr.sections">
+    <h2 ng-bind="section.title"></h2>
+    <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/wave/?tag={{genre}}" ng-repeat="genre in section.array" ng-bind="genre"></a>
   </section>
 
-  <section class="column">
-    <h2>Жанры и теги</h2>
-    <a class="btn btn-primary" href="/wave/?tag={{genre.name}}" ng-repeat="genre in ctr.genreList" ng-bind="genre.name"></a>
+  <section class="column inner">
+    <h2>Все жанры и теги</h2>
+    <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/wave/?tag={{genre.name}}" ng-repeat="genre in ctr.genreList" ng-bind="genre.name"></a>
   </section>
 </section>

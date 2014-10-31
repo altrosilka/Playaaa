@@ -90,7 +90,7 @@ angular.module('App')
           return resp.data.album;
         }));
       }
-    }
+    } 
 
     service.tag = {
       getTopTracks: function(tag) {

@@ -5,8 +5,8 @@
   <base href="/" target="_blank" />
   <meta charset="UTF-8">
   <title>Playaaa</title>
-  <link rel="stylesheet" href="pack/vendors.css?v=1.1.14">
-  <link rel="stylesheet" href="pack/styles.css?v=1.1.14">
+  <link rel="stylesheet" href="pack/vendors.css?v=1.1.15">
+  <link rel="stylesheet" href="pack/styles.css?v=1.1.15">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
 </head> 
@@ -21,13 +21,14 @@
       <div class="wrap">
         <h1>Playaaa</h1>
         <h2>онлайн-плеер</h2>
+        <h4>версия 1.1.15 от 31.10.2014</h4>
         <h3 ng-class="{'active':ctr.userName}">вход под пользователем
           <span ng-bind="ctr.userName"></span>
-        </h3>
+        </h3> 
         <button style="display:none;" class="btn" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
       </div>
     </div>
-    <div class="image" set-bg-on-load="images/background/intro.jpg"></div>
+    <div class="image" set-bg-on-load="'/images/background/intro.jpg'"></div>
   </div>
   <div class="mainLoader" data-line-loader></div>
   <div class="content">
@@ -135,9 +136,9 @@
   </div>
 
  
-  <script type="text/javascript" src="pack/vendor.js?v=1.1.14"></script>
-  <script type="text/javascript" src="pack/templates.js?v=1.1.14"></script>
-  <script type="text/javascript" src="pack/scripts.js?v=1.1.14"></script>
+  <script type="text/javascript" src="pack/vendor.js?v=1.1.15"></script>
+  <script type="text/javascript" src="pack/templates.js?v=1.1.15"></script>
+  <script type="text/javascript" src="pack/scripts.js?v=1.1.15"></script>
 </body>
 
 </html>
