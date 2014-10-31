@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-ng-app="App">
 
-<head>
+<head> 
   <base href="@@baseUrl" target="_blank" />
   <meta charset="UTF-8">
   <title>Playaaa</title>
@@ -12,6 +12,9 @@
 </head> 
 
 <body data-status="{{ $root.status }}" data-state="{{$root.state}}" data-ng-class="{'radioBody':isRadio}">
+  <div ng-controller="C_background as ctr">
+    <div class="fullsizeBackground" set-bg-on-load="ctr.image"></div>
+  </div>
   <div class="waveOverlay"></div>
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
@@ -94,11 +97,11 @@
             <span ng-bind="ctr.volume | number:0"></span>%
           </div>
         </div>
-
+ 
       </header>
       <div class="playlistFull" ng-controller="C_playlist as ctr">
         <div class="removeField" style="display:none;" data-ng-class="{'active':ctr.inDrag}" ddata-drop="true" ddata-jqyoui-options djqyoui-droppable="{onOver: 'ctr.onOver', onDrop: 'ctr.onDrop'}"></div>
-
+ 
         <div class="tabs">табы</div>
 
         <section class="playlistsContainer" data-drop="true" data-jqyoui-options jqyoui-droppable ng-model="ctr.currentTrackList">
@@ -113,7 +116,7 @@
           <a href="/lib/">Библиотека</a>
           <a href="/discover/">Поиск</a>
           <a href="/artists/">Исполнители</a>
-          <a href="/playlists/">Плейлисты</a>
+          <a href="/charts/">Чарты</a>
         </menu>
         <form ng-submit="ctr.search(ctr.q)">
           <input class="select" type="text" placeholder="Поиск музыки" ng-model="ctr.q">

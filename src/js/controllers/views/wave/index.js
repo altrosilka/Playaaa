@@ -24,7 +24,7 @@ angular.module('App')
         var artist = $stateParams.artist;
         PS_echonest.getStaticPlaylist({
           artist: artist,
-          sort: 'song_hotttnesss-desc',
+          //sort: 'song_hotttnesss-desc',
           results: 30,
           bucket: 'song_hotttnesss'
         }).then(function(resp) {

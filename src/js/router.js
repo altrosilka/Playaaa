@@ -56,12 +56,16 @@ App.config([
           }
         }
       })
-      .state('playlists', {
-        url: "/playlists/",
-        controller: 'C_playlists as ctr',
-        templateUrl: "templates/views/playlists/index.html",
-        reloadOnSearch: false
+      .state('charts', {
+        url: "/charts/",
+        controller: 'C_charts as ctr',
+        templateUrl: "templates/views/charts/index.html"
       })
+        .state('chartspage', {
+          url: "/charts/:chartName/",
+          controller: 'C_charts.page as ctr',
+          templateUrl: "templates/views/charts/page.html"
+        })
       .state('share', {
         url: "/share/:type/:id",
         controller: 'C_share as ctr',

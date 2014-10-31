@@ -1,15 +1,13 @@
 <section id="view-wave" class="view fullsizePlayingView">
   <div class="fullsizeImage" set-bg-on-load="ctr.artistInfo.image"></div>
   <div class="container">
-    <h2>Волна <a class="link no-border" href="/artists/{{ctr.query}}/" ng-if="!ctr.isTag" ng-bind="ctr.query"></a>
+    <h2>Волна
+      <a class="link no-border" href="/artists/{{ctr.query}}/" ng-if="!ctr.isTag" ng-bind="ctr.query"></a>
       <span ng-if="ctr.isTag" ng-bind="ctr.query"></span>
     </h2>
 
     <div class="list ng-hide">
-    	<div ng-repeat="song in ctr.songs" track info="song"></div>
-    </div>
+      <div ng-repeat="song in ctr.songs" track info="song"></div>
+    </div> 
   </div>
-
-
-
 </section>

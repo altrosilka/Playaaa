@@ -1,5 +1,22 @@
 #view-artists-page {
-  .whiteHeader {
+  .tags {
+    position: absolute;
+    display: block;
+    top: 36px;
+    right: 16px;
+    .tag {
+      font-size: 10px;
+      text-decoration: none;
+      border-bottom: 1px solid;
+      transition: @fastTime;
+      display: inline-block;
+      margin-left: 10px;
+      &:hover {
+        border-color: transparent;
+      }
+    }
+  }
+  ._whiteHeader {
     height: 250px;
     padding: 0;
     .fullsizeImage {

@@ -111,6 +111,21 @@ angular.module('App')
         return call('chart.getHypedArtists', {
           limit: limit || 50
         });
+      },
+      getHypedTracks: function(limit) {
+        return call('chart.getHypedTracks', {
+          limit: limit || 50
+        });
+      },
+      getLovedTracks: function(limit) {
+        return call('chart.getLovedTracks', {
+          limit: limit || 50
+        });
+      },
+      getTopTracks: function(limit) {
+        return call('chart.getTopTracks', {
+          limit: limit || 50
+        });
       }
     }
 

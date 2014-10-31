@@ -1,5 +1,5 @@
 angular.module('App')
-  .controller('C_playlists', [
+  .controller('C_charts', [
     '$stateParams',
     '$scope',
     'PS_echonest',

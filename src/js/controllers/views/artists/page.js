@@ -11,7 +11,8 @@ angular.module('App')
     'PS_echonest',
     'S_reduce',
     'S_processing',
-    function($q, $scope, $rootScope, $stateParams, $state, PS_lastfm, PS_self, PS_vk, PS_echonest, S_reduce, S_processing) {
+    'S_eventer',
+    function($q, $scope, $rootScope, $stateParams, $state, PS_lastfm, PS_self, PS_vk, PS_echonest, S_reduce, S_processing, S_eventer) {
       var ctr = {};
 
 
@@ -115,8 +116,8 @@ angular.module('App')
           image: src.image[src.image.length - 1]['#text'],
           tags: resp.tags.data.toptags.tag
         }
+        S_eventer.sendEvent('artistInfoRecievedFromLF',ctr.artistInfo);
         ctr.publics = (resp.publics.response) ? resp.publics.response.items : [];
-        console.log(ctr.publics);
       });
 
       return ctr;

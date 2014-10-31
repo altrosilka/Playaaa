@@ -8,15 +8,33 @@ html, body {
 body {
   font: 13px Arial, Helvetica, sans-serif;
   font-weight: 300;
-  &:after {
-    content: '';
+  background-color: #111;
+  .fullsizeBackground {
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background: #111 url(../images/background/intro.jpg) center no-repeat;
+    background-repeat: no-repeat;
+    background-position: center 20%;
+    background-size: cover;
     z-index: 1;
+    transition: opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      content: '';
+      background: url(../images/overlay_w.png) center repeat;
+    }
   }
   .mainLoader {
     transition: 0.4s;
@@ -77,8 +95,10 @@ a {
   margin: 0px 0 0px 380px;
   min-height: 100%;
   > footer {
-    padding: 20px 0 30px;
+    padding: 20px 20px;
+    margin-bottom: 20px;
     color: #ddd;
+    background-color: rgba(0, 0, 0, 0.7);
     font-size: 11px;
     a {
       i {
@@ -130,7 +150,6 @@ a {
   -ms-user-select: none;
   user-select: none;
 }
-
 .select {
   -webkit-touch-callout: initial;
   -webkit-user-select: initial;

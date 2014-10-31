@@ -1,0 +1,14 @@
+<section class="view view-fullsize column">
+
+  <section class="charts column">
+    <h2>Мировые чарты</h2>
+    <a class="btn btn-primary" href="/charts/popular/">Популярные хиты</a>
+    <a class="btn btn-primary" href="/charts/hyped/">Набирающие популярность</a>
+    <a class="btn btn-primary" href="/charts/loved/">Избранные композиции</a> 
+  </section>
+
+  <section class="column">
+    <h2>Жанры и теги</h2>
+    <a class="btn btn-primary" href="/wave/?tag={{genre.name}}" ng-repeat="genre in ctr.genreList" ng-bind="genre.name"></a>
+  </section>
+</section>

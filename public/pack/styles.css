@@ -261,16 +261,34 @@ body {
 body {
   font: 13px Arial, Helvetica, sans-serif;
   font-weight: 300;
+  background-color: #111;
 }
-body:after {
-  content: '';
+body .fullsizeBackground {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
-  background: #111111 url(../images/background/intro.jpg) center no-repeat;
+  background-repeat: no-repeat;
+  background-position: center 20%;
+  background-size: cover;
   z-index: 1;
+  transition: opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+body .fullsizeBackground.active {
+  opacity: 1;
+  visibility: visible;
+}
+body .fullsizeBackground:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  content: '';
+  background: url(../images/overlay_w.png) center repeat;
 }
 body .mainLoader {
   transition: 0.4s;
@@ -331,8 +349,10 @@ a:hover {
   min-height: 100%;
 }
 .layout > footer {
-  padding: 20px 0 30px;
+  padding: 20px 20px;
+  margin-bottom: 20px;
   color: #ddd;
+  background-color: rgba(0, 0, 0, 0.7);
   font-size: 11px;
 }
 .layout > footer a i {
@@ -518,7 +538,7 @@ header.whiteHeader .top menu a:hover {
 }
 header.whiteHeader .top menu a.active,
 header.whiteHeader .top menu a.active:hover {
-  color: #333;
+  color: #fff;
   border-bottom: none;
   cursor: default;
 }
@@ -761,11 +781,28 @@ header.whiteHeader .top .image {
   margin: 6px 0 0;
   display: block;
 }
-#view-artists-page .whiteHeader {
+#view-artists-page .tags {
+  position: absolute;
+  display: block;
+  top: 36px;
+  right: 16px;
+}
+#view-artists-page .tags .tag {
+  font-size: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid;
+  transition: 0.2s;
+  display: inline-block;
+  margin-left: 10px;
+}
+#view-artists-page .tags .tag:hover {
+  border-color: transparent;
+}
+#view-artists-page ._whiteHeader {
   height: 250px;
   padding: 0;
 }
-#view-artists-page .whiteHeader .fullsizeImage {
+#view-artists-page ._whiteHeader .fullsizeImage {
   height: 100%;
   z-index: 1;
   width: 100%;
@@ -775,7 +812,7 @@ header.whiteHeader .top .image {
   position: absolute;
   -webkit-transform: translate3d(0, 0, 0);
 }
-#view-artists-page .whiteHeader .fullsizeImage:after {
+#view-artists-page ._whiteHeader .fullsizeImage:after {
   position: absolute;
   top: 0;
   right: 0;
@@ -784,18 +821,18 @@ header.whiteHeader .top .image {
   content: '';
   background: url(../images/overlay.png) center repeat;
 }
-#view-artists-page .whiteHeader .wave {
+#view-artists-page ._whiteHeader .wave {
   top: auto;
   bottom: 16px;
   right: 16px;
 }
-#view-artists-page .whiteHeader .tags {
+#view-artists-page ._whiteHeader .tags {
   position: absolute;
   display: block;
   top: 16px;
   right: 16px;
 }
-#view-artists-page .whiteHeader .tags .tag {
+#view-artists-page ._whiteHeader .tags .tag {
   font-size: 10px;
   text-decoration: none;
   border-bottom: 1px solid;
@@ -803,10 +840,10 @@ header.whiteHeader .top .image {
   display: inline-block;
   margin-left: 10px;
 }
-#view-artists-page .whiteHeader .tags .tag:hover {
+#view-artists-page ._whiteHeader .tags .tag:hover {
   border-color: transparent;
 }
-#view-artists-page .whiteHeader h1 {
+#view-artists-page ._whiteHeader h1 {
   right: 132px;
   bottom: 40px;
   left: 20px;
@@ -815,24 +852,24 @@ header.whiteHeader .top .image {
   border: none;
   top: auto;
 }
-#view-artists-page .whiteHeader menu {
+#view-artists-page ._whiteHeader menu {
   left: 20px;
   bottom: 16px;
   right: 132px;
   top: auto;
 }
-#view-artists-page .whiteHeader menu a {
+#view-artists-page ._whiteHeader menu a {
   font-size: 14px;
 }
-#view-artists-page .whiteHeader menu a.active {
+#view-artists-page ._whiteHeader menu a.active {
   color: #fff;
 }
-#view-artists-page .whiteHeader .image {
+#view-artists-page ._whiteHeader .image {
   width: 100px;
   height: 100px;
   box-shadow: 0px 2px 11px rgba(0, 0, 0, 0.7);
 }
-#view-artists-page .whiteHeader .play {
+#view-artists-page ._whiteHeader .play {
   width: 88px;
   height: 88px;
   border-radius: 5px;
@@ -845,7 +882,7 @@ header.whiteHeader .top .image {
   top: 20px;
   color: #555;
 }
-#view-artists-page .whiteHeader .play .fa {
+#view-artists-page ._whiteHeader .play .fa {
   font-size: 38px;
   line-height: 28px;
   height: 28px;
@@ -857,21 +894,21 @@ header.whiteHeader .top .image {
   -webkit-transform: scale(0.8);
   margin-left: 5px;
 }
-#view-artists-page .whiteHeader .play:hover {
+#view-artists-page ._whiteHeader .play:hover {
   background: #eee;
   color: #111;
   text-decoration: none;
 }
-#view-artists-page .whiteHeader .play:hover .fa {
+#view-artists-page ._whiteHeader .play:hover .fa {
   margin-top: 31px;
   -webkit-transform: scale(1);
 }
-#view-artists-page .whiteHeader .play:hover span {
+#view-artists-page ._whiteHeader .play:hover span {
   bottom: 0px;
   opacity: 0;
   visibility: hidden;
 }
-#view-artists-page .whiteHeader .play span {
+#view-artists-page ._whiteHeader .play span {
   position: absolute;
   left: 0;
   right: 0;
