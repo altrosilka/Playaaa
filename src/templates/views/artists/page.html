@@ -7,7 +7,7 @@
       </h1>
       <menu> 
         <a ng-href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
-        <a ng-href="/artists/{{ctr.artistInfo.name}}/albums/" ng-class="{'active':ctr.section === 'albums'}">Альбомы</a>
+        <a ng-href="/artists/{{ctr.artistInfo.name}}/albums/" ng-class="{'active':ctr.section === 'albums'}" ng-show="ctr.albums.length">Альбомы</a>
         <!--<a href="/artists/{{ctr.artistInfo.name}}/videos/" ng-class="{'active':ctr.section === 'videos'}">Видео</a>-->
         <a ng-href="/artists/{{ctr.artistInfo.name}}/similar/" ng-class="{'active':ctr.section === 'similar'}">Похожее</a>
       </menu>
@@ -58,7 +58,7 @@
       <div class="inner">
         <h2>Альбомы</h2>
       </div>
-      <div class="albums list list-gray clearfix">
+      <div class="albums clearfix">
         <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
       </div>
     </div>
@@ -80,7 +80,7 @@
       <div class="inner">
         <h2>Альбомы</h2>
       </div>
-      <div class="albums list list-gray clearfix">
+      <div class="albums clearfix">
         <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
       </div>
     </div>

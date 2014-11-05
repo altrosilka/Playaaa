@@ -16,12 +16,14 @@
   </header>
 
 
-  <div class="column inner">
-    <h2>Композиции с альбома
-      <small class="pull-right">
-        <div ng-pluralize count="ctr.audios.length" when="ctr.tracksPlurals"></div>
-      </small>
-    </h2>
+  <div class="column">
+    <div class="inner">
+      <h2>Композиции с альбома
+        <small class="pull-right">
+          <div ng-pluralize count="ctr.tracksLength" when="ctr.tracksPlurals"></div>
+        </small>
+      </h2>
+    </div>
     <div class="tracks">
       <div track ng-repeat="item in ctr.audios" info="item"></div>
     </div>

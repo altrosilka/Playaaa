@@ -13,6 +13,9 @@ angular.module('App')
           autocorrect: true
         });
       },
+      getTopTracks: function(options) {
+        return call('artist.getTopTracks', options);
+      },
       getSimilar: function(artist) {
 
         var deferred = $q.defer();

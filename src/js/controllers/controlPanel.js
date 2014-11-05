@@ -24,15 +24,11 @@ angular.module('App').controller('C_controlPanel', [
 
 
     $scope.$on('progressCalculated', function(e, sm) {
-
       ctr.totalTime = sm.durationEstimate / 1000;
-
-      if (!$scope.$$phase) {
-        $scope.$apply();
-      }
     });
 
     $scope.$on('trackError', function() {
+      console.log(234);
       ctr.next();
     });
 
@@ -68,8 +64,8 @@ angular.module('App').controller('C_controlPanel', [
       }
     });
     $scope.$on('trackStarted', function(e, q) {
-
-      ctr.totalTime = q.duration;
+      ctr.currentTime = 0;
+      ctr.totalTime = 0;
       ctr.artist = q.artist;
       ctr.title = q.title;
       ctr.feat = q.feat;
@@ -84,22 +80,22 @@ angular.module('App').controller('C_controlPanel', [
       S_sound.togglePause();
     }
 
-    ctr.share = function(){
+    ctr.share = function() {
       S_modals.openShareModal(S_sound.getPlayingTrackInfo());
     }
 
-    ctr.love = function(){
-      PS_vk.addTrackToAudios(S_sound.getPlayingTrackInfo()).then(function(resp){
+    ctr.love = function() {
+      PS_vk.addTrackToAudios(S_sound.getPlayingTrackInfo()).then(function(resp) {
 
       });
     }
 
-    ctr.toggleVolume = function(event){
+    ctr.toggleVolume = function(event) {
       event.stopPropagation();
       ctr.muted = S_sound.toggleMute();
     }
 
-    ctr.stopPropagation = function(event){
+    ctr.stopPropagation = function(event) {
       event.stopPropagation();
     }
 

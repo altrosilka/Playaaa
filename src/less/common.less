@@ -15,25 +15,32 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
-    background-repeat: no-repeat;
-    background-position: center 20%;
-    background-size: cover;
-    z-index: 1;
-    transition: opacity 0.5s, visibility 0.5s;
-    opacity: 0;
-    visibility: hidden;
-    &.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    &:after {
+    .layer {
       position: absolute;
-      top: 0;
-      right: 0;
       left: 0;
+      right: 0;
+      top: 0;
       bottom: 0;
-      content: '';
-      background: url(../images/overlay_w.png) center repeat;
+      background-repeat: no-repeat;
+      background-position: center 20%;
+      background-size: cover;
+      z-index: 1;
+      transition: opacity 0.5s, visibility 0.5s;
+      opacity: 0;
+      visibility: hidden;
+      &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      &:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        content: '';
+        background: url(../images/overlay_w.png) center repeat;
+      }
     }
   }
   .mainLoader {

@@ -13,15 +13,15 @@
 
 <body data-status="{{ $root.status }}" data-state="{{$root.state}}" data-ng-class="{'radioBody':isRadio}">
   <div ng-controller="C_background as ctr">
-    <div class="fullsizeBackground" set-bg-on-load="ctr.image"></div>
+    <div class="fullsizeBackground" set-bg-on-load="ctr.image" new-layer="true"></div>
   </div>
   <div class="waveOverlay"></div>
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
       <div class="wrap">
-        <h1>Playaaa</h1>
+        <h1>Playaaa</h1> 
         <h2>онлайн-плеер</h2>
-        <h4>версия 1.1.15 от 31.10.2014</h4>
+        <h4>версия 1.1.15 от 05.11.2014</h4>
         <h3 ng-class="{'active':ctr.userName}">вход под пользователем
           <span ng-bind="ctr.userName"></span>
         </h3> 
@@ -86,7 +86,7 @@
               <div ng-if="ctr.currentTime === 0" data-line-loader></div>
               <span ng-bind="ctr.currentTime | toGIS"></span>
             </div>
-            <div class="total" ng-bind="ctr.totalTime | toGIS"></div>
+            <div class="total" ng-hide="!ctr.totalTime" ng-bind="ctr.totalTime | toGIS"></div>
           </div>
         </div>
 

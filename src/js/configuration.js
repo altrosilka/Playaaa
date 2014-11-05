@@ -22,6 +22,7 @@ App
       history: '/history'
     }
   }) 
+  .value('preloadingSongsCount', 5)
   .constant('localization',{
     months: ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
   })

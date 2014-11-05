@@ -2,9 +2,10 @@ angular.module('App')
   .service('S_sound', ['$rootScope', '$timeout', 'S_utils', 'S_enviroment', 'S_eventer', function($rootScope, $timeout, S_utils, S_enviroment, S_eventer) {
 
 
+
     var service = {};
 
-    var currentSound, currentSoundId, currentSoundInfo;
+    var currentSound, currentSoundId, currentTrackId, currentSoundInfo;
 
     var volume, isMuted;
 
@@ -156,7 +157,6 @@ angular.module('App')
         p = 100;
       }
 
-
       if (currentSound) {
         currentSound.setPosition(currentSound.durationEstimate * p / 100);
       }
@@ -178,40 +178,43 @@ angular.module('App')
       }
     }
 
-    service.create = function(info, onfinish) {
-      var id = info.aid;
+    service.create = function(info) {
+      var id = info.id;
       var url = info.url;
 
 
-      service.stopAll();
-      if (currentSound && currentSound.readyState !== 3) {
-        currentSound.unload();
-      }
-      currentSound = soundManager.createSound({
+      return soundManager.createSound({
         id: id,
         url: url,
         volume: volume,
+        autoLoad: true,
+        autoPlay: false,
         onfinish: function() {
-          if (typeof onfinish === 'function') {
-            onfinish();
+          if (getSoundId(id) === currentSoundId) {
+            S_eventer.sendEvent('trackFinished');
           }
-          S_eventer.sendEvent('trackFinished');
         },
         onload: function() {
-          S_eventer.sendEvent('progressCalculated', this);
-        },
-        whileplaying: function() {
-          if (this.duration != null) {
-            S_eventer.sendEvent('progressChanged', this);
+          if (getSoundId(id) === currentSoundId) {
+            S_eventer.sendEvent('progressCalculated', this);
           }
         },
-        whileloading: function() {
-          if (this.bytesLoaded != null) {
+        whileplaying: function() {
+          if (this.duration != null && getSoundId(id) === currentSoundId) {
+            S_eventer.sendEvent('progressChanged', this);
             S_eventer.sendEvent('downloadingTrackState', this.bytesLoaded / this.bytesTotal);
           }
         },
+        whileloading: function() {
+          //if (this.bytesLoaded != null && getSoundId(id) === currentSoundId) {
+          //  S_eventer.sendEvent('downloadingTrackState', this.bytesLoaded / this.bytesTotal);
+          //}
+        },
         onplay: function() {
-          S_eventer.sendEvent('progressCalculated', true);
+          if (getSoundId(id) === currentSoundId) {
+            S_eventer.sendEvent('progressCalculated', true);
+          }
+
 
           /*
           var set = Settings.get();
@@ -237,7 +240,6 @@ angular.module('App')
           S_eventer.sendEvent('playStateChanged', false);
         }
       });
-      return currentSound;
     }
 
     service.stopAll = function() {
@@ -249,20 +251,22 @@ angular.module('App')
       return mbUsed;
     }
 
-    service.createAndPlay = function(q, onerror, onfinish) {
-
-      var sound = service.create(q, onfinish);
-
-      if (isMuted) {
-        sound.mute();
+    service.createAndPlay = function(q, onerror) {
+      service.stopAll();
+      if (currentSound) {
+        currentSound.unload();
       }
 
-      sound.play();
-
       currentSoundInfo = q;
+      currentSoundId = q.id;      
+      currentSound = soundManager.getSoundById(currentSoundId) || service.create(q);
 
-      currentSoundId = q.id;
+      if (isMuted) {
+        currentSound.mute();
+      }
 
+      currentSound.play();
+    
       S_enviroment.setTitle(q.artist + ' – ' + q.title);
       $timeout(function() {
         var sound = service.getSound();
@@ -278,9 +282,11 @@ angular.module('App')
         }
 
       }, 8000);
-
       S_eventer.sendEvent('trackStarted', q);
+    }
 
+    function getSoundId(id) {
+      return id;
     }
 
     return service;

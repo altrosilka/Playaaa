@@ -10,32 +10,53 @@ angular.module('App')
     'S_reduce',
     'S_sound',
     'S_logic',
-    function($stateParams, $scope, PS_echonest, PS_vk, PS_lastfm, S_utils, S_processing, S_reduce, S_sound, S_logic) {
+    'preloadingSongsCount',
+    function($stateParams, $scope, PS_echonest, PS_vk, PS_lastfm, S_utils, S_processing, S_reduce, S_sound, S_logic, preloadingSongsCount) {
       var ctr = {};
+
+      var searchingInProgress = true,
+        sessionId, firstTrackStarted = false,
+        playedTrackInfo;
 
       ctr.isTag = ($stateParams.tag) ? true : false;
       ctr.typeLocale = (ctr.isTag) ? 'тегу' : 'исполнителю';
       ctr.query = ($stateParams.tag) ? $stateParams.tag : $stateParams.artist;
 
       ctr.songs = [];
- 
+
       ctr.playing = false;
       if ($stateParams.artist && !$stateParams.tag) {
-        var artist = $stateParams.artist;
-        PS_echonest.getStaticPlaylist({
-          artist: artist,
-          //sort: 'song_hotttnesss-desc',
-          results: 30,
-          bucket: 'song_hotttnesss'
+        PS_echonest.call('playlist/dynamic/create', {
+          artist: $stateParams.artist,
+          type: 'artist-radio'
         }).then(function(resp) {
-          createListeners(resp.data.response.songs)
+          sessionId = resp.data.response.session_id;
+          loadNextSongs(sessionId);
         });
       }
 
       if ($stateParams.tag && !$stateParams.artist) {
-        var tag = $stateParams.tag;
+        PS_echonest.call('playlist/dynamic/create', {
+          genre: $stateParams.tag,
+          type: 'genre-radio'
+        }).then(function(resp) {
+          sessionId = resp.data.response.session_id;
+          loadNextSongs(sessionId);
+        });
+      }
+
+      function loadNextSongs(sessionId) {
+        PS_echonest.call('playlist/dynamic/next', {
+          session_id: sessionId,
+          results: 5
+        }).then(function(resp) {
+          createListeners(resp.data.response.songs);
+        });
+      }
+
+      function loadByTag(tag) {
         PS_echonest.getStaticPlaylist({
-          results: 12,
+          results: 30,
           type: 'genre-radio',
           genre: tag
         }).then(function(resp) {
@@ -48,7 +69,7 @@ angular.module('App')
       }
 
       function createListeners(songs) {
-        ctr.playing = false;
+
 
         var filtTracks = getTracks(songs);
 
@@ -74,10 +95,15 @@ angular.module('App')
           tracks = S_reduce.filterTracks(tracks, {
             withDurations: true
           });
-          ctr.songs = ctr.songs.concat(tracks);
+          ctr.songs = ctr.songs.concat(_.filter(tracks, function(track) {
+            return _.findIndex(ctr.songs, function(song) {
+              return song.id === track.id;
+            }) === -1;
+          }));
+          console.log(ctr.songs.length);
 
-          if (!ctr.playing && ctr.songs.length > 0) {
-            ctr.playing = true;
+          if (!firstTrackStarted && ctr.songs.length > 0) {
+            firstTrackStarted = true;
             if (soundManager.ok()) {
               S_sound.createAndPlay(ctr.songs[0]);
             } else {
@@ -87,7 +113,17 @@ angular.module('App')
             }
           }
         }, function() {
+          searchingInProgress = false;
           S_processing.ready();
+          if (playedTrackInfo) {
+            var l = ctr.songs.length;
+            var i = _.findIndex(ctr.songs, function(song) {
+              return playedTrackInfo.id === song.id;
+            });
+            if (l - i < preloadingSongsCount) {
+              loadNextSongs(sessionId);
+            }
+          }
         });
       }
 
@@ -126,8 +162,19 @@ angular.module('App')
       }
 
       $scope.$on('trackStarted', function(event, info) {
+        console.log('started');
         getArtistImage(info.artist);
-      })
+        playedTrackInfo = info;
+        var l = ctr.songs.length;
+        var i = _.findIndex(ctr.songs, function(song) {
+          return playedTrackInfo.id === song.id;
+        });
+        if (l - i < preloadingSongsCount && !searchingInProgress) {
+          searchingInProgress = true;
+          loadNextSongs(sessionId);
+        }
+        S_sound.create(ctr.songs[i + 1]);
+      });
 
       return ctr;
     }

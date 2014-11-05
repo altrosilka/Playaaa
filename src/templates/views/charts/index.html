@@ -6,7 +6,12 @@
     <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/charts/hyped/">Набирающие популярность</a>
     <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/charts/loved/">Избранные композиции</a> 
   </section>
- 
+
+  <section class="column inner" style="display:none;">
+    <h2>Настроения</h2>
+    <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/wave/?tag={{genre.name}}" ng-repeat="genre in ctr.moodsList" ng-bind="genre.name"></a>
+  </section>
+
   <section class="column inner" ng-repeat="section in ctr.sections">
     <h2 ng-bind="section.title"></h2>
     <a style="margin: 10px 10px 0 0" class="btn btn-primary" href="/wave/?tag={{genre}}" ng-repeat="genre in section.array" ng-bind="genre"></a>

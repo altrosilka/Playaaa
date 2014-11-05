@@ -1,4 +1,4 @@
-angular.module('App').controller('C_album', ['$stateParams', 'PS_lastfm', 'PS_vk','S_reduce',function($stateParams, PS_lastfm, PS_vk, S_reduce) {
+angular.module('App').controller('C_album', ['$stateParams', 'PS_lastfm', 'PS_vk', 'S_reduce', 'S_processing', function($stateParams, PS_lastfm, PS_vk, S_reduce, S_processing) {
 
   var ctr = this;
 
@@ -23,11 +23,9 @@ angular.module('App').controller('C_album', ['$stateParams', 'PS_lastfm', 'PS_vk
     album: albumName
   }).then(function(data) {
     ctr.info = data;
-
     var filtTracks = getTracks(data);
-    
+    ctr.tracksLength = filtTracks.length;
     PS_vk.findTrackArray(filtTracks, function(array, start) {
-      console.log('part!');
       var tracks = [];
       $.each(array.response, function(i, val) {
         var q = val.items[0];
@@ -47,7 +45,7 @@ angular.module('App').controller('C_album', ['$stateParams', 'PS_lastfm', 'PS_vk
 
 
     }, function() {
-      console.log('all!');
+      S_processing.ready();
     });
   });
 
@@ -63,8 +61,8 @@ angular.module('App').controller('C_album', ['$stateParams', 'PS_lastfm', 'PS_vk
       });
     }
 
-    if (typeof data.tracks.track.length === 'undefined'){
-      filteredTracks.push(data.tracks.track); 
+    if (typeof data.tracks.track.length === 'undefined') {
+      filteredTracks.push(data.tracks.track);
     }
 
     return filteredTracks;

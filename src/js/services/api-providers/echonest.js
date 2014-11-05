@@ -16,11 +16,21 @@ angular.module('App')
       }, options));
     }
 
+    service.getMoodsList = function(options) {
+      return call('artist/list_terms', angular.extend({
+        type: 'mood'
+      }, options));
+    }
+
     service.extractArtists = function(text) {
       return call('artist/extract', {
         text: text,
         results: 3
       });
+    }
+
+    service.call = function(method, options){
+      return call(method, options);
     }
 
     function call(method, options) {

@@ -5,7 +5,6 @@ angular.module('App')
       var service = {};
 
       service.findMostLikelyTrack = function(info, items) {
-        console.log(new Date().getTime());
         var cycleCount = 3,
           itemsLength = items.length,
           realArtist = $.trim(info.artist),
@@ -53,7 +52,6 @@ angular.module('App')
           returnItem = items[0];
         }
 
-        console.log(new Date().getTime());
         return returnItem;
       }
 

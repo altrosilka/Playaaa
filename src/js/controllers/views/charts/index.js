@@ -52,6 +52,10 @@ angular.module('App')
         ctr.genreList = resp.data.response.genres;
       });
 
+      PS_echonest.getMoodsList().then(function(resp) {
+        ctr.moodsList = resp.data.response.terms;
+      });
+
       return ctr;
     }
   ])

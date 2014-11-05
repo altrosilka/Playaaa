@@ -15,8 +15,6 @@ angular.module('App')
     function($q, $scope, $rootScope, $stateParams, $state, PS_lastfm, PS_self, PS_vk, PS_echonest, S_reduce, S_processing, S_eventer) {
       var ctr = {};
 
-
-
       var artist = $state.params.artist;
 
       ctr.section = $state.params.section;
@@ -31,10 +29,14 @@ angular.module('App')
         switch (section) {
           case 'tracks':
             $q.all({
-              _tracks: PS_vk.search({
+              tracks_vk: PS_vk.search({
                 q: artist,
-                count: 50,
+                count: 100,
                 performer_only: 1
+              }),
+              tracks_last: PS_lastfm.artist.getTopTracks({
+                artist: artist,
+                limit: 100
               }),
               tracks: PS_echonest.getStaticPlaylist({
                 artist: artist,
@@ -44,9 +46,16 @@ angular.module('App')
                 sort: 'song_hotttnesss-desc'
               }),
             }).then(function(resp) {
-              //ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items);
-              ctr.searchTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {artist: 'artist_name'});
-              
+
+
+              var lastFmTracks = S_reduce.remapTracks(S_reduce.normalizeTopTracks(resp.tracks_last.data.toptracks.track));
+              var echonestTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {
+                artist: 'artist_name'
+              });
+
+              //ctr.searchTracks = (echonestTracks.length < 10) ? lastFmTracks : echonestTracks;
+
+              ctr.searchTracks = resp.tracks_vk.response.items;
               S_processing.ready();
             });
             break;
@@ -64,7 +73,7 @@ angular.module('App')
             $q.all({
               similar: PS_lastfm.artist.getSimilar(artist)
             }).then(function(data) {
-              ctr.similarArtists = data.similar;
+              ctr.similarArtists = data.similar.splice(0, 6);
               S_processing.ready();
             });
             break;
@@ -81,16 +90,25 @@ angular.module('App')
                 bucket: 'song_hotttnesss',
                 sort: 'song_hotttnesss-desc'
               }),
+              tracks_last: PS_lastfm.artist.getTopTracks({
+                artist: artist,
+                limit: 10
+              }),
               albums: PS_lastfm.artist.getTopAlbums({
                 artist: artist,
                 limit: 3
               })
             }).then(function(resp) {
               //ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items).splice(0, 10);
-              ctr.searchTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {artist: 'artist_name'}).splice(0, 10);
+
               ctr.albums = resp.albums;
 
-              
+              var lastFmTracks = S_reduce.remapTracks(S_reduce.normalizeTopTracks(resp.tracks_last.data.toptracks.track));
+              var echonestTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {
+                artist: 'artist_name'
+              }).splice(0, 10)
+
+              ctr.searchTracks = (echonestTracks.length < 10) ? lastFmTracks : echonestTracks;
 
               S_processing.ready();
             });
@@ -116,7 +134,7 @@ angular.module('App')
           image: src.image[src.image.length - 1]['#text'],
           tags: resp.tags.data.toptags.tag
         }
-        S_eventer.sendEvent('artistInfoRecievedFromLF',ctr.artistInfo);
+        S_eventer.sendEvent('artistInfoRecievedFromLF', ctr.artistInfo);
         ctr.publics = (resp.publics.response) ? resp.publics.response.items : [];
       });
 
