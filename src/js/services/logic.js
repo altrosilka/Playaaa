@@ -1,8 +1,44 @@
 angular.module('App')
   .service('S_logic', [
     '$rootScope',
-    function($rootScope) {
+    'S_reduce',
+    function($rootScope, S_reduce) {
       var service = {};
+
+      service.sortArtistPublics = function(artist, items){
+        //TODO: подумать над сортировкой - теряются паблики с огромным кол-вом подписчиков и мусорными названиями
+        var lower = artist.toLowerCase();
+        return _.sortBy(items, function(pub) {
+          if (pub.name.toLowerCase() === lower){
+            return 0;
+          } else {
+            return 1/pub.members_count;
+          }
+        });
+      }
+
+      service.findTracksDatasource = function(artist, info) {
+        var lastFmTracks = S_reduce.remapTracks(S_reduce.normalizeTopTracks(info.last.data.toptracks.track));
+        var echonestTracks = S_reduce.remapTracks(info.echo.data.response.songs, {
+          artist: 'artist_name'
+        });
+        var vkTracks = info.vk.response.items;
+
+        var lastFmTrackArtist = (lastFmTracks[0]) ? lastFmTracks[0].artist : undefined;
+        var echonestTrackArtist = (echonestTracks[0]) ? echonestTracks[0].artist : undefined;
+
+        var tracks = [];
+
+        if (echonestTrackArtist === artist) {
+          tracks = (echonestTracks.length < 10) ? (lastFmTracks.length < 10) ? vkTracks : lastFmTracks : echonestTracks;
+        } else if (lastFmTrackArtist === artist) {
+          tracks = (lastFmTracks.length < 10) ? vkTracks : lastFmTracks;
+        } else {
+          tracks = vkTracks;
+        }
+
+        return tracks;
+      }
 
       service.findMostLikelyTrack = function(info, items) {
         var cycleCount = 3,

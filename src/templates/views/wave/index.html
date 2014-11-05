@@ -4,6 +4,7 @@
     <h2>Волна
       <a class="link no-border" href="/artists/{{ctr.query}}/" ng-if="!ctr.isTag" ng-bind="ctr.query"></a>
       <span ng-if="ctr.isTag" ng-bind="ctr.query"></span>
+      <span ng-if="!ctr.isTag" ng-click="ctr.restart()">перезагрузить</span>
     </h2>
 
     <div class="list ng-hide">

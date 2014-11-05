@@ -45,6 +45,18 @@ angular.module('App')
         });
       }
 
+      ctr.restart = function(){
+        ctr.songs.length = 0;
+        PS_echonest.call('playlist/dynamic/restart', {
+          session_id: sessionId,
+          artist: $stateParams.artist,
+          type: 'artist-radio'
+        }).then(function(resp) {
+          sessionId = resp.data.response.session_id;
+          loadNextSongs(sessionId);
+        });
+      }
+
       function loadNextSongs(sessionId) {
         PS_echonest.call('playlist/dynamic/next', {
           session_id: sessionId,

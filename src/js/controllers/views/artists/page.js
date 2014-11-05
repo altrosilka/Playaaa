@@ -9,16 +9,16 @@ angular.module('App')
     'PS_self',
     'PS_vk',
     'PS_echonest',
-    'S_reduce',
     'S_processing',
     'S_eventer',
-    function($q, $scope, $rootScope, $stateParams, $state, PS_lastfm, PS_self, PS_vk, PS_echonest, S_reduce, S_processing, S_eventer) {
+    'S_logic',
+    function($q, $scope, $rootScope, $stateParams, $state, PS_lastfm, PS_self, PS_vk, PS_echonest, S_processing, S_eventer, S_logic) {
       var ctr = {};
 
       var artist = $state.params.artist;
 
       ctr.section = $state.params.section;
-
+      console.log($stateParams);
       $scope.$on('$stateChangeSuccess', function(event, toState, toParams) {
         ctr.section = toParams.section;
         ctr.loadInfo(ctr.section);
@@ -36,9 +36,10 @@ angular.module('App')
               }),
               tracks_last: PS_lastfm.artist.getTopTracks({
                 artist: artist,
-                limit: 100
+                limit: 100,
+                autocorrect: 0
               }),
-              tracks: PS_echonest.getStaticPlaylist({
+              tracks_echonest: PS_echonest.getStaticPlaylist({
                 artist: artist,
                 type: 'artist',
                 results: 100,
@@ -46,16 +47,11 @@ angular.module('App')
                 sort: 'song_hotttnesss-desc'
               }),
             }).then(function(resp) {
-
-
-              var lastFmTracks = S_reduce.remapTracks(S_reduce.normalizeTopTracks(resp.tracks_last.data.toptracks.track));
-              var echonestTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {
-                artist: 'artist_name'
+              ctr.searchTracks = S_logic.findTracksDatasource(artist, {
+                vk: resp.tracks_vk,
+                echo: resp.tracks_echonest,
+                last: resp.tracks_last
               });
-
-              //ctr.searchTracks = (echonestTracks.length < 10) ? lastFmTracks : echonestTracks;
-
-              ctr.searchTracks = resp.tracks_vk.response.items;
               S_processing.ready();
             });
             break;
@@ -79,11 +75,11 @@ angular.module('App')
             break;
           default:
             $q.all({
-              _tracks: PS_vk.search({
+              tracks_vk: PS_vk.search({
                 q: artist,
                 performer_only: 1
               }),
-              tracks: PS_echonest.getStaticPlaylist({
+              tracks_echonest: PS_echonest.getStaticPlaylist({
                 artist: artist,
                 type: 'artist',
                 results: 10,
@@ -97,46 +93,46 @@ angular.module('App')
               albums: PS_lastfm.artist.getTopAlbums({
                 artist: artist,
                 limit: 3
+              }),
+              publics: PS_vk.call('groups.search', {
+                q: artist,
+                fields: "members_count,verified",
+                count: 10
               })
             }).then(function(resp) {
-              //ctr.searchTracks = S_reduce.filterTracks(resp.tracks.response.items).splice(0, 10);
 
               ctr.albums = resp.albums;
 
-              var lastFmTracks = S_reduce.remapTracks(S_reduce.normalizeTopTracks(resp.tracks_last.data.toptracks.track));
-              var echonestTracks = S_reduce.remapTracks(resp.tracks.data.response.songs, {
-                artist: 'artist_name'
-              }).splice(0, 10)
+              ctr.searchTracks = S_logic.findTracksDatasource(artist, {
+                vk: resp.tracks_vk,
+                echo: resp.tracks_echonest,
+                last: resp.tracks_last
+              });
 
-              ctr.searchTracks = (echonestTracks.length < 10) ? lastFmTracks : echonestTracks;
-
+              ctr.publics = (resp.publics.response) ? S_logic.sortArtistPublics(artist, resp.publics.response.items).splice(0,3) : [];
+              console.log(resp.publics.response.items);
               S_processing.ready();
             });
             break;
         }
       }
 
-      //      ctr.loadInfo(ctr.section);
-
       $q.all({
-        info: PS_lastfm.artist.getInfo(artist),
-        tags: PS_lastfm.artist.getTopTags(artist),
-        publics: PS_vk.call('groups.search', {
-          q: artist,
-          fields: "members_count,verified,site",
-          count: 3
-        })
+        info: PS_lastfm.artist.getInfo(artist)
+          //tags: PS_lastfm.artist.getTopTags(artist),
       }).then(function(resp) {
 
         var src = resp.info.data.artist;
         ctr.artistInfo = {
           name: src.name,
-          image: src.image[src.image.length - 1]['#text'],
-          tags: resp.tags.data.toptags.tag
+          image: src.image[src.image.length - 1]['#text'] //,
+            //tags: resp.tags.data.toptags.tag
         }
         S_eventer.sendEvent('artistInfoRecievedFromLF', ctr.artistInfo);
-        ctr.publics = (resp.publics.response) ? resp.publics.response.items : [];
+
       });
+
+
 
       return ctr;
     }

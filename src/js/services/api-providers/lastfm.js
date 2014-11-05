@@ -7,6 +7,9 @@ angular.module('App')
     }
 
     service.artist = {
+      search: function(artist){
+         return call('artist.search', {artist: artist});
+      },
       getInfo: function(artist) {
         return call('artist.getInfo', {
           artist: artist,
