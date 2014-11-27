@@ -1,5 +1,5 @@
 header.whiteHeader {
-  height: 128px;
+  height: 110px;
   position: relative;
   .top {
     position: absolute;
@@ -8,37 +8,46 @@ header.whiteHeader {
     right: 0;
     top: 0;
     bottom: 0;
+    h4 {
+      font-size: 8px;
+      top: 17px;
+      padding-bottom: 6px;
+      color: #888;
+      position: absolute;
+      left: 89px;
+    } 
     h1 {
       font-size: 22px;
-      top: 32px;
-      border-bottom: 1px solid #444444;
+      top: 42px;
       padding-bottom: 6px;
     }
     h2 {
       font-size: 18px;
       top: 73px;
     }
-    h1, h2 {
+    h1, h2, h3 {
       color: #eee;
       position: absolute;
       margin: 0;
-      left: 128px;
-      right: 20px;
+      left: 88px;
+      right: 15px;
     }
-    .wave {
+    h3 {
+      font-size: 12px;
       position: absolute;
-      right: 20px;
-      top: 75px;
+      left: 87px;
+      top: 70px;
       a {
-        display:inline-block;
-        margin-left:10px;
-        font-size: 14px;
+        display: inline-block;
+        cursor:pointer;
+        font-size: 12px;
         i {
-          margin-left:5px;
+          margin-left: 5px;
         }
       }
     }
     menu {
+      display: none;
       position: absolute;
       left: 128px;
       padding: 0;
@@ -64,10 +73,10 @@ header.whiteHeader {
     }
     .image {
       position: absolute;
-      width: 88px;
-      height: 88px;
-      left: 20px;
-      top: 20px;
+      width: 66px;
+      height: 66px;
+      left: 15px;
+      top: 25px;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: top;

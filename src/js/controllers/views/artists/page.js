@@ -18,11 +18,14 @@ angular.module('App')
       var artist = $state.params.artist;
 
       ctr.section = $state.params.section;
-      console.log($stateParams);
       $scope.$on('$stateChangeSuccess', function(event, toState, toParams) {
         ctr.section = toParams.section;
         ctr.loadInfo(ctr.section);
       });
+
+      ctr.loadWave = function(artist){
+        S_eventer.sendEvent('startArtistWave',artist);
+      };
 
       ctr.loadInfo = function(section) {
         S_processing.loading();
@@ -110,7 +113,6 @@ angular.module('App')
               });
 
               ctr.publics = (resp.publics.response) ? S_logic.sortArtistPublics(artist, resp.publics.response.items).splice(0,3) : [];
-              console.log(resp.publics.response.items);
               S_processing.ready();
             });
             break;
@@ -129,7 +131,6 @@ angular.module('App')
             //tags: resp.tags.data.toptags.tag
         }
         S_eventer.sendEvent('artistInfoRecievedFromLF', ctr.artistInfo);
-
       });
 
 

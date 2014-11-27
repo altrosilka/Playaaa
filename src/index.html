@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html data-ng-app="App">
 
-<head> 
+<head>
   <base href="@@baseUrl" target="_blank" />
   <meta charset="UTF-8">
   <title>Playaaa</title>
   <link rel="stylesheet" href="pack/vendors.css?v=@@version">
   <link rel="stylesheet" href="pack/styles.css?v=@@version">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-</head> 
+</head>
 
 <body data-status="{{ $root.status }}" data-state="{{$root.state}}" data-ng-class="{'radioBody':isRadio}">
-  <div ng-controller="C_background as ctr">
-    <div class="fullsizeBackground" set-bg-on-load="ctr.image" new-layer="true"></div>
-  </div>
   <div class="waveOverlay"></div>
   <div class="intro" style="background-color: #333" ng-controller="C_intro as ctr" ng-hide="ctr.removeIntro" ng-class="{'hider':ctr.hideIntro}">
     <div class="top">
       <div class="wrap">
-        <h1>Playaaa</h1> 
+        <h1>Playaaa</h1>
         <h2>онлайн-плеер</h2>
         <h4>версия @@version от @@date</h4>
         <h3 ng-class="{'active':ctr.userName}">вход под пользователем
           <span ng-bind="ctr.userName"></span>
-        </h3> 
+        </h3>
         <button style="display:none;" class="btn" ng-show="ctr.needAuth" ng-click="ctr.authorize()">Войти</button>
       </div>
     </div>
@@ -33,9 +29,52 @@
   <div class="mainLoader" data-line-loader></div>
   <div class="content">
 
-    <div class="leftPanel panel noselect">
-      <header class="controlPanel" ng-controller="C_controlPanel as ctr">
+    <header class="navigation noselect" ng-controller="C_header as ctr" ng-show="ctr.visible">
+      <menu>
+        <a style="display:none;" href="/">Главная</a>
+        <a href="/lib/">Библиотека</a>
+        <a style="display:none;" href="/discover/">Поиск </a>
+        <a href="/artists/">Исполнители</a>
+        <a href="/charts/">Чарты</a>
+      </menu>
+      <form ng-submit="ctr.search(ctr.q)">
+        <input class="select" type="text" placeholder="Поиск музыки" ng-model="ctr.q">
+        <input type="submit" style="position:absolute;left:-9999px">
+      </form>
+    </header>
 
+
+    <div class="layout">
+      <div data-ui-view class="view"></div>
+      <footer class="clearfix">
+        <span class="pull-left">Онлайн-плеер Playaaa</span>
+        <div class="pull-right"><a href="http://vk.com/playaaa" target="_blank">Группа плеера в ВК<i class="fa fa-external-link"></i></a> / <a href="http://vk.com/playaaa_music" target="_blank">Паблик с лучшей музыкой<i class="fa fa-external-link"></i></a>
+        </div>
+      </footer>
+    </div>
+
+    <div class="rightPanel noselect">
+
+      <header class="controlPanel" data-ng-class="{'radioMode':ctr.radioMode, 'openedList': ctr.radioListIsOpened}" data-ng-controller="C_controlPanel as ctr">
+        <div ng-controller="C_background as ctr">
+          <div class="fullsizeBackground" set-bg-on-load="ctr.image" new-layer="true"></div>
+        </div>
+        <div class="radioScope" data-ng-controller="C_wave as radioCtr">
+
+          <div class="topText">Волна
+            <a class="link no-border" href="/artists/{{radioCtr.query}}/" ng-if="!ctr.isTag" ng-bind="radioCtr.query"></a>
+            <span ng-if="radioCtr.isTag" ng-bind="radioCtr.query"></span>
+            <span style="display:none;" class="link no-border" ng-if="!radioCtr.isTag" ng-click="radioCtr.restart()">перезагрузить</span>
+          </div>
+
+          <div class="songList">
+            <div class="switcher" data-ng-click="radioCtr.toggleList()"></div>
+            <div class="list">
+
+              <div ng-repeat="song in radioCtr.songs" track data-info="song" data-set-new-info="radioCtr.setSongNewInfo"></div>
+            </div>
+          </div>
+        </div>
         <div class="trackInfo select ng-hide" ng-show="ctr.artist">
           <div class="artist">
             <span ng-bind="ctr.artist | unEscape"></span>
@@ -98,11 +137,11 @@
             <span ng-bind="ctr.volume | number:0"></span>%
           </div>
         </div>
- 
+
       </header>
       <div class="playlistFull" ng-controller="C_playlist as ctr">
         <div class="removeField" style="display:none;" data-ng-class="{'active':ctr.inDrag}" ddata-drop="true" ddata-jqyoui-options djqyoui-droppable="{onOver: 'ctr.onOver', onDrop: 'ctr.onDrop'}"></div>
- 
+
         <div class="tabs">табы</div>
 
         <section class="playlistsContainer" data-drop="true" data-jqyoui-options jqyoui-droppable ng-model="ctr.currentTrackList">
@@ -110,32 +149,12 @@
         </section>
       </div>
     </div>
-    <div class="layout panel">
-      <header class="noselect" ng-controller="C_header as ctr" ng-show="ctr.visible">
-        <menu>
-          <a href="/">Главная</a>
-          <a href="/lib/">Библиотека</a>
-          <a href="/discover/">Поиск</a>
-          <a href="/artists/">Исполнители</a>
-          <a href="/charts/">Чарты</a>
-        </menu>
-        <form ng-submit="ctr.search(ctr.q)">
-          <input class="select" type="text" placeholder="Поиск музыки" ng-model="ctr.q">
-          <input type="submit" style="position:absolute;left:-9999px">
-        </form>
-      </header>
-      <div data-ui-view class="view"></div>
-      <footer class="clearfix">
-        <span class="pull-left">Онлайн-плеер Playaaa</span>
-        <div class="pull-right"><a href="http://vk.com/playaaa" target="_blank">Группа плеера в ВК<i class="fa fa-external-link"></i></a> / <a href="http://vk.com/playaaa_music" target="_blank">Паблик с лучшей музыкой<i class="fa fa-external-link"></i></a>
-        </div>
-      </footer>
-    </div>
+
 
 
   </div>
 
- 
+
   <script type="text/javascript" src="pack/vendor.js?v=@@version"></script>
   <script type="text/javascript" src="pack/templates.js?v=@@version"></script>
   <script type="text/javascript" src="pack/scripts.js?v=@@version"></script>

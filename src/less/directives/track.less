@@ -1,8 +1,9 @@
 .track {
   height: 30px;
-  padding: 0 20px;
+  padding: 7px 15px;
   font-size: 12px;
   .play {
+    display: none;
     float: left;
     margin-top: 7px;
     color: #555;
@@ -13,14 +14,18 @@
   }
   .time {
     float: right;
-    margin: 7px 0 0 10px;
+    margin: 0px 0 0 10px;
   }
   .bitrate {
     float: right;
   }
   .text {
-    float: left;
-    margin: 7px 0 0 10px;
+    margin:0px 45px 0 0px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: auto;
+    display: block;
     .artist {
       font-weight: bold;
     }
@@ -30,8 +35,8 @@
     background-color: rgba(255, 255, 255, 0.3);
     cursor: pointer;
   }
-  &.active{
-    color:#fff;  
-    background-color: rgba(255,255,255,0.2);
+  &.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }

@@ -1,11 +1,12 @@
 <section id="view-artists-page" class="view view-fullsize" ng-if="ctr.artistInfo">
-  <header class="whiteHeader column">
+  <header class="whiteHeader">
     <div class="fullsizeImage" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
     <div class="top">
+      <h4>исполнитель</h4>
       <h1>
         <span ng-bind="ctr.artistInfo.name"></span>
       </h1>
-      <menu> 
+      <menu>
         <a ng-href="/artists/{{ctr.artistInfo.name}}/tracks/" ng-class="{'active':ctr.section === 'tracks'}">Композиции</a>
         <a ng-href="/artists/{{ctr.artistInfo.name}}/albums/" ng-class="{'active':ctr.section === 'albums'}" ng-show="ctr.albums.length">Альбомы</a>
         <!--<a href="/artists/{{ctr.artistInfo.name}}/videos/" ng-class="{'active':ctr.section === 'videos'}">Видео</a>-->
@@ -19,9 +20,10 @@
         </a>
       </span>
 
-      <span class="wave">
-        <a class="link" ng-href="/wave/?artist={{ctr.artistInfo.name}}">Волна <span ng-bind="ctr.artistInfo.name"></span><i class="fa fa-volume-up"></i></a>
-      </span>
+      <h3>
+        <span ng-click="ctr.loadWave(ctr.artistInfo.name)"><a class="link">Волна <span ng-bind="ctr.artistInfo.name"></span></a>
+        </span>
+      </h3>
       <div class="image" ng-style="{'background-image':'url('+ctr.artistInfo.image+')'}"></div>
     </div>
   </header>
@@ -30,7 +32,8 @@
   <section ng-if="!ctr.section">
     <div class="column" ng-show="ctr.searchTracks.length">
       <div class="inner">
-        <h2>Треки</h2>
+        <h2><a class="link" ng-href="/artists/{{ctr.artistInfo.name}}/tracks/">Треки</a>
+        </h2>
       </div>
       <div class="albums list list-gray">
         <div ng-repeat="song in ctr.searchTracks" track info="song"></div>
@@ -43,24 +46,38 @@
         </h2>
       </div>
       <div class="publics">
-        <a class="public" href="/public/{{public.id}}/" ng-repeat="public in ctr.publics">
-          <div class="image" ng-style="{'background-image':'url('+public.photo_100+')'}"></div>
+        <div class="public" ng-repeat="public in ctr.publics">
+          <a href="/public/{{public.id}}/">
+            <div class="image" ng-style="{'background-image':'url('+public.photo_100+')'}"></div>
+          </a>
           <div class="info">
-            <span class="name" ng-bind="public.name"></span>
+            <a href="/public/{{public.id}}/" class="name" ng-bind="public.name"></a>
             <span class="members">
-              <strong ng-bind="public.members_count"></strong>&nbsp;подписчиков</span>
+              <a class="link no-border" href="/public/{{public.id}}/">
+                <strong ng-bind="public.members_count"></strong>&nbsp;подписчиков</a>
+            </span>
           </div>
-        </a>
+        </div>
       </div>
     </div>
-
+    <!--
     <div class="column" ng-show="ctr.albums.length">
       <div class="inner">
-        <h2>Альбомы</h2>
+        <h2><a class="link" ng-href="/artists/{{ctr.artistInfo.name}}/albums/">Альбомы</a>
+        </h2>
       </div>
       <div class="albums clearfix">
         <div class="item" album-image ng-repeat="item in ctr.albums" info="item"></div>
       </div>
+    </div>
+    -->
+
+    <div class="column">
+      <div class="inner">
+        <h2><a class="link" ng-href="/artists/{{ctr.artistInfo.name}}/similar/">Похожее</a>
+        </h2>
+      </div>
+
     </div>
   </section>
 
@@ -74,7 +91,7 @@
       </div>
     </div>
   </section>
-
+  <!--
   <section ng-if="ctr.section === 'albums'">
     <div class="column">
       <div class="inner">
@@ -85,7 +102,7 @@
       </div>
     </div>
   </section>
-
+  -->
   <section ng-if="ctr.section === 'similar'">
     <div class="column">
       <div class="inner">

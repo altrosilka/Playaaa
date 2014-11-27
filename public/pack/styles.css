@@ -44,10 +44,64 @@ input[type="text"]:focus {
   color: #ccc;
 }
 .controlPanel {
-  position: relative;
-  height: 150px;
-  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  bottom: 0px;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  z-index: 2;
   color: #ddd;
+  transition: 0.4s;
+}
+.controlPanel .radioScope {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.controlPanel .radioScope .topText {
+  opacity: 0;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  transform: translateX(-20px);
+  transition: 0.4s;
+  visibility: hidden;
+}
+.controlPanel .radioScope .songList {
+  position: absolute;
+  right: -320px;
+  top: 0;
+  bottom: 0;
+  width: 320px;
+  border-left: 1px solid #222;
+  z-index: 2;
+  background: #000;
+}
+.controlPanel .radioScope .songList .list {
+  position: absolute;
+  right: 0px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+.controlPanel .radioScope .songList .switcher {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #ff0;
+  left: -40px;
+  top: 0px;
+}
+.controlPanel.radioMode .topText {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0px);
+}
+.controlPanel.openedList {
+  right: 320px;
 }
 .controlPanel .fake {
   height: 3px;
@@ -76,6 +130,7 @@ input[type="text"]:focus {
   transition: 0.2s;
   opacity: 0.8;
   height: 15px;
+  z-index: 10;
 }
 .controlPanel .volumePanel:hover,
 .controlPanel .progressPanel:hover {
@@ -84,14 +139,16 @@ input[type="text"]:focus {
 .controlPanel .volumePanel {
   padding: 0 5px;
   position: absolute;
-  bottom: 10px;
-  right: 15px;
-  width: 90px;
+  top: auto;
+  bottom: 20px;
+  width: 160px;
+  right: 20px;
 }
 .controlPanel .volumePanel .current {
   position: absolute;
-  top: -10px;
-  font-size: 9px;
+  font-size: 11px;
+  color: #888;
+  top: -16px;
   right: 5px;
 }
 .controlPanel .volumePanel .current.muted {
@@ -102,16 +159,30 @@ input[type="text"]:focus {
   text-decoration: line-through;
 }
 .controlPanel .progressPanel {
-  bottom: 10px;
-  width: 218px;
+  top: auto;
+  bottom: 20px;
   left: 20px;
+  right: 200px;
+  width: auto;
   cursor: pointer;
+}
+.controlPanel .progressPanel .minutesScaler {
+  margin-left: -1px;
+}
+.controlPanel .progressPanel .minutesScaler .scale {
+  top: 5px;
+  bottom: 5px;
+  background-color: rgba(155, 155, 155, 0.5);
+  width: 3px;
 }
 .controlPanel .progressPanel .times .current,
 .controlPanel .progressPanel .times .total {
   position: absolute;
-  top: -10px;
-  font-size: 9px;
+  opacity: 1;
+  visibility: visible;
+  top: -16px;
+  color: #888;
+  font-size: 11px;
 }
 .controlPanel .progressPanel .times .current {
   left: 0px;
@@ -132,20 +203,25 @@ input[type="text"]:focus {
   right: 0px;
 }
 .controlPanel .buttons {
-  position: absolute;
-  left: 0px;
-  top: 68px;
-  right: 0px;
+  z-index: 10;
   text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin-top: -20px;
 }
 .controlPanel .buttons .btn {
-  opacity: 0.6;
   border-radius: 50%;
   background: transparent;
   line-height: 24px;
   outline: none;
   padding: 0 8px;
   transition: 0.2s;
+  opacity: 1;
+  box-shadow: none;
+  width: auto;
+  height: auto;
 }
 .controlPanel .buttons .btn:hover {
   opacity: 0.8;
@@ -156,7 +232,8 @@ input[type="text"]:focus {
   box-shadow: none;
 }
 .controlPanel .buttons .btn i {
-  color: #fff;
+  color: #ddd;
+  font-size: 22px;
 }
 .controlPanel .buttons .btn.next,
 .controlPanel .buttons .btn.prev {
@@ -165,7 +242,7 @@ input[type="text"]:focus {
 }
 .controlPanel .buttons .btn.next i,
 .controlPanel .buttons .btn.prev i {
-  font-size: 13px;
+  font-size: 23px;
   line-height: 23px;
 }
 .controlPanel .buttons .btn.next {
@@ -188,42 +265,51 @@ input[type="text"]:focus {
 }
 .controlPanel .buttons .btn.play,
 .controlPanel .buttons .btn.pause {
-  width: 40px;
-  height: 40px;
-  margin: 0;
+  margin: 0 10px;
+  width: 50px;
 }
 .controlPanel .buttons .btn.play i,
 .controlPanel .buttons .btn.pause i {
-  font-size: 20px;
+  font-size: 38px;
+}
+.controlPanel .buttons .btn:hover i {
+  color: #fff;
 }
 .controlPanel .trackInfo {
+  z-index: 11;
   font-size: 12px;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   position: absolute;
-  top: 15px;
   right: 10px;
   left: 10px;
+  text-shadow: 0px 0px 3px #222;
+  font-weight: 300;
+  top: 50%;
+  margin-top: -156px;
+}
+.controlPanel .trackInfo .artist {
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+.controlPanel .trackInfo .title {
+  font-size: 37px;
 }
 .controlPanel .trackInfo .separator {
   display: none;
 }
-.controlPanel .trackInfo .title {
-  font-size: 15px;
-  margin-top: 3px;
-}
-.leftPanel {
+.rightPanel {
   position: fixed;
   top: 0px;
   bottom: 0px;
-  left: 50%;
-  margin-left: -620px;
-  width: 360px;
+  right: 0;
+  left: 420px;
   border-radius: 0px;
 }
-.leftPanel .playlistFull .playlistsContainer {
+.rightPanel .playlistFull .playlistsContainer {
   height: 100px;
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -264,7 +350,7 @@ body {
   background-color: #111;
 }
 body .fullsizeBackground {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -295,7 +381,23 @@ body .fullsizeBackground .layer:after {
   left: 0;
   bottom: 0;
   content: '';
-  background: url(../images/overlay_w.png) center repeat;
+  background: url(../images/overlay_b.png) center repeat;
+}
+body .fullsizeBackground:after {
+  content: '';
+  position: absolute;
+  height: 150px;
+  opacity: 0.7;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.83) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(54%, rgba(0, 0, 0, 0.45)), color-stop(100%, rgba(0, 0, 0, 0.83)));
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.83) 100%);
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.83) 100%);
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.83) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 54%, rgba(0, 0, 0, 0.83) 100%);
 }
 body .mainLoader {
   transition: 0.4s;
@@ -344,16 +446,17 @@ a:hover {
   border-color: transparent;
 }
 .content {
-  width: 1240px;
-  margin: auto;
   min-height: 100%;
   position: relative;
   z-index: 2;
 }
 .layout {
-  width: 860px;
-  margin: 0px 0 0px 380px;
-  min-height: 100%;
+  width: 360px;
+  margin: 0px 0 0px 60px;
+  background-color: #000;
+  position: relative;
+  border-right: 1px solid #222;
+  z-index: 3;
 }
 .layout > footer {
   padding: 20px 20px;
@@ -367,19 +470,17 @@ a:hover {
 }
 .panel {
   margin-bottom: 0;
-  background: transparent;
   box-shadow: none;
+  border-radius: 0px;
 }
 .column {
-  background-color: rgba(0, 0, 0, 0.7);
-  box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
+  /*background-color: rgba(0, 0, 0, 0.7);*/
   border-radius: 1px;
-  margin: 15px 0;
-  padding: 10px 0 20px;
+  margin: 0 0 25px 0;
   color: #bbb;
 }
 .column .inner {
-  padding: 10px 20px!important;
+  padding: 10px 15px!important;
 }
 .column h2 {
   font-size: 24px;
@@ -416,6 +517,9 @@ a:hover {
   -ms-user-select: initial;
   user-select: initial;
 }
+.baseColor {
+  color: #f0a824;
+}
 .list .item {
   border-radius: 1px;
   background-color: #fff;
@@ -439,10 +543,9 @@ a:hover {
   margin: 0 -20px;
 }
 .artistGrid .item {
-  float: left;
-  margin: 20px 0 0 20px;
-  width: 259px;
-  height: 287px;
+  display: block;
+  margin: 15px 15px 0 15px;
+  height: 265px;
   position: relative;
   overflow: hidden;
 }
@@ -482,7 +585,7 @@ a:hover {
   padding: 20px;
 }
 header.whiteHeader {
-  height: 128px;
+  height: 110px;
   position: relative;
 }
 header.whiteHeader .top {
@@ -493,10 +596,17 @@ header.whiteHeader .top {
   top: 0;
   bottom: 0;
 }
+header.whiteHeader .top h4 {
+  font-size: 8px;
+  top: 17px;
+  padding-bottom: 6px;
+  color: #888;
+  position: absolute;
+  left: 89px;
+}
 header.whiteHeader .top h1 {
   font-size: 22px;
-  top: 32px;
-  border-bottom: 1px solid #444444;
+  top: 42px;
   padding-bottom: 6px;
 }
 header.whiteHeader .top h2 {
@@ -504,27 +614,30 @@ header.whiteHeader .top h2 {
   top: 73px;
 }
 header.whiteHeader .top h1,
-header.whiteHeader .top h2 {
+header.whiteHeader .top h2,
+header.whiteHeader .top h3 {
   color: #eee;
   position: absolute;
   margin: 0;
-  left: 128px;
-  right: 20px;
+  left: 88px;
+  right: 15px;
 }
-header.whiteHeader .top .wave {
+header.whiteHeader .top h3 {
+  font-size: 12px;
   position: absolute;
-  right: 20px;
-  top: 75px;
+  left: 87px;
+  top: 70px;
 }
-header.whiteHeader .top .wave a {
+header.whiteHeader .top h3 a {
   display: inline-block;
-  margin-left: 10px;
-  font-size: 14px;
+  cursor: pointer;
+  font-size: 12px;
 }
-header.whiteHeader .top .wave a i {
+header.whiteHeader .top h3 a i {
   margin-left: 5px;
 }
 header.whiteHeader .top menu {
+  display: none;
   position: absolute;
   left: 128px;
   padding: 0;
@@ -551,16 +664,16 @@ header.whiteHeader .top menu a.active:hover {
 }
 header.whiteHeader .top .image {
   position: absolute;
-  width: 88px;
-  height: 88px;
-  left: 20px;
-  top: 20px;
+  width: 66px;
+  height: 66px;
+  left: 15px;
+  top: 25px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
 }
 .fullsizePlayingView {
-  position: fixed;
+  position: absolute;
   z-index: 60;
   left: 0;
   right: 0;
@@ -656,147 +769,11 @@ header.whiteHeader .top .image {
   height: 130px;
   position: relative;
 }
-.radioBody .layout > header {
-  z-index: 70;
-  position: fixed;
-  width: 860px;
-  background-color: transparent;
-  box-shadow: none;
-}
-.radioBody .leftPanel {
-  z-index: 70;
-  left: 50%;
-  width: 1000px;
-  margin-left: -500px;
-  top: 60px;
-  box-shadow: none;
-  color: #ddd;
-  position: absolute;
-  bottom: 60px;
-}
-.radioBody .leftPanel > .playlistFull {
-  display: none;
-}
-.radioBody .leftPanel .controlPanel {
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: auto;
-  background-color: transparent;
-}
-.radioBody .leftPanel .controlPanel .trackInfo {
-  text-shadow: 0px 0px 3px #222;
-  font-weight: 300;
-  top: 50%;
-  margin-top: -156px;
-}
-.radioBody .leftPanel .controlPanel .trackInfo .separator {
-  display: none;
-}
-.radioBody .leftPanel .controlPanel .trackInfo .artist {
-  font-size: 24px;
-  font-weight: 300;
-  margin-bottom: 4px;
-}
-.radioBody .leftPanel .controlPanel .trackInfo .title {
-  font-size: 37px;
-}
-.radioBody .leftPanel .controlPanel .buttons {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  margin-top: -20px;
-}
-.radioBody .leftPanel .controlPanel .buttons .btn {
-  opacity: 1;
-  box-shadow: none;
-  width: auto;
-  height: auto;
-}
-.radioBody .leftPanel .controlPanel .buttons .btn i {
-  color: #ddd;
-  font-size: 22px;
-}
-.radioBody .leftPanel .controlPanel .buttons .btn:hover i {
-  color: #fff;
-}
-.radioBody .leftPanel .controlPanel .buttons .btn.play,
-.radioBody .leftPanel .controlPanel .buttons .btn.pause {
-  margin: 0 10px;
-  width: 50px;
-}
-.radioBody .leftPanel .controlPanel .buttons .btn.play i,
-.radioBody .leftPanel .controlPanel .buttons .btn.pause i {
-  font-size: 38px;
-}
-.radioBody .leftPanel .controlPanel .fake {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-}
-.radioBody .leftPanel .controlPanel .fake .progressLine {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 2px;
-}
-.radioBody .leftPanel .controlPanel .fake .download {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-}
-.radioBody .leftPanel .controlPanel .volumePanel {
-  top: auto;
-  bottom: 0px;
-  width: 160px;
-  right: 0px;
-}
-.radioBody .leftPanel .controlPanel .volumePanel .current {
-  font-size: 11px;
-  color: #888;
-  top: -16px;
-}
-.radioBody .leftPanel .controlPanel .volumePanel .current.muted {
-  color: #f00;
-  text-decoration: line-through;
-}
-.radioBody .leftPanel .controlPanel .progressPanel {
-  top: auto;
-  bottom: 0px;
-  left: 0px;
-  right: 200px;
-  width: auto;
-}
-.radioBody .leftPanel .controlPanel .progressPanel .times .total,
-.radioBody .leftPanel .controlPanel .progressPanel .times .current {
-  opacity: 1;
-  visibility: visible;
-  top: -16px;
-  color: #888;
-  font-size: 11px;
-}
-.radioBody .leftPanel .controlPanel .progressPanel .times .total {
-  right: 0px;
-}
-.radioBody .leftPanel .controlPanel .progressPanel .times .current {
-  left: 0px;
-}
-.radioBody .leftPanel .controlPanel .progressPanel .minutesScaler {
-  margin-left: -1px;
-}
-.radioBody .leftPanel .controlPanel .progressPanel .minutesScaler .scale {
-  top: 5px;
-  bottom: 5px;
-  background-color: rgba(155, 155, 155, 0.5);
-  width: 3px;
-}
 #view-album .gray {
   font-size: 12px;
   float: right;
   margin: 6px 0 0;
   display: block;
-}
-.artistGrid {
-  height: 612px;
 }
 #view-artists-page .tags {
   position: absolute;
@@ -839,9 +816,9 @@ header.whiteHeader .top .image {
   background: url(../images/overlay.png) center repeat;
 }
 #view-artists-page ._whiteHeader .wave {
-  top: auto;
-  bottom: 16px;
-  right: 16px;
+  position: absolute;
+  left: 79px;
+  top: 65px;
 }
 #view-artists-page ._whiteHeader .tags {
   position: absolute;
@@ -937,11 +914,12 @@ header.whiteHeader .top .image {
 }
 #view-artists-page .publics {
   overflow: auto;
-  padding: 3px 20px;
+  padding: 3px 15px;
 }
 #view-artists-page .publics .public {
-  float: left;
-  margin-right: 20px;
+  margin-top: 10px;
+  display: block;
+  overflow: auto;
 }
 #view-artists-page .publics .public .image {
   width: 50px;
@@ -969,10 +947,13 @@ header.whiteHeader .top .image {
   color: #666;
   font-size: 10px;
 }
+#view-artists-page .publics .public .info .members a.link {
+  color: #666;
+}
 #view-artists-page .albums .item {
   float: left;
   display: block;
-  margin: 20px 0 0 20px;
+  margin: 10px 0 0 15px;
   width: 259px;
   height: 75px;
   position: relative;
@@ -1089,9 +1070,6 @@ body[data-state="share"] .buttons .prev,
 body[data-state="share"] .buttons .next {
   display: none;
 }
-body[data-state="share"].radioBody .leftPanel {
-  top: 160px;
-}
 .minutesScaler {
   position: absolute;
   top: 1px;
@@ -1109,10 +1087,11 @@ body[data-state="share"].radioBody .leftPanel {
 }
 .track {
   height: 30px;
-  padding: 0 20px;
+  padding: 7px 15px;
   font-size: 12px;
 }
 .track .play {
+  display: none;
   float: left;
   margin-top: 7px;
   color: #555;
@@ -1122,14 +1101,18 @@ body[data-state="share"].radioBody .leftPanel {
 }
 .track .time {
   float: right;
-  margin: 7px 0 0 10px;
+  margin: 0px 0 0 10px;
 }
 .track .bitrate {
   float: right;
 }
 .track .text {
-  float: left;
-  margin: 7px 0 0 10px;
+  margin: 0px 45px 0 0px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: auto;
+  display: block;
 }
 .track .text .artist {
   font-weight: bold;
@@ -1221,45 +1204,51 @@ body[data-state="share"].radioBody .leftPanel {
     opacity: 1;
   }
 }
-.layout > header {
-  height: 60px;
-  background-color: rgba(0, 0, 0, 0.6);
+.navigation {
+  width: 60px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000;
   box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.3);
   border-radius: 1px;
+  border-right: 1px solid #222;
+  z-index: 100;
 }
-.layout > header menu {
+.navigation menu {
   margin: 0;
   padding: 0;
   float: left;
   height: 100%;
 }
-.layout > header menu a {
+.navigation menu a {
   float: left;
-  height: 100%;
-  padding: 0 20px;
+  height: 60px;
+  padding: 0 0px;
   line-height: 60px;
   transition: 0.2s;
-  font-size: 13px;
+  font-size: 10px;
   color: #bbb;
   text-decoration: none;
 }
-.layout > header menu a:hover {
+.navigation menu a:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.1);
   color: #eee;
   box-shadow: inset 0px -1px 3px rgba(0, 0, 0, 0.1);
 }
-.layout > header menu a:active,
-.layout > header menu a.active,
-.layout > header menu a.active:hover {
+.navigation menu a:active,
+.navigation menu a.active,
+.navigation menu a.active:hover {
   background-color: rgba(0, 0, 0, 0.2);
   color: #fff;
   box-shadow: inset 0px -1px 3px rgba(0, 0, 0, 0.2);
 }
-.layout > header form {
+.navigation form {
   float: right;
 }
-.layout > header form input[type="text"] {
+.navigation form input[type="text"] {
   float: right;
   margin: 16px 20px 0;
   background-color: #333;

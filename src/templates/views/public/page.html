@@ -2,9 +2,10 @@
   <div class="column">
     <header class="whiteHeader">
       <div class="top">
-        <h1>Паблик
+        <h4>публичная страница</h4>
+        <h1>
           <strong ng-bind="ctr.public.name"></strong>
-          <span class="verified" ng-if="ctr.public.verified"><i class="fa fa-check"></i> официальное сообщество</span>
+          <span style="display:none;" class="verified" ng-if="ctr.public.verified"><i class="fa fa-check"></i> официальное сообщество</span>
         </h1>
         <h2 ng-if="ctr.parsedArtists">
           <span ng-if="ctr.parsedArtists.length > 1">исполнителей</span>
@@ -18,10 +19,10 @@
   </div>
 
   <div class="column" ng-class="{'short':ctr.albums}">
-  	<div class="albums" ng-if="ctr.albums">
-  		<a href="/public/{{ctr.public.id}}/" class="album" ng-class="{'active':!ctr.activeAlbum}" ng-click="ctr.loadAlbum()">Все треки</a>
-  		<a href="/public/{{ctr.public.id}}/?album_id={{album.id}}" class="album" ng-repeat="album in ctr.albums"  ng-class="{'active':ctr.activeAlbum === album.id}" ng-click="ctr.loadAlbum(album.id)">{{album.title}}</a> 
-  	</div>
+    <div class="albums" ng-if="ctr.albums">
+      <a href="/public/{{ctr.public.id}}/" class="album" ng-class="{'active':!ctr.activeAlbum}" ng-click="ctr.loadAlbum()">Все треки</a>
+      <a href="/public/{{ctr.public.id}}/?album_id={{album.id}}" class="album" ng-repeat="album in ctr.albums" ng-class="{'active':ctr.activeAlbum === album.id}" ng-click="ctr.loadAlbum(album.id)">{{album.title}}</a> 
+    </div>
     <div class="inner">
       <h2>Треки</h2>
     </div>

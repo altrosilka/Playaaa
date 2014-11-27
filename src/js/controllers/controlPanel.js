@@ -2,14 +2,20 @@ angular.module('App').controller('C_controlPanel', [
   '$scope',
   'S_sound',
   'S_modals',
+  'S_eventer',
   'PS_vk',
-  function($scope, S_sound, S_modals, PS_vk) {
+  'PS_lastfm',
+  function($scope, S_sound, S_modals, S_eventer, PS_vk, PS_lastfm) {
     var ctr = this;
 
     $scope.playing = false;
 
     var volumeChanging = false;
     var progressChanging = false;
+
+    $scope.$on('startArtistWave', function(e, artist) {
+      ctr.radioMode = true;
+    });
 
     $scope.$on('progressChanged', function(e, sm) {
       var progressPercent = sm.position / sm.durationEstimate * 100;
@@ -243,6 +249,32 @@ angular.module('App').controller('C_controlPanel', [
           $scope.$apply();
         }
       }, 0);
+    }
+
+    $scope.$on('trackStarted', function(event, info) {
+      getArtistImage(info.artist);
+    });
+
+
+    function getArtistImage(artist) {
+      PS_lastfm.artist.getInfo(artist).then(function(resp) {
+        var src = resp.data.artist;
+        var info = {};
+        if (!src || !src.image || src.image[src.image.length - 1]['#text'] === '') {
+          var t = new Trianglify();
+          var pattern = t.generate(document.body.clientWidth, document.body.clientHeight);
+          info = {
+            name: artist,
+            image: pattern.dataUri
+          }
+        } else {
+          info = {
+            name: src.name,
+            image: src.image[src.image.length - 1]['#text']
+          }
+        }
+        S_eventer.sendEvent('artistInfoRecievedFromLF', info);
+      });
     }
 
     return ctr;

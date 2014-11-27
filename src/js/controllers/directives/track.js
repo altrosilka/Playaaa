@@ -7,9 +7,8 @@ angular.module('App').controller('CD_track', [
   function($scope, S_eventer, S_sound, S_logic, PS_vk) {
     var ctr = this;
 
-    ctr.playTrack = function(info) {
+    ctr.playTrack = function(info, setSongNewInfo) {
       if (!info.url) {
-        console.log(new Date().getTime());
         PS_vk.search({
           q: info.artist + ' ' + info.title,
           count: 100
@@ -25,8 +24,11 @@ angular.module('App').controller('CD_track', [
             title: info.title
           }, resp.response.items);
 
+          if (typeof setSongNewInfo === 'function'){
+            setSongNewInfo(info, q);
+          }
           S_sound.createAndPlay(q);
-        })
+        });
       } else {
         S_sound.createAndPlay(info);
       }
@@ -38,7 +40,15 @@ angular.module('App').controller('CD_track', [
           return false;
         }
 
-        return soundId === $scope.info.id;
+        if ($scope.info.id) {
+          return soundId === $scope.info.id;
+        } else {
+          if (ctr.info) {
+            return soundId === ctr.info.id;
+          }
+        }
+
+
       }
       /*
         ctr.onStart = function(){

@@ -39,9 +39,9 @@
       }
     }
     .wave {
-      top: auto;
-      bottom: 16px;
-      right: 16px;
+      position: absolute;
+      left: 79px;
+      top: 65px;
     }
     .tags {
       position: absolute;
@@ -138,10 +138,11 @@
   }
   .publics {
     overflow: auto;
-    padding: 3px 20px;
+    padding: 3px 15px;
     .public {
-      float: left;
-      margin-right: 20px;
+      margin-top: 10px;
+      display: block;
+      overflow: auto;
       .image {
         width: 50px;
         height: 50px;
@@ -166,6 +167,9 @@
           display: block;
           color: #666;
           font-size: 10px;
+          a.link {
+            color: #666;
+          }
         }
       }
     }
@@ -173,7 +177,7 @@
   .albums .item {
     float: left;
     display: block;
-    margin: 20px 0 0 20px;
+    margin: 10px 0 0 15px;
     width: 259px;
     height: 75px;
     position: relative;
